@@ -126,6 +126,22 @@
   .band.sand{background:linear-gradient(180deg,var(--cream) 0%, #efe6d3 100%)}
   .band.navy{background:var(--navy);color:var(--cream)}
   .band.navy h2,.band.navy h3{color:var(--cream)}
+
+  /* ---------- Coastal photo bands (muted, parallax) ---------- */
+  .coastband{color:var(--cream);background-color:var(--navy);background-repeat:no-repeat}
+  .coastband h2,.coastband h3,.coastband h4{color:var(--cream)}
+  .coastband .center p{color:rgba(248,243,232,.85)}
+  .coastband.horizon{
+    background-image:linear-gradient(rgba(17,38,60,.74),rgba(17,38,60,.8)),url(assets/coast-horizon.webp);
+    background-size:cover;background-position:center;background-attachment:fixed;
+  }
+  .coastband.sunset{
+    background-image:linear-gradient(rgba(17,38,60,.5),rgba(17,38,60,.72)),url(assets/coast-sunset.webp);
+    background-size:cover;background-position:center 62%;background-attachment:fixed;
+  }
+  @media(max-width:768px){
+    .coastband.horizon,.coastband.sunset{background-attachment:scroll}
+  }
   .center{text-align:center;max-width:640px;margin:0 auto 52px}
   .center h2{font-size:clamp(2rem,3.6vw,2.7rem)}
   .center p{color:var(--muted);margin-top:14px;font-size:1.06rem}
@@ -416,7 +432,7 @@
 </section>
 
 <!-- ===== How it works ===== -->
-<section class="band navy" id="how">
+<section class="band coastband horizon" id="how">
   <div class="wrap">
     <div class="center reveal">
       <p class="eyebrow" style="color:var(--sand)">Effortless For You</p>
@@ -555,7 +571,7 @@
 </section>
 
 <!-- ===== Quote ===== -->
-<section class="band navy">
+<section class="band coastband sunset">
   <div class="wrap quote reveal">
     <p>“The little welcome bag was the first thing our guests noticed — and the last thing they forgot. It set the tone for the whole stay.”</p>
     <div class="who">— A warm welcome, thoughtfully curated</div>
