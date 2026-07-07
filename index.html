@@ -82,7 +82,7 @@
   }
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
   .brand{display:flex;align-items:center;gap:12px}
-  .brand .mark{width:46px;height:46px;flex:0 0 auto}
+  .brand .mark{width:46px;height:46px;flex:0 0 auto;object-fit:contain;display:block}
   .brand .txt{line-height:1}
   .brand .txt .a{font-family:'Playfair Display',serif;font-weight:800;color:var(--navy);
     font-size:1.02rem;letter-spacing:.14em;display:block}
@@ -112,7 +112,7 @@
   .trust{display:flex;gap:22px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:.88rem;font-weight:600}
   .trust .stars{color:#e0a63c;letter-spacing:2px}
   .hero-art{position:relative}
-  .hero-emblem{width:min(430px,90%);margin:0 auto;filter:drop-shadow(0 24px 40px rgba(22,50,79,.28))}
+  .hero-emblem{width:min(440px,92%);height:auto;display:block;margin:0 auto;filter:drop-shadow(0 22px 34px rgba(22,50,79,.24))}
   .trust span{display:inline-flex;align-items:center;gap:7px}
   .trust span svg{color:var(--teal-dk);flex:0 0 auto}
 
@@ -274,7 +274,7 @@
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top" aria-label="Gulf Coast Greetings home">
-      <span class="mark" id="markSlot"></span>
+      <img class="mark" src="assets/logo-mark.webp" alt="Gulf Coast Greetings logo" width="46" height="46" />
       <span class="txt"><span class="a">GULF COAST</span><span class="b">Greetings</span></span>
     </a>
     <nav class="links" id="navLinks">
@@ -314,7 +314,7 @@
       </div>
     </div>
     <div class="hero-art reveal">
-      <div class="hero-emblem" id="emblemSlot"></div>
+      <img class="hero-emblem" src="assets/logo.webp" alt="Gulf Coast Greetings — Warm Welcomes, Lasting Memories" />
     </div>
   </div>
 </section>
@@ -540,7 +540,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="brand"><span class="mark" id="markSlot2" style="width:44px;height:44px"></span>
+        <div class="brand"><img class="mark" src="assets/logo-mark.webp" alt="Gulf Coast Greetings logo" style="width:44px;height:44px" />
           <span class="txt"><span class="a" style="color:var(--cream)">GULF COAST</span><span class="b">Greetings</span></span>
         </div>
         <p>Curated, locally-inspired welcome gifts for vacation rentals, realtors, and new residents across the Texas Coastal Bend.</p>
@@ -574,71 +574,6 @@
 <!-- ===== Supabase ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  /* ---- Brand emblem (SVG, reused in nav + hero + footer) ---- */
-  function emblemSVG(size){
-    return `
-    <svg viewBox="0 0 200 200" width="100%" height="100%" role="img" aria-label="Gulf Coast Greetings emblem" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <clipPath id="scene"><circle cx="100" cy="100" r="72"/></clipPath>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#eaf1ee"/><stop offset="1" stop-color="#f8f3e8"/>
-        </linearGradient>
-        <path id="topArc" d="M100,100 m-88,0 a88,88 0 0,1 176,0" fill="none"/>
-        <path id="botArc" d="M100,100 m88,0 a88,88 0 0,1 -176,0" fill="none"/>
-      </defs>
-      <circle cx="100" cy="100" r="96" fill="#f8f3e8"/>
-      <circle cx="100" cy="100" r="94" fill="none" stroke="#16324f" stroke-width="4"/>
-      <circle cx="100" cy="100" r="80" fill="none" stroke="#3f8f8b" stroke-width="1.5"/>
-      <!-- scene -->
-      <g clip-path="url(#scene)">
-        <rect x="20" y="28" width="160" height="150" fill="url(#sky)"/>
-        <circle cx="118" cy="74" r="17" fill="#e6a94b" opacity="0.9"/>
-        <!-- water -->
-        <rect x="20" y="92" width="160" height="86" fill="#3f8f8b" opacity="0.16"/>
-        <path d="M28,100 q10,-4 20,0 t20,0 t20,0 t20,0 t20,0 t20,0" stroke="#3f8f8b" stroke-width="1.4" fill="none" opacity=".6"/>
-        <path d="M32,110 q10,-4 20,0 t20,0 t20,0 t20,0 t20,0" stroke="#3f8f8b" stroke-width="1.2" fill="none" opacity=".45"/>
-        <!-- pier + lighthouse (right) -->
-        <g fill="#16324f">
-          <rect x="150" y="78" width="5" height="22"/><rect x="147" y="72" width="11" height="8"/>
-          <rect x="149" y="66" width="7" height="7"/><path d="M148 66 l4-6 4 6 z"/>
-          <rect x="118" y="96" width="42" height="3"/>
-          <rect x="122" y="96" width="2.5" height="8"/><rect x="132" y="96" width="2.5" height="8"/>
-          <rect x="142" y="96" width="2.5" height="8"/><rect x="152" y="96" width="2.5" height="8"/>
-        </g>
-        <!-- palm (left) -->
-        <g stroke="#16324f" stroke-width="3.4" fill="none" stroke-linecap="round">
-          <path d="M52,100 C54,86 55,74 54,64"/>
-        </g>
-        <g fill="#16324f">
-          <path d="M54,62 C40,54 30,58 26,66 C34,62 44,62 54,66 Z"/>
-          <path d="M54,62 C68,54 78,58 82,66 C74,62 64,62 54,66 Z"/>
-          <path d="M54,62 C46,50 40,44 32,44 C42,48 48,56 54,66 Z"/>
-          <path d="M54,62 C62,50 68,44 76,44 C66,48 60,56 54,66 Z"/>
-        </g>
-        <!-- birds -->
-        <g stroke="#16324f" stroke-width="1.6" fill="none" stroke-linecap="round">
-          <path d="M66,52 q4,-4 8,0"/><path d="M74,52 q4,-4 8,0"/>
-        </g>
-      </g>
-      <!-- curved text -->
-      <text font-family="Playfair Display, serif" font-size="15" font-weight="800" letter-spacing="2" fill="#16324f">
-        <textPath href="#topArc" startOffset="50%" text-anchor="middle">GULF COAST</textPath>
-      </text>
-      <text font-family="Mulish, sans-serif" font-size="7.4" font-weight="700" letter-spacing="3.4" fill="#3f8f8b">
-        <textPath href="#botArc" startOffset="50%" text-anchor="middle">WARM WELCOMES · LASTING MEMORIES</textPath>
-      </text>
-      <text x="100" y="150" text-anchor="middle" font-family="Great Vibes, cursive" font-size="30" fill="#3f8f8b">Greetings</text>
-      <g transform="translate(100,127)">
-        <path d="M0,4 C-8,4 -9,-4.5 0,-6.5 C9,-4.5 8,4 0,4 Z" fill="#e6a94b"/>
-        <g stroke="#f8f3e8" stroke-width="0.7" fill="none" stroke-linecap="round">
-          <path d="M0,4 L0,-5.6"/><path d="M0,4 L-3.6,-4.2"/><path d="M0,4 L3.6,-4.2"/><path d="M0,4 L-6.4,-1.6"/><path d="M0,4 L6.4,-1.6"/>
-        </g>
-      </g>
-    </svg>`;
-  }
-  document.getElementById('emblemSlot').innerHTML = emblemSVG();
-  document.getElementById('markSlot').innerHTML = emblemSVG();
-  document.getElementById('markSlot2').innerHTML = emblemSVG();
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   /* ---- Mobile nav ---- */
