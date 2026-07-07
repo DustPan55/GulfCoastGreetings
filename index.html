@@ -132,7 +132,7 @@
   .coastband h2,.coastband h3,.coastband h4{color:var(--cream)}
   .coastband .center p{color:rgba(248,243,232,.85)}
   .coastband.horizon{
-    background-image:linear-gradient(rgba(17,38,60,.74),rgba(17,38,60,.8)),url(assets/coast-horizon.webp);
+    background-image:linear-gradient(rgba(17,38,60,.48),rgba(17,38,60,.64)),url(assets/coast-horizon.webp);
     background-size:cover;background-position:center;background-attachment:fixed;
   }
   .coastband.sunset{
@@ -165,7 +165,7 @@
 
   /* ---------- How it works ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;counter-reset:step}
-  .step{position:relative;padding:30px 22px;border-radius:var(--radius);background:rgba(255,255,255,.06);border:1px solid rgba(248,243,232,.18)}
+  .step{position:relative;padding:30px 22px;border-radius:var(--radius);background:rgba(12,28,46,.42);border:1px solid rgba(248,243,232,.22);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
   .step .n{
     counter-increment:step;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;
     width:42px;height:42px;border-radius:50%;background:var(--sand);color:var(--navy);
