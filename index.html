@@ -580,11 +580,11 @@
       <p class="lead">Tell us about your properties or business and we'll put together a welcome-bag plan that fits. No pressure, no obligation.</p>
       <div class="ci-item">
         <span class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span>
-        <div><b>979-743-5350</b><span>Call or text — we're local</span></div>
+        <div><b data-cc="p">&nbsp;</b><span>Call or text — we're local</span></div>
       </div>
       <div class="ci-item">
         <span class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></span>
-        <div><b>Welcome@gulfcoastgreetingstx.com</b><span>We reply within one business day</span></div>
+        <div><b data-cc="e">&nbsp;</b><span>We reply within one business day</span></div>
       </div>
       <div class="ci-item">
         <span class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
@@ -663,8 +663,8 @@
       <div>
         <h5>Get in Touch</h5>
         <ul>
-          <li><a href="tel:9797435350">979-743-5350</a></li>
-          <li><a href="mailto:Welcome@gulfcoastgreetingstx.com">Welcome@gulfcoastgreetingstx.com</a></li>
+          <li><span data-cc="p">&nbsp;</span></li>
+          <li><span data-cc="e">&nbsp;</span></li>
           <li><a href="#top">Rockport, Texas</a></li>
         </ul>
       </div>
@@ -680,6 +680,20 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---- Contact details (assembled at runtime so bots can't scrape plain text) ---- */
+  const _dec = a => a.map(c => String.fromCharCode(c)).join('');
+  const EMAIL = _dec([87,101,108,99,111,109,101,64,103,117,108,102,99,111,97,115,116,103,114,101,101,116,105,110,103,115,116,120,46,99,111,109]);
+  const PHONE_DIGITS = _dec([57,55,57,55,52,51,53,51,53,48]);
+  const PHONE_FMT = PHONE_DIGITS.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+  document.querySelectorAll('[data-cc="p"]').forEach(el => {
+    const a = document.createElement('a'); a.href = 'tel:' + PHONE_DIGITS; a.textContent = PHONE_FMT; a.rel = 'nofollow';
+    el.textContent = ''; el.appendChild(a);
+  });
+  document.querySelectorAll('[data-cc="e"]').forEach(el => {
+    const a = document.createElement('a'); a.href = 'mailto:' + EMAIL; a.textContent = EMAIL; a.rel = 'nofollow';
+    el.textContent = ''; el.appendChild(a);
+  });
 
   /* ---- Mobile nav ---- */
   const ham = document.getElementById('hamburger');
@@ -730,7 +744,7 @@
       showMsg('ok', 'Thank you! Your request is in — we\'ll be in touch within one business day.');
     }catch(err){
       console.error(err);
-      showMsg('err', 'Sorry, something went wrong. Please call or text us at 979-743-5350 and we\'ll take care of you.');
+      showMsg('err', 'Sorry, something went wrong. Please call or text us at ' + PHONE_FMT + ' and we\'ll take care of you.');
     }finally{
       btn.disabled = false; btn.textContent = orig;
     }
