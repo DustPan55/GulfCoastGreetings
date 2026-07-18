@@ -185,6 +185,7 @@
     background:linear-gradient(90deg,var(--teal),var(--sun))}
   .bag-figure{margin:10px auto 14px;display:flex;align-items:flex-end;justify-content:center;min-height:190px}
   .bag-figure svg{height:auto;display:block;filter:drop-shadow(0 12px 16px rgba(22,50,79,.18))}
+  .bag-figure img{width:100%;max-width:215px;height:215px;object-fit:cover;border-radius:16px;box-shadow:0 14px 24px rgba(22,50,79,.2)}
   .bagcard h3{font-size:1.22rem}
   .bagcard .size{display:inline-block;margin:8px 0 10px;font-weight:800;color:var(--teal-dk);
     font-size:.76rem;letter-spacing:.11em;text-transform:uppercase}
@@ -226,9 +227,10 @@
   .wl p{color:var(--muted);font-size:1rem}
 
   /* ---------- Gallery ---------- */
-  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:820px;margin:0 auto}
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto}
   .gallery figure{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06)}
   .gallery figure img{aspect-ratio:1/1;object-fit:contain;padding:18px;background:linear-gradient(180deg,#fff,#f6f1e6)}
+  .gallery figure.photo img{object-fit:cover;padding:0}
   .gallery figcaption{padding:14px 18px 18px;font-weight:700;color:var(--navy);font-size:.98rem}
   .gallery figcaption span{display:block;font-weight:500;color:var(--muted);font-size:.85rem;margin-top:2px}
 
@@ -453,13 +455,7 @@
     <div class="bags3">
       <div class="bagcard reveal">
         <div class="bag-figure">
-          <svg width="118" viewBox="0 0 140 158" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Small white Kraft welcome bag">
-            <path d="M50 48 C50 24 90 24 90 48" fill="none" stroke="#16324f" stroke-width="4" stroke-linecap="round"/>
-            <rect x="32" y="48" width="76" height="102" rx="6" fill="#ffffff" stroke="#d9ccb0" stroke-width="1.5"/>
-            <path d="M32 56 h76" stroke="#ece1c9" stroke-width="1.4"/>
-            <g fill="#16324f" opacity=".9"><path d="M45 50 L52 26 59 50Z"/><path d="M62 50 L71 20 80 50Z"/><path d="M83 50 L90 28 97 50Z"/></g>
-            <image href="assets/logo-mark.webp" x="48" y="80" width="44" height="44"/>
-          </svg>
+          <img src="assets/bag-small.webp" alt="Small white Kraft welcome bag with navy tissue and striped ribbon" loading="lazy" />
         </div>
         <h3>Small</h3>
         <div class="size">8 × 5 × 10 · White Kraft</div>
@@ -476,13 +472,7 @@
       </div>
       <div class="bagcard reveal">
         <div class="bag-figure">
-          <svg width="150" viewBox="0 0 140 158" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Medium white Kraft welcome bag">
-            <path d="M50 48 C50 24 90 24 90 48" fill="none" stroke="#16324f" stroke-width="4" stroke-linecap="round"/>
-            <rect x="32" y="48" width="76" height="102" rx="6" fill="#ffffff" stroke="#d9ccb0" stroke-width="1.5"/>
-            <path d="M32 56 h76" stroke="#ece1c9" stroke-width="1.4"/>
-            <g fill="#16324f" opacity=".9"><path d="M45 50 L52 26 59 50Z"/><path d="M62 50 L71 20 80 50Z"/><path d="M83 50 L90 28 97 50Z"/></g>
-            <image href="assets/logo-mark.webp" x="48" y="80" width="44" height="44"/>
-          </svg>
+          <img src="assets/bag-medium.webp" alt="Medium white Kraft welcome bag styled with navy tissue and striped ribbon" loading="lazy" />
         </div>
         <h3>Medium</h3>
         <div class="size">10 × 5 × 10 · White Kraft</div>
@@ -541,7 +531,8 @@
       <p>Every bag carries our signature navy-and-cream Gulf Coast look.</p>
     </div>
     <div class="gallery">
-      <figure class="reveal"><img src="assets/bag-white.webp" alt="White gift bag with navy tissue and striped ribbon" /><figcaption>The Vacation Rental Bag<span>Pre-made &amp; stocked with Texas goodies</span></figcaption></figure>
+      <figure class="reveal photo"><img src="assets/bag-lifestyle.webp" alt="White welcome bag with navy tissue beside Texas coffee, popcorn, taffy and koozies" loading="lazy" /><figcaption>The Vacation Rental Bag<span>Pre-made &amp; stocked with Texas goodies</span></figcaption></figure>
+      <figure class="reveal photo"><img src="assets/bag-spread.webp" alt="Full spread of Gulf Coast Greetings welcome-bag contents — coffee, popcorn, taffy, water and koozies" loading="lazy" /><figcaption>Stocked with Texas Finds<span>Coffee, popcorn, taffy, koozies &amp; more</span></figcaption></figure>
       <figure class="reveal"><img src="assets/tote-navy.webp" alt="Navy striped canvas beach tote with Gulf Coast Greetings badge" /><figcaption>The Realtor Luxury Tote<span>Filled with local Rockport favorites</span></figcaption></figure>
     </div>
   </div>
