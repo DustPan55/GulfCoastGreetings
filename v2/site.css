@@ -374,3 +374,31 @@ footer ul a:hover{opacity:1;color:var(--sand)}
   .foot-grid{grid-template-columns:1fr;gap:26px}
   .band{padding:56px 0}
 }
+/* Phones: shrink headings, chips and labels so they stay on one line */
+@media(max-width:640px){
+  .script,.center .script,.page-head .script{font-size:1.35rem !important}
+  .center h2{font-size:1.45rem}
+  .page-head h1{font-size:1.55rem}
+  .page-head{padding:38px 16px 30px}
+  .cat-card h3{font-size:1rem}
+  .cat-card .lbl{padding:14px 16px;gap:10px}
+  .cat-card .go{white-space:nowrap;font-size:.7rem}
+  .perks{gap:7px}
+  .perks span{font-size:.7rem;padding:6px 10px;white-space:nowrap}
+  .seg .tab{font-size:.82rem;padding:9px 14px;white-space:nowrap}
+  .p-head h3{font-size:1.05rem;white-space:nowrap}
+  .p-price small{white-space:nowrap}
+  .page-head h1{font-size:min(1.55rem,5.4vw)}
+  .cat-card h3{font-size:min(1rem,4.1vw)}
+  .brk{display:block}
+  .contact-info{min-width:0}
+  .ci-item b{font-size:min(1.02rem,4.2vw);overflow-wrap:anywhere}
+}
+@media(max-width:360px){
+  .brand .mark{width:40px;height:40px}
+  .brand .txt .a{font-size:.8rem;letter-spacing:.12em}
+  .head-inner{gap:8px}
+  .cart-btn{padding:9px 12px}
+  .script,.center .script,.page-head .script{font-size:1.2rem !important}
+  .cat-card .go{display:none}
+}
