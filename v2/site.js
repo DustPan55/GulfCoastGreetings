@@ -64,6 +64,7 @@
           <div id="tFeeRow"><span>Card processing fee (${CAT.cardFeePct}%)</span><span id="tFee">$0.00</span></div>
           <div class="grand"><span>Total</span><span id="tTotal">$0.00</span></div>
         </div>
+        <div class="form-msg" id="minMsg" role="status" style="margin:0 0 12px"></div>
         <button class="btn btn-primary" id="checkoutBtn" style="width:100%;justify-content:center">Checkout →</button>
         <div class="form-msg" id="checkoutMsg" role="status"></div>
         <p class="fine">A thank-you card is included with every basket. Please Note: Due to high order volume and customized orders, processing and delivery times may occasionally be delayed.</p>
@@ -143,6 +144,9 @@
       const list = CAT.products.filter(p => p.category === catId && (!champOnly || p.champagne))
         .sort((a, b) => (a.price == null) - (b.price == null) || (a.price - b.price) || ((a.num || 0) - (b.num || 0)));
       prodEl.innerHTML = list.map(productCard).join('');
+      const cat = CAT.categories.find(c => c.id === catId);
+      const perks = document.querySelector('.perks');
+      if(cat && cat.minNote && perks && !perks.querySelector('.min')) perks.insertAdjacentHTML('afterbegin', `<span class="min">&#10022; ${esc(cat.minNote)}</span>`);
       prodEl.querySelectorAll('.product').forEach(wireCard);
     };
     if(seg) seg.querySelectorAll('button').forEach(b => b.onclick = () => { champOnly = b.dataset.f === 'champagne'; render(); });
@@ -219,6 +223,13 @@
       <span class="amt">${money(unitPrice(l) * l.qty)}</span></div>`; }).join('');
     linesEl.querySelectorAll('[data-d]').forEach(b => b.onclick = () => { const l = cart[b.dataset.li]; l.qty = Math.max(1, l.qty + +b.dataset.d); save(); renderCart(); });
     linesEl.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { cart.splice(+b.dataset.rm, 1); save(); renderCart(); });
+    const short = CAT.categories.filter(c => c.minQty).map(c => {
+      const n = cart.filter(l => product(l.id).category === c.id).reduce((t, l) => t + l.qty, 0);
+      return n && n < c.minQty ? `${c.minNote}. You have ${n}; add ${c.minQty - n} more to check out.` : null;
+    }).filter(Boolean);
+    const minEl = document.getElementById('minMsg');
+    minEl.textContent = short.join(' '); minEl.className = short.length ? 'form-msg err' : 'form-msg';
+    document.getElementById('checkoutBtn').disabled = short.length > 0;
     const sub = cart.reduce((s, l) => s + unitPrice(l) * l.qty, 0);
     const card = document.querySelector('input[name="pay"]:checked').value === 'card';
     const fee = card ? Math.round(sub * CAT.cardFeePct) / 100 : 0;

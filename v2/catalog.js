@@ -4,10 +4,11 @@
    - photos: shown in the swipe carousel; the contents list is always the last slide.
    - champagne: true shows the "champagne not included" note.
    - wrap: false hides the cellophane wrap add-on for that basket.
+   - minQty on a category: the cart won't check out until that many items from the category are in it.
    - placeholder: true marks a stand-in entry until the real basket details arrive. */
 window.GCG_CATALOG = {
   categories: [
-    { id: 'vacation', label: 'Vacation Rental Welcome Bags',
+    { id: 'vacation', label: 'Vacation Rental Welcome Bags', minQty: 10, minNote: 'Minimum order of 10 welcome bags (sizes can be mixed)',
       blurb: 'Pre-made welcome bags stocked with Texas finds, finished with a customized card and your logo on the front.' },
     { id: 'realtor', label: 'Realtor Closing Gifts',
       blurb: 'Reusable coastal baskets packed with premium local and Texas items: a closing gift that keeps your name top of mind.' }
