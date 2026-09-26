@@ -1,0 +1,31 @@
+# Keeps the free-plan Gulf Coast Greetings Supabase project from auto-pausing.
+# Supabase pauses free projects after ~7 days of low database activity; a couple of
+# small reads per day prevent that. The request is read-only and uses the public
+# (publishable) key that already ships in the website; RLS limits it to approved reviews.
+# If a run fails (e.g. the project is paused or unreachable), GitHub emails the repo owner.
+# Note: GitHub disables scheduled workflows in repos with no commits for 60 days (it emails first).
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "17 13 * * *"   # ~8:17 AM Central (CDT)
+    - cron: "17 1 * * *"    # ~8:17 PM Central (CDT)
+  workflow_dispatch: {}
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read one approved review
+        env:
+          SUPABASE_URL: https://ubdnxnpptqvyijswjyju.supabase.co
+          SUPABASE_KEY: sb_publishable_2R1cCTNlNE1qqg00llGBdQ_xeBIQwHL
+        run: |
+          code=$(curl -sS -o body.txt -w '%{http_code}' --retry 3 --retry-delay 20 \
+            -H "apikey: $SUPABASE_KEY" \
+            "$SUPABASE_URL/rest/v1/gcg_reviews?select=id&limit=1")
+          echo "HTTP $code: $(head -c 200 body.txt)"
+          test "$code" = "200"
