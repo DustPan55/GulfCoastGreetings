@@ -17,7 +17,9 @@ python3 -m http.server 8000
 ```
 
 ## Backend (Supabase)
-- Project: **FieldAudit** (shared) · table `gcg_inquiries` (prefixed to stay isolated)
+- Original site (root `index.html`): Supabase **FieldAudit** (shared, work) · table `gcg_inquiries`
+- v2 site: dedicated Gulf Coast Greetings project `ubdnxnpptqvyijswjyju` (free plan) · tables `gcg_inquiries`, `gcg_reviews`; schema in `supabase/schema.sql`
+- Reviews show only after the owner sets `approved = true` in Table Editor
 - Row Level Security: anonymous visitors may **insert** leads only; reads are private (owner only)
 - Config lives in the `<script>` block at the bottom of `index.html`
   (`SUPABASE_URL`, `SUPABASE_KEY` — publishable key, safe to expose)

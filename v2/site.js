@@ -4,9 +4,9 @@
 (function(){
   const CAT = window.GCG_CATALOG;
   /* Supabase backend. The publishable key is safe to expose; access is limited by Row Level Security
-     (see supabase/schema.sql). REVIEWS_* point at the dedicated Gulf Coast Greetings project. */
-  const LEADS_URL = 'https://gbrdnlnhushxfgkudcce.supabase.co', LEADS_KEY = 'sb_publishable_qgc0My9kI2jwbBVa6o03eA_bJHyA1U_';
-  const REVIEWS_URL = '', REVIEWS_KEY = '';
+     (see supabase/schema.sql). Both forms use the dedicated Gulf Coast Greetings project. */
+  const GCG_URL = 'https://ubdnxnpptqvyijswjyju.supabase.co', GCG_KEY = 'sb_publishable_2R1cCTNlNE1qqg00llGBdQ_xeBIQwHL';
+  const LEADS_URL = GCG_URL, LEADS_KEY = GCG_KEY, REVIEWS_URL = GCG_URL, REVIEWS_KEY = GCG_KEY;
   const sbClient = (url, key) => url && key && window.supabase ? window.supabase.createClient(url, key) : null;
   const PAGE = document.body.dataset.page || '';
   const money = n => '$' + n.toFixed(2);
