@@ -412,8 +412,8 @@
   .scrim{position:fixed;inset:0;background:rgba(15,30,46,.45);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s}
   .scrim.open{opacity:1;pointer-events:auto}
   .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--cream);z-index:100;
-    transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(22,50,79,.4)}
-  .drawer.open{transform:none}
+    transform:translateX(100%);transition:transform .3s ease, visibility .3s;display:flex;flex-direction:column;visibility:hidden}
+  .drawer.open{transform:none;visibility:visible;box-shadow:-20px 0 50px -20px rgba(22,50,79,.4)}
   .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid rgba(22,50,79,.12)}
   .drawer-head h3{font-size:1.35rem}
   .x{background:none;border:0;font-size:1.6rem;line-height:1;color:var(--navy);cursor:pointer;padding:4px 8px}
@@ -474,129 +474,214 @@
     .cart-btn .lbl{display:none}
     .car-arrow{width:36px;height:36px}
   }
+  /* =====================================================================
+     v2 layout: utility bar, masthead, category nav, banner, finder, collections
+     ===================================================================== */
+  :root{--mist:#7c9d9b;--mist-dk:#678987;--stone:#f1ece3}
+  .util{background:var(--mist);color:#fff;position:relative;z-index:5}
+  .util-inner{display:flex;justify-content:space-between;align-items:center;height:62px}
+  .util-left{display:flex;gap:34px}
+  .util a,.util-phone{font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:#fff}
+  .util-left a:hover{opacity:.8}
+  .util-mark{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;
+    box-shadow:0 6px 18px -6px rgba(22,50,79,.35);border:3px solid var(--mist)}
+  .util-mark img{width:74px;height:74px}
+  .util-right{display:flex;justify-content:flex-end;align-items:center;gap:22px}
+  .util-phone a{color:#fff}
+  .util .cart-btn{background:transparent;padding:6px;color:#fff}
+  .util .cart-btn:hover{background:rgba(255,255,255,.14)}
+  .masthead{text-align:center;padding:26px 16px 14px;background:#fff}
+  .mast-sub{display:flex;justify-content:center;gap:130px;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .wordmark{display:inline-block;margin-top:14px;font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(1.6rem,3.6vw,2.5rem);
+    letter-spacing:.14em;color:var(--navy)}
+  .mast-script{font-family:'Great Vibes',cursive;color:var(--teal);font-size:clamp(1.5rem,2.6vw,2rem);margin-top:2px}
+  .catnav{background:#fff;border-top:1px solid rgba(22,50,79,.1);border-bottom:1px solid rgba(22,50,79,.1);position:sticky;top:0;z-index:50}
+  .catnav-links{display:flex;justify-content:space-between;align-items:center;min-height:70px;gap:10px}
+  .catnav-links a{font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--navy);text-align:center;line-height:1.55;font-weight:600;padding:10px 4px}
+  .catnav-links a b{display:block;font-weight:600}
+  .catnav-links a:hover{color:var(--teal-dk)}
+  .catnav .hamburger{margin:0 auto}
+  .banner{position:relative;min-height:clamp(440px,62vh,620px);display:grid;place-items:center;overflow:hidden;background:var(--navy)}
+  .banner-slides .bs{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.04);
+    transition:opacity 1.4s ease, transform 7s ease}
+  .banner-slides .bs.on{opacity:1;transform:none}
+  .banner::after{content:"";position:absolute;inset:0;background:radial-gradient(closest-side at 50% 46%,rgba(248,243,232,.5),rgba(17,38,60,.28) 70%,rgba(17,38,60,.5))}
+  .banner-inner{position:relative;z-index:2;text-align:center;padding:40px 16px}
+  .banner-logo{width:clamp(220px,30vw,330px);aspect-ratio:1;border-radius:50%;background:rgba(252,248,240,.94);margin:0 auto;
+    display:grid;place-items:center;box-shadow:0 26px 60px -18px rgba(10,24,40,.6);border:6px solid rgba(255,255,255,.7)}
+  .banner-logo img{width:88%;height:auto}
+  .arc{width:min(760px,94vw);height:auto;margin:-14px auto 0;display:block;overflow:visible}
+  .arc text{font-family:'Playfair Display',serif;font-style:italic;font-size:34px;fill:#fff;letter-spacing:.02em;
+    paint-order:stroke;stroke:rgba(17,38,60,.45);stroke-width:5px}
+  .banner-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .box-btn{background:#fff;color:var(--navy);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.95rem;
+    padding:14px 26px;border:2px solid #fff;box-shadow:0 12px 30px -12px rgba(10,24,40,.6);transition:.2s}
+  .box-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .finder{background:var(--mist);color:#fff;padding:26px 0 32px}
+  .ruled{display:flex;align-items:center;gap:22px;font-family:'Mulish',sans-serif;font-weight:500;color:#fff;font-size:clamp(1.3rem,2.4vw,1.85rem);letter-spacing:.01em}
+  .ruled::before,.ruled::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.7)}
+  .finder-row{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:18px;flex-wrap:wrap}
+  .finder-label{display:inline-flex;align-items:center;gap:12px;font-size:1.08rem}
+  .finder select{width:auto;min-width:190px;background:#fff;border:0;border-radius:2px;padding:7px 10px;font-family:Georgia,serif;font-size:.85rem;color:var(--muted)}
+  .finder button{background:transparent;color:#fff;border:1.5px solid #fff;padding:7px 46px;letter-spacing:.16em;text-transform:uppercase;font:600 .8rem 'Mulish',sans-serif;cursor:pointer}
+  .finder button:hover{background:#fff;color:var(--mist-dk)}
+  .collections{background:var(--stone);padding:36px 0 50px}
+  .collections h2{text-align:center;font-family:'Mulish',sans-serif;font-weight:500;font-size:clamp(1.3rem,2.4vw,1.7rem);color:var(--ink);margin-bottom:24px}
+  .coll .car-track{gap:24px;padding:4px 2px 30px}
+  .coll .car-slide{flex:0 0 calc((100% - 72px)/4)}
+  .coll-card{position:relative;display:flex;flex-direction:column;align-items:center}
+  .coll-card img{width:100%;aspect-ratio:1/.92;object-fit:cover;display:block}
+  .coll-badge{position:relative;z-index:1;margin-top:-50px;width:92px;height:92px;border-radius:50%;
+    background:rgba(255,255,255,.9);display:grid;place-items:center;color:var(--mist-dk);box-shadow:0 6px 16px -10px rgba(22,50,79,.5)}
+  .coll-label{position:relative;z-index:2;align-self:stretch;display:block;margin:-24px 10px 0;background:#fff;text-align:center;padding:15px 8px;letter-spacing:.2em;
+    text-transform:uppercase;font-size:.78rem;font-weight:700;color:var(--ink);box-shadow:0 10px 24px -14px rgba(22,50,79,.4)}
+  .coll-card:hover .coll-label{color:var(--teal-dk)}
+  .coll .car-arrow{top:40%}
+  .coll .car-dots{display:none}
+  .filter-chip{display:none;margin:-18px auto 24px;width:max-content;background:#fff;border:1px solid rgba(22,50,79,.15);border-radius:999px;
+    padding:7px 8px 7px 16px;font-size:.86rem;font-weight:700;color:var(--navy);box-shadow:var(--shadow-sm)}
+  .filter-chip.show{display:flex;align-items:center;gap:10px}
+  .filter-chip button{border:0;background:var(--cream-2);border-radius:999px;padding:3px 10px;cursor:pointer;font:700 .8rem 'Mulish',sans-serif;color:var(--navy)}
+  @media(max-width:920px){
+    .coll .car-slide{flex-basis:calc((100% - 24px)/2)}
+    .mast-sub{gap:70px}
+    .catnav-links a{font-size:.72rem;letter-spacing:.14em}
+  }
+  @media(max-width:760px){
+    .util-left{gap:16px}.util-left a:last-child,.util-phone{display:none}
+    .util a{letter-spacing:.14em;font-size:.72rem}
+    .util-mark{width:66px;height:66px;top:8px}.util-mark img{width:58px;height:58px}
+    .mast-sub{gap:56px;font-size:.64rem;letter-spacing:.2em}
+    .catnav .hamburger{display:block;padding:14px}
+    .catnav-links{position:absolute;left:0;right:0;top:100%;flex-direction:column;background:#fff;padding:10px 16px 18px;gap:0;
+      box-shadow:var(--shadow-sm);display:none}
+    .catnav-links.open{display:flex}
+    .catnav-links a{width:100%;padding:12px 0;border-bottom:1px solid rgba(22,50,79,.08)}
+    .catnav-links a b{display:inline}
+    .finder-row{flex-direction:column;align-items:stretch}
+    .finder select,.finder button{width:100%}
+    .finder-label{justify-content:center}
+    .coll .car-slide{flex-basis:78%}
+  }
 </style>
 </head>
 <body>
 
-<!-- ===== Announcement ===== -->
-<div class="topbar">Proudly based in <b>Rockport, Texas</b> &nbsp;·&nbsp; Locally inspired, thoughtfully curated &nbsp;·&nbsp; Free local delivery</div>
-
-<!-- ===== Nav ===== -->
-<header class="nav">
-  <div class="wrap nav-inner">
-    <a class="brand" href="#top" aria-label="Gulf Coast Greetings home">
-      <img class="mark" src="../assets/logo-mark.webp" alt="Gulf Coast Greetings logo" width="46" height="46" />
-      <span class="txt"><span class="a">GULF COAST</span><span class="b">Greetings</span></span>
-    </a>
-    <nav class="links" id="navLinks">
-      <a href="#shop" data-cat="vacation">Vacation Rental</a>
-      <a href="#shop" data-cat="realtor">Realtor Closing</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <div class="nav-right">
+<span id="top"></span>
+<!-- ===== Utility bar ===== -->
+<div class="util">
+  <div class="wrap util-inner">
+    <nav class="util-left"><a href="#contact">Contact Us</a><a href="#reviews">Reviews</a></nav>
+    <a class="util-mark" href="#top" aria-label="Gulf Coast Greetings home"><img src="../assets/logo-mark.webp" alt="Gulf Coast Greetings logo" width="84" height="84" /></a>
+    <div class="util-right">
+      <span class="util-phone" data-cc="p">&nbsp;</span>
       <button class="cart-btn" id="cartBtn" aria-label="Open cart">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 016 0"/></svg>
-        <span class="lbl">Cart</span><span class="cart-count" id="cartCount">0</span>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-2 11H5z"/><path d="M8 9l4-6 4 6M9 13v4M12 13v4M15 13v4"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
       </button>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
+</div>
+
+<!-- ===== Masthead ===== -->
+<header class="masthead">
+  <div class="mast-sub"><span>Locally Owned</span><span>Rockport, Texas</span></div>
+  <a class="wordmark" href="#top">Gulf Coast Greetings</a>
+  <div class="mast-script">Warm Welcomes. Lasting Memories.</div>
 </header>
 
-<span id="top"></span>
+<!-- ===== Category nav ===== -->
+<nav class="catnav" aria-label="Shop categories">
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="wrap catnav-links" id="navLinks">
+    <a href="#shop" data-cat="vacation">Vacation Rental <b>Welcome Bags</b></a>
+    <a href="#shop" data-cat="realtor">Realtor <b>Closing Baskets</b></a>
+    <a href="#shop" data-cat="realtor" data-filter="champagne">Champagne <b>Baskets</b></a>
+    <a href="#gallery">Gallery</a>
+    <a href="#how">How It <b>Works</b></a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-<!-- ===== Hero ===== -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <svg class="waves" viewBox="0 0 1440 120" preserveAspectRatio="none" height="90" aria-hidden="true">
-    <path d="M0,60 C240,110 480,10 720,50 C960,90 1200,20 1440,60 L1440,120 L0,120 Z" fill="#3f8f8b" opacity=".22"/>
-    <path d="M0,80 C240,40 480,120 720,80 C960,40 1200,110 1440,80 L1440,120 L0,120 Z" fill="#16324f" opacity=".12"/>
-  </svg>
-  <div class="wrap hero-inner">
-    <div class="hero-copy reveal">
-      <p class="eyebrow">Curated Coastal Welcome Gifts</p>
-      <h1>Warm Welcomes.<span class="script">Lasting Memories.</span></h1>
-      <p class="lead">Beautiful, locally-inspired welcome bags that set the tone for an unforgettable stay.</p>
-      <p class="sub">We stock your business or rental with pre-made welcome gift bags for a convenient setup process for your next arrival. We also offer luxury closing gifts for realtors and new-tenant welcome bags.</p>
-      <div class="hero-cta">
-        <a href="#shop" class="btn btn-primary">Shop Welcome Gifts →</a>
-        <a href="#gallery" class="btn btn-ghost">View the Gallery</a>
-      </div>
-    </div>
-    <div class="hero-art reveal">
-      <div class="carousel hero-show" id="heroShow" data-autoplay="4500">
-        <div class="car-track">
-          <div class="car-slide"><img src="../assets/bag-navy-spread.webp" alt="Large navy welcome bag with Texas coffee, popcorn, jam, mug and koozies" /></div>
-          <div class="car-slide"><img src="../assets/bags-lineup.webp" alt="Small, medium and large welcome bags side by side" /></div>
-          <div class="car-slide"><img src="../assets/bag-lifestyle.webp" alt="White welcome bag beside Texas coffee, popcorn, crackers, taffy and koozies" /></div>
-          <div class="car-slide"><img src="../assets/tote-navy.webp" alt="Navy striped canvas beach tote" /></div>
-        </div>
-      </div>
-      <div class="hero-thumbs" id="heroThumbs"></div>
+<!-- ===== Banner: main logo over rotating photos ===== -->
+<section class="banner">
+  <div class="banner-slides" id="bannerSlides" aria-hidden="true">
+    <div class="bs on" style="background-image:url(../assets/coast-path.webp);background-position:center 45%"></div>
+    <div class="bs" style="background-image:url(../assets/bag-navy-spread.webp)"></div>
+    <div class="bs" style="background-image:url(../assets/coast-dune.webp);background-position:center 70%"></div>
+    <div class="bs" style="background-image:url(../assets/bags-lineup.webp)"></div>
+  </div>
+  <div class="banner-inner">
+    <div class="banner-logo reveal"><img src="../assets/logo.webp" alt="Gulf Coast Greetings: Warm Welcomes, Lasting Memories" /></div>
+    <svg class="arc" viewBox="0 0 800 120" aria-hidden="true"><path id="arcPath" d="M40,20 Q400,130 760,20" fill="none"/><text><textPath href="#arcPath" startOffset="50%" text-anchor="middle">Curated coastal gifts for every warm welcome</textPath></text></svg>
+    <div class="banner-cta">
+      <a class="box-btn" href="#shop" data-cat="realtor">Shop Closing Baskets</a>
+      <a class="box-btn" href="#shop" data-cat="vacation">Shop Welcome Bags</a>
     </div>
   </div>
 </section>
 
-<!-- ===== Feature strip ===== -->
-<section class="featstrip">
+<!-- ===== Finder band ===== -->
+<section class="finder">
   <div class="wrap">
-    <div class="feat reveal"><span class="fi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8S9 3 6.5 4.5 8 8 12 8zM12 8s3-5 5.5-3.5S16 8 12 8z"/></svg></span><b>Texas Curated Gifts</b></div>
-    <div class="feat reveal"><span class="fi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><circle cx="12" cy="14" r="1.6"/><path d="M12 15.6V18"/></svg></span><b>Perfect for Closings</b></div>
-    <div class="feat reveal"><span class="fi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h13v11H1z"/><path d="M14 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg></span><b>Bulk Delivery Setup</b></div>
-    <div class="feat reveal"><span class="fi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 3h6v3H9z"/><path d="M8 12h8M8 16h5"/></svg></span><b>Property Manager Ready</b></div>
+    <h2 class="ruled"><span>Locally Owned, Thoughtfully Curated</span></h2>
+    <form class="finder-row" id="finder">
+      <span class="finder-label"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8S9 3 6.5 4.5 8 8 12 8zM12 8s3-5 5.5-3.5S16 8 12 8z"/></svg> Let's find the perfect gift</span>
+      <select id="fOcc" aria-label="Occasion"><option value="">occasion</option><option value="vacation">Vacation rental welcome</option><option value="realtor">Realtor closing gift</option><option value="champagne">Champagne celebration</option></select>
+      <select id="fPrice" aria-label="Price range"><option value="">price range</option><option value="0-50">Under $50</option><option value="50-100">$50 to $100</option><option value="100-9999">$100 and up</option></select>
+      <button type="submit">Find It</button>
+    </form>
   </div>
 </section>
 
-<!-- ===== Services ===== -->
-<section class="band cream" id="services">
+<!-- ===== Collections ===== -->
+<section class="collections">
+  <div class="wrap">
+    <h2>Explore Our Collections</h2>
+    <div class="carousel coll">
+      <div class="car-track">
+        <a class="car-slide coll-card" href="#shop" data-cat="vacation"><img src="../assets/bag-lifestyle.webp" alt="" loading="lazy"><span class="coll-badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span><span class="coll-label">Vacation Rental Bags</span></a>
+        <a class="car-slide coll-card" href="#shop" data-cat="realtor"><img src="../assets/tote-navy.webp" alt="" loading="lazy"><span class="coll-badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/></svg></span><span class="coll-label">Realtor Closing Baskets</span></a>
+        <a class="car-slide coll-card" href="#shop" data-cat="realtor" data-filter="champagne"><img src="../assets/bag-navy-spread.webp" alt="" loading="lazy"><span class="coll-badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h4l-.5 6a2.5 2.5 0 01-3 0z"/><path d="M10 11v8M7.5 21h5"/><path d="M14 3h4l-.5 6a2.5 2.5 0 01-3 0zM16 11v8M13.5 21h5"/></svg></span><span class="coll-label">Champagne Baskets</span></a>
+        <a class="car-slide coll-card" href="#gallery"><img src="../assets/bags-lineup.webp" alt="" loading="lazy"><span class="coll-badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg></span><span class="coll-label">Gallery</span></a>
+        <a class="car-slide coll-card" href="#contact"><img src="../assets/bag-spread.webp" alt="" loading="lazy"><span class="coll-badge"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><span class="coll-label">Custom &amp; Bulk Orders</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Shop ===== -->
+<section class="band sand" id="shop">
   <div class="wrap">
     <div class="center reveal">
-      <p class="eyebrow">What We Offer</p>
-      <h2>Thoughtful gifts for every kind of welcome</h2>
+      <p class="eyebrow">Shop</p>
+      <h2>Welcome bags &amp; closing baskets</h2>
+      <p>Swipe through each basket to see it from every angle, then the full list of what's inside.</p>
     </div>
-    <div class="cards3">
-      <div class="card reveal">
-        <span class="tag"></span>
-        <div class="ic">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6"/><path d="M5 9v11h14V9"/><path d="M9 20v-6h6v6"/></svg>
-        </div>
-        <h3>Vacation Rental Welcome Gifts</h3>
-        <p>Pre-made welcome bags in three sizes, featuring Texas finds.</p>
-        <ul>
-          <li>Your logo is featured on the front of every bag, along with products inside</li>
-          <li>Three ready-to-place sizes, stocked with Texas goodies</li>
-          <li>Elevates reviews &amp; repeat bookings</li>
-        </ul>
-      </div>
-      <div class="card reveal">
-        <span class="tag"></span>
-        <div class="ic">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10l-9-7-9 7v10a1 1 0 001 1h5v-6h6v6h5a1 1 0 001-1z"/><circle cx="12" cy="11" r="1.4"/></svg>
-        </div>
-        <h3>Realtor Closing Gifts</h3>
-        <p>Elegant reusable cotton or wicker basket, packed with premium local and Texas items — a tailored closing gift that shows your appreciation and keeps your name top of mind.</p>
-        <ul>
-          <li>Durable coastal basket — multiple colors in stock</li>
-          <li>Packed with premium local &amp; Texas items</li>
-          <li>Tailored for that special new homeowner</li>
-        </ul>
-      </div>
-      <div class="card reveal">
-        <span class="tag"></span>
-        <div class="ic">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l3 3v17H6z"/><path d="M9 7h6M9 11h6M9 15h4"/></svg>
-        </div>
-        <h3>New Tenant Gift Bags</h3>
-        <p>Welcome new residents home with a warm, coastal gift that sets the tone for a great tenancy from day one.</p>
-        <ul>
-          <li>Ideal for landlords &amp; communities</li>
-          <li>Makes move-in day special</li>
-          <li>Builds goodwill from the start</li>
-        </ul>
-      </div>
+    <div class="perks reveal">
+      <span>&#10022; Thank-you card included with every basket</span>
+      <span>&#10022; ACH bank transfer: no fee</span>
+      <span>&#10022; Card payments online: 3% fee</span>
     </div>
+    <div class="tabs" role="tablist" id="shopTabs"></div>
+    <p class="tab-blurb" id="tabBlurb"></p>
+    <div class="filter-chip" id="filterChip"><span></span><button type="button">Clear ✕</button></div>
+    <div class="products" id="products"></div>
+    <div class="notice reveal" style="margin-top:36px">
+      <b>Please Note:</b> Due to high order volume and customized orders, processing and delivery times may occasionally be delayed. We appreciate your patience and understanding, and apologize for any inconvenience.
+    </div>
+  </div>
+</section>
+
+<!-- ===== Gallery ===== -->
+<section class="band cream" id="gallery">
+  <div class="wrap">
+    <div class="center reveal">
+      <p class="eyebrow">Gallery</p>
+      <h2>Signature style, coast to closing</h2>
+    </div>
+    <div class="gal" id="gal"></div>
   </div>
 </section>
 
@@ -617,39 +702,6 @@
   </div>
 </section>
 
-<!-- ===== Shop ===== -->
-<section class="band sand" id="shop">
-  <div class="wrap">
-    <div class="center reveal">
-      <p class="eyebrow">Shop</p>
-      <h2>Welcome bags &amp; closing baskets</h2>
-      <p>Swipe through each basket to see it from every angle, then the full list of what's inside.</p>
-    </div>
-    <div class="perks reveal">
-      <span>&#10022; Thank-you card included with every basket</span>
-      <span>&#10022; ACH bank transfer: no fee</span>
-      <span>&#10022; Card payments online: 3% fee</span>
-    </div>
-    <div class="tabs" role="tablist" id="shopTabs"></div>
-    <p class="tab-blurb" id="tabBlurb"></p>
-    <div class="products" id="products"></div>
-    <div class="notice reveal" style="margin-top:36px">
-      <b>Please Note:</b> Due to high order volume and customized orders, processing and delivery times may occasionally be delayed. We appreciate your patience and understanding, and apologize for any inconvenience.
-    </div>
-  </div>
-</section>
-
-<!-- ===== Gallery ===== -->
-<section class="band cream" id="gallery">
-  <div class="wrap">
-    <div class="center reveal">
-      <p class="eyebrow">Gallery</p>
-      <h2>Signature style, coast to closing</h2>
-    </div>
-    <div class="gal" id="gal"></div>
-  </div>
-</section>
-
 <!-- ===== Why / The Standard ===== -->
 <section class="band sand" id="why">
   <div class="wrap why-split">
@@ -663,14 +715,6 @@
       <div class="wl"><h4>Effortless Scalability</h4><p>Save time on procurement and assembly. Our ready-made bags are designed for consistency, making it easy to scale hospitality across your entire portfolio.</p></div>
       <div class="wl"><h4>Professional Local Branding</h4><p>We source Texas favorites, allowing you to offer a unique, authentic experience that differentiates your properties from standard rentals.</p></div>
     </div>
-  </div>
-</section>
-
-<!-- ===== Quote ===== -->
-<section class="band coastband dune">
-  <div class="wrap quote reveal">
-    <p>“The little welcome bag was the first thing our guests noticed — and the last thing they forgot. It set the tone for the whole stay.”</p>
-    <div class="who">— A warm welcome, thoughtfully curated</div>
   </div>
 </section>
 
@@ -886,11 +930,12 @@
     const dots = document.createElement('div'); dots.className = 'car-dots';
     slides.forEach((_, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Go to slide ' + (i+1)); b.onclick = () => go(i); dots.appendChild(b); });
     root.append(prev, next, dots);
-    const idx = () => Math.round(track.scrollLeft / track.clientWidth);
-    const go = i => track.scrollTo({ left: Math.max(0, Math.min(slides.length-1, i)) * track.clientWidth });
+    const step = () => (slides[1].offsetLeft - slides[0].offsetLeft) || track.clientWidth;
+    const idx = () => Math.round(track.scrollLeft / step());
+    const go = i => track.scrollTo({ left: Math.max(0, Math.min(slides.length-1, i)) * step() });
     const sync = () => {
       const i = idx();
-      prev.disabled = i === 0; next.disabled = i === slides.length - 1;
+      prev.disabled = track.scrollLeft < 4; next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
       [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
       onChange && onChange(i);
     };
@@ -900,25 +945,29 @@
     return { go, idx, count: slides.length, track };
   }
 
-  /* Hero slideshow with thumbnails + autoplay (pauses on interaction) */
+  /* Banner: crossfade background photos behind the main logo */
   (function(){
-    const root = document.getElementById('heroShow');
-    const thumbs = document.getElementById('heroThumbs');
-    const imgs = [...root.querySelectorAll('img')];
-    imgs.forEach((im, i) => { const b = document.createElement('button'); b.setAttribute('aria-label','Show photo ' + (i+1)); b.innerHTML = `<img src="${im.src}" alt="">`; b.onclick = () => { stop(); car.go(i); }; thumbs.appendChild(b); });
-    const car = makeCarousel(root, i => [...thumbs.children].forEach((t, j) => t.classList.toggle('on', j === i)));
-    let timer = setInterval(() => car.go((car.idx() + 1) % car.count), +root.dataset.autoplay || 4500);
-    const stop = () => clearInterval(timer);
-    root.addEventListener('pointerdown', stop); root.querySelectorAll('.car-arrow').forEach(a => a.addEventListener('click', stop));
+    const bs = [...document.querySelectorAll('#bannerSlides .bs')];
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches || bs.length < 2) return;
+    let i = 0;
+    setInterval(() => { bs[i].classList.remove('on'); i = (i + 1) % bs.length; bs[i].classList.add('on'); }, 5500);
   })();
+  document.querySelectorAll('.coll').forEach(c => makeCarousel(c));
 
   /* Product cards */
   const tabsEl = document.getElementById('shopTabs'), prodEl = document.getElementById('products'), blurbEl = document.getElementById('tabBlurb');
-  function renderShop(catId){
+  let shopFilter = null; // { champagne, min, max, label }
+  const chip = document.getElementById('filterChip');
+  function renderShop(catId, filter){
+    shopFilter = filter || null;
+    chip.classList.toggle('show', !!shopFilter);
+    if(shopFilter) chip.querySelector('span').textContent = 'Showing: ' + shopFilter.label;
     const cat = CAT.categories.find(c => c.id === catId) || CAT.categories[0];
     [...tabsEl.children].forEach(t => { const on = t.dataset.cat === cat.id; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
     blurbEl.textContent = cat.blurb;
     const list = CAT.products.filter(p => p.category === cat.id)
+      .filter(p => !shopFilter || ((!shopFilter.champagne || p.champagne) &&
+        (shopFilter.min == null || (p.price != null && p.price >= shopFilter.min && p.price < shopFilter.max))))
       .sort((a, b) => (a.price == null) - (b.price == null) || (a.price - b.price) || ((a.num || 0) - (b.num || 0)));
     prodEl.innerHTML = list.map(p => {
       const slides = p.photos.map(ph => `<div class="car-slide"><img src="${ph.src}" alt="${esc(ph.alt)}" class="${ph.fit === 'contain' ? 'contain' : ''}" loading="lazy" onerror="this.onerror=null;this.src='../assets/logo.webp';this.className='contain'"></div>`).join('')
@@ -942,7 +991,7 @@
           </div>
         </div>
       </article>`;
-    }).join('');
+    }).join('') || '<p class="empty" style="grid-column:1/-1">Nothing matches yet. Prices are still being added; try clearing the filter.</p>';
     prodEl.querySelectorAll('.product').forEach(card => {
       const car = makeCarousel(card.querySelector('.carousel'));
       card.querySelector('[data-contents]').onclick = () => car.go ? car.go(99) : null;
@@ -958,7 +1007,18 @@
     });
   }
   CAT.categories.forEach(c => { const b = document.createElement('button'); b.className = 'tab'; b.type = 'button'; b.setAttribute('role','tab'); b.dataset.cat = c.id; b.textContent = c.label; b.onclick = () => renderShop(c.id); tabsEl.appendChild(b); });
-  document.querySelectorAll('a[data-cat]').forEach(a => a.addEventListener('click', () => renderShop(a.dataset.cat)));
+  const CHAMP = { champagne: true, label: 'Champagne baskets' };
+  document.querySelectorAll('a[data-cat]').forEach(a => a.addEventListener('click', () => renderShop(a.dataset.cat, a.dataset.filter === 'champagne' ? CHAMP : null)));
+  chip.querySelector('button').onclick = () => renderShop(tabsEl.querySelector('.tab.on').dataset.cat);
+  document.getElementById('finder').addEventListener('submit', e => {
+    e.preventDefault();
+    const occ = document.getElementById('fOcc').value, pr = document.getElementById('fPrice').value;
+    const f = {}; const labels = [];
+    if(occ === 'champagne'){ f.champagne = true; labels.push('Champagne baskets'); }
+    if(pr){ const [lo, hi] = pr.split('-').map(Number); f.min = lo; f.max = hi; labels.push(document.getElementById('fPrice').selectedOptions[0].text); }
+    renderShop(occ === 'vacation' ? 'vacation' : occ ? 'realtor' : (tabsEl.querySelector('.tab.on') || {dataset:{cat:'vacation'}}).dataset.cat, labels.length ? Object.assign(f, { label: labels.join(', ') }) : null);
+    document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+  });
   renderShop(location.hash === '#realtor' ? 'realtor' : 'vacation');
 
   /* Cart (kept in this browser only) */
