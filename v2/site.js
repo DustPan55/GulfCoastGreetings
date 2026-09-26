@@ -3,6 +3,11 @@
    this script fills in the header, footer and cart, then wires whatever sections the page contains. */
 (function(){
   const CAT = window.GCG_CATALOG;
+  /* Supabase backend. The publishable key is safe to expose; access is limited by Row Level Security
+     (see supabase/schema.sql). REVIEWS_* point at the dedicated Gulf Coast Greetings project. */
+  const LEADS_URL = 'https://gbrdnlnhushxfgkudcce.supabase.co', LEADS_KEY = 'sb_publishable_qgc0My9kI2jwbBVa6o03eA_bJHyA1U_';
+  const REVIEWS_URL = '', REVIEWS_KEY = '';
+  const sbClient = (url, key) => url && key && window.supabase ? window.supabase.createClient(url, key) : null;
   const PAGE = document.body.dataset.page || '';
   const money = n => '$' + n.toFixed(2);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -275,19 +280,39 @@
     gal.querySelectorAll('button').forEach(b => b.onclick = () => { show(+b.dataset.i); lb.classList.add('open'); });
   }
 
-  /* ---------- Reviews (not connected yet) ---------- */
+  /* ---------- Reviews: show approved ones, submit new ones for approval ---------- */
   const rf = document.getElementById('reviewForm');
-  if(rf) rf.addEventListener('submit', e => {
-    e.preventDefault();
-    const m = document.getElementById('reviewMsg');
-    m.className = 'form-msg ok';
-    m.textContent = 'Thanks! (Preview: reviews will be saved once this form is connected.)';
-  });
+  if(rf){
+    const sbr = sbClient(REVIEWS_URL, REVIEWS_KEY);
+    const listEl = document.getElementById('reviewList'), m = document.getElementById('reviewMsg');
+    const stars = n => '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+    if(sbr) sbr.from('gcg_reviews').select('rating,name,org,body,created_at').order('created_at', { ascending: false }).limit(50)
+      .then(({ data, error }) => {
+        if(error){ console.error(error); return; }
+        if(data && data.length) listEl.innerHTML = data.map(r => `<div class="review"><span class="stars" aria-label="${r.rating} out of 5 stars">${stars(r.rating)}</span>
+          <p>${esc(r.body)}</p><small>${esc(r.name)}${r.org ? ' · ' + esc(r.org) : ''}</small></div>`).join('');
+      });
+    rf.addEventListener('submit', async e => {
+      e.preventDefault();
+      const fd = new FormData(rf);
+      const payload = { rating: +fd.get('rating') || 0, name: (fd.get('name')||'').trim(), org: (fd.get('org')||'').trim() || null, body: (fd.get('text')||'').trim() };
+      if(!payload.rating || !payload.name || !payload.body){ m.className = 'form-msg err'; m.textContent = 'Please choose a star rating and fill in your name and review.'; return; }
+      if(!sbr){ m.className = 'form-msg ok'; m.textContent = 'Thanks! (Preview: reviews will be saved once this form is connected.)'; return; }
+      const btn = rf.querySelector('button[type=submit]'); btn.disabled = true;
+      try{
+        const { error } = await sbr.from('gcg_reviews').insert([payload]);
+        if(error) throw error;
+        rf.reset(); m.className = 'form-msg ok'; m.textContent = "Thank you! Your review has been sent and will appear once it's approved.";
+      }catch(err){
+        console.error(err); m.className = 'form-msg err'; m.textContent = 'Sorry, something went wrong. Please try again, or call or text us at ' + PHONE_FMT + '.';
+      }finally{ btn.disabled = false; }
+    });
+  }
 
   /* ---------- Consultation form (Supabase) ---------- */
   const form = document.getElementById('inquiryForm');
   if(form && window.supabase){
-    const sb = window.supabase.createClient('https://gbrdnlnhushxfgkudcce.supabase.co', 'sb_publishable_qgc0My9kI2jwbBVa6o03eA_bJHyA1U_');
+    const sb = sbClient(LEADS_URL, LEADS_KEY);
     const btn = document.getElementById('submitBtn'), msg = document.getElementById('formMsg');
     const showMsg = (kind, text) => { msg.className = 'form-msg ' + kind; msg.textContent = text; };
     form.addEventListener('submit', async e => {
