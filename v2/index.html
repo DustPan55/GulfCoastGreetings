@@ -319,6 +319,161 @@
     .foot-grid{grid-template-columns:1fr;gap:26px}
     .band{padding:60px 0}
   }
+
+  /* =====================================================================
+     v2: shop, carousels, cart, gallery, reviews
+     ===================================================================== */
+  .nav-right{display:flex;align-items:center;gap:10px}
+  .cart-btn{position:relative;display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:var(--cream);
+    border:0;border-radius:999px;padding:10px 16px;font:700 .9rem 'Mulish',sans-serif;cursor:pointer}
+  .cart-btn:hover{background:var(--navy-2)}
+  .cart-count{min-width:22px;height:22px;border-radius:999px;background:var(--sun);color:var(--navy);
+    display:grid;place-items:center;font-size:.78rem;padding:0 6px}
+
+  /* Carousel (native swipe via scroll-snap, arrows for desktop) */
+  .carousel{position:relative}
+  .car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;border-radius:inherit}
+  .car-track::-webkit-scrollbar{display:none}
+  .car-slide{flex:0 0 100%;scroll-snap-align:start;position:relative}
+  .car-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:42px;height:42px;border-radius:50%;
+    border:0;background:rgba(255,255,255,.92);color:var(--navy);box-shadow:var(--shadow-sm);cursor:pointer;
+    display:grid;place-items:center;transition:opacity .2s, transform .15s}
+  .car-arrow:hover{transform:translateY(-50%) scale(1.07)}
+  .car-arrow[disabled]{opacity:0;pointer-events:none}
+  .car-arrow.prev{left:10px}.car-arrow.next{right:10px}
+  .car-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:7px;z-index:2}
+  .car-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:rgba(22,50,79,.28);cursor:pointer}
+  .car-dots button.on{background:var(--navy);width:20px;border-radius:999px}
+  .swipe-hint{font-size:.76rem;color:var(--muted);text-align:center;margin-top:8px;font-weight:600;letter-spacing:.03em}
+
+  /* Hero slideshow */
+  .hero-show{border-radius:24px;overflow:hidden;box-shadow:var(--shadow);background:#fff;aspect-ratio:4/3.4}
+  .hero-show .car-track,.hero-show .car-slide{height:100%}
+  .hero-show img{width:100%;height:100%;object-fit:cover}
+  .hero-show .car-dots button{background:rgba(255,255,255,.6)}
+  .hero-show .car-dots button.on{background:#fff}
+  .hero-mark{position:absolute;left:-18px;bottom:-22px;width:108px;height:108px;border-radius:50%;background:#fff;
+    padding:8px;box-shadow:var(--shadow);z-index:3}
+  .hero-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+  .hero-thumbs button{border:2px solid transparent;border-radius:12px;overflow:hidden;padding:0;cursor:pointer;
+    aspect-ratio:1;background:#fff;opacity:.72;transition:.2s}
+  .hero-thumbs button.on,.hero-thumbs button:hover{opacity:1;border-color:var(--teal)}
+  .hero-thumbs img{width:100%;height:100%;object-fit:cover}
+
+  /* Shop */
+  .notice{max-width:860px;margin:0 auto 30px;background:#fff;border:1px solid rgba(22,50,79,.1);
+    border-left:5px solid var(--sun);border-radius:14px;padding:16px 20px;font-size:.93rem;color:var(--ink);box-shadow:var(--shadow-sm)}
+  .notice b{color:var(--navy)}
+  .perks{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:-18px 0 30px}
+  .perks span{background:#fff;border:1px solid rgba(22,50,79,.12);border-radius:999px;padding:8px 15px;
+    font-weight:700;font-size:.84rem;color:var(--navy);box-shadow:var(--shadow-sm)}
+  .tabs{display:flex;justify-content:center;gap:8px;margin:0 auto 12px;flex-wrap:wrap}
+  .tab{border:2px solid var(--navy);background:transparent;color:var(--navy);border-radius:999px;
+    padding:11px 22px;font:700 .95rem 'Mulish',sans-serif;cursor:pointer;transition:.18s}
+  .tab.on{background:var(--navy);color:var(--cream)}
+  .tab-blurb{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 34px}
+  .products{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:start}
+  .product{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06);
+    overflow:hidden;display:flex;flex-direction:column}
+  .product .carousel{background:linear-gradient(180deg,#fff,#f6f1e6)}
+  .product .car-slide{aspect-ratio:1;overflow:hidden;min-height:0}
+  .product .car-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .product .car-slide img.contain{object-fit:contain;padding:16px}
+  .contents-slide{padding:26px 26px 36px;display:flex;flex-direction:column;background:var(--cream)}
+  .contents-slide h4{font-size:1.1rem;margin-bottom:10px}
+  .contents-slide .bag-contents{margin-top:0;overflow:auto}
+  .p-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px}
+  .p-num{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dk);font-weight:800}
+  .p-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .p-head h3{font-size:1.22rem}
+  .p-price{font-family:'Playfair Display',serif;font-weight:800;font-size:1.45rem;color:var(--navy);white-space:nowrap}
+  .p-size{font-size:.84rem;color:var(--muted);font-weight:600}
+  .p-link{background:none;border:0;padding:0;color:var(--teal-dk);font:700 .88rem 'Mulish',sans-serif;cursor:pointer;
+    text-align:left;text-decoration:underline;text-underline-offset:3px}
+  .champ{background:#fff7e8;border:1px solid rgba(230,169,75,.45);border-radius:11px;padding:10px 13px;font-size:.84rem;color:#6b4a12}
+  .champ b{display:block;letter-spacing:.06em;color:#8a5a0c}
+  .addon{display:flex;flex-direction:column;gap:8px;border-top:1px solid rgba(22,50,79,.1);padding-top:12px}
+  .addon label.chk{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.9rem;color:var(--navy);margin:0;cursor:pointer}
+  .addon label.chk input{width:18px;height:18px;accent-color:var(--teal)}
+  .ribbons{display:none;gap:8px;padding-left:27px}
+  .ribbons.show{display:flex}
+  .ribbons label{margin:0;display:flex;align-items:center;gap:6px;font-weight:600;font-size:.86rem;color:var(--ink);cursor:pointer}
+  .ribbons input{width:auto;accent-color:var(--teal)}
+  .buy{display:flex;gap:10px;align-items:center;margin-top:4px}
+  .qty{display:flex;align-items:center;border:1.5px solid rgba(22,50,79,.18);border-radius:999px;overflow:hidden;flex:0 0 auto}
+  .qty button{width:36px;height:42px;border:0;background:transparent;font-size:1.1rem;color:var(--navy);cursor:pointer}
+  .qty input{width:38px;border:0;background:transparent;text-align:center;padding:0;font-weight:700}
+  .buy .btn{flex:1;justify-content:center;padding:12px 16px}
+  .ph-flag{position:absolute;top:12px;left:12px;z-index:3;background:var(--coral);color:#fff;font-size:.72rem;font-weight:800;
+    letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+
+  /* Cart drawer */
+  .scrim{position:fixed;inset:0;background:rgba(15,30,46,.45);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s}
+  .scrim.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--cream);z-index:100;
+    transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(22,50,79,.4)}
+  .drawer.open{transform:none}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid rgba(22,50,79,.12)}
+  .drawer-head h3{font-size:1.35rem}
+  .x{background:none;border:0;font-size:1.6rem;line-height:1;color:var(--navy);cursor:pointer;padding:4px 8px}
+  .drawer-body{flex:1;overflow:auto;padding:18px 22px}
+  .drawer-foot{border-top:1px solid rgba(22,50,79,.12);padding:18px 22px;background:#fff}
+  .line{display:grid;grid-template-columns:64px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid rgba(22,50,79,.08);align-items:start}
+  .line img{width:64px;height:64px;object-fit:cover;border-radius:10px;background:#fff}
+  .line b{color:var(--navy);display:block;font-size:.95rem}
+  .line small{display:block;color:var(--muted);font-size:.8rem}
+  .line .rm{background:none;border:0;color:#a8402f;font:600 .78rem 'Mulish',sans-serif;cursor:pointer;padding:0;margin-top:4px}
+  .line .amt{font-weight:800;color:var(--navy)}
+  .empty{color:var(--muted);text-align:center;padding:40px 0}
+  .pay{display:grid;gap:8px;margin:4px 0 14px}
+  .pay label{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0;background:var(--cream);
+    border:1.5px solid rgba(22,50,79,.14);border-radius:11px;padding:11px 13px;cursor:pointer;font-size:.9rem}
+  .pay label:has(input:checked){border-color:var(--teal);background:#eef6f3}
+  .pay input{width:auto;accent-color:var(--teal);margin-right:8px}
+  .pay span.fee{color:var(--muted);font-weight:700;font-size:.8rem}
+  .totals{display:grid;gap:4px;font-size:.92rem;margin-bottom:14px}
+  .totals div{display:flex;justify-content:space-between}
+  .totals .grand{font-size:1.15rem;font-weight:800;color:var(--navy);border-top:1px solid rgba(22,50,79,.12);padding-top:8px;margin-top:4px}
+  .fine{font-size:.78rem;color:var(--muted);margin-top:10px;line-height:1.5}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);opacity:0;visibility:hidden;background:var(--navy);color:var(--cream);
+    padding:12px 20px;border-radius:999px;font-weight:700;font-size:.9rem;z-index:120;transition:transform .3s ease;box-shadow:var(--shadow)}
+  .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+
+  /* Gallery v2 (masonry-ish grid + lightbox) */
+  .gal{columns:3 260px;column-gap:18px}
+  .gal button{display:block;width:100%;margin:0 0 18px;border:0;padding:0;cursor:zoom-in;border-radius:16px;overflow:hidden;
+    box-shadow:var(--shadow-sm);background:#fff;break-inside:avoid}
+  .gal img{width:100%;height:auto;transition:transform .35s ease}
+  .gal button:hover img{transform:scale(1.03)}
+  .lightbox{position:fixed;inset:0;z-index:130;background:rgba(10,22,36,.92);display:none;align-items:center;justify-content:center;padding:20px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:min(1000px,100%);max-height:86vh;border-radius:12px;object-fit:contain}
+  .lightbox .x{position:absolute;top:14px;right:16px;color:#fff;font-size:2.2rem}
+  .lightbox .car-arrow{position:fixed}
+
+  /* Reviews */
+  .reviews-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start}
+  .review-list{display:grid;gap:18px}
+  .review{background:#fff;border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06)}
+  .review .stars{color:#e0a63c;letter-spacing:2px}
+  .review p{margin:8px 0;color:var(--ink)}
+  .review small{color:var(--muted);font-weight:700}
+  .star-input{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px}
+  .star-input input{display:none}
+  .star-input label{font-size:1.8rem;color:rgba(22,50,79,.2);cursor:pointer;margin:0;line-height:1}
+  .star-input input:checked ~ label,.star-input label:hover,.star-input label:hover ~ label{color:#e0a63c}
+
+  @media(max-width:920px){
+    .products{grid-template-columns:1fr 1fr}
+    .reviews-grid{grid-template-columns:1fr}
+    .hero-mark{width:84px;height:84px;left:-6px;bottom:-16px}
+  }
+  @media(max-width:640px){
+    .products{grid-template-columns:1fr}
+    .cart-btn .lbl{display:none}
+    .car-arrow{width:36px;height:36px}
+  }
 </style>
 </head>
 <body>
@@ -334,13 +489,19 @@
       <span class="txt"><span class="a">GULF COAST</span><span class="b">Greetings</span></span>
     </a>
     <nav class="links" id="navLinks">
-      <a href="#services">What We Offer</a>
-      <a href="#how">How It Works</a>
-      <a href="#inside">What's Inside</a>
-      <a href="#gallery">Our Bags</a>
-      <a href="#contact" class="btn btn-teal nav-cta">Request a Consultation</a>
+      <a href="#shop" data-cat="vacation">Vacation Rental</a>
+      <a href="#shop" data-cat="realtor">Realtor Closing</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 016 0"/></svg>
+        <span class="lbl">Cart</span><span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
 
@@ -360,12 +521,20 @@
       <p class="lead">Beautiful, locally-inspired welcome bags that set the tone for an unforgettable stay.</p>
       <p class="sub">We stock your business or rental with pre-made welcome gift bags for a convenient setup process for your next arrival. We also offer luxury closing gifts for realtors and new-tenant welcome bags.</p>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary">Request a Consultation →</a>
-        <a href="#services" class="btn btn-ghost">See What We Offer</a>
+        <a href="#shop" class="btn btn-primary">Shop Welcome Gifts →</a>
+        <a href="#gallery" class="btn btn-ghost">View the Gallery</a>
       </div>
     </div>
     <div class="hero-art reveal">
-      <img class="hero-emblem" src="../assets/logo.webp" alt="Gulf Coast Greetings — Warm Welcomes, Lasting Memories" />
+      <div class="carousel hero-show" id="heroShow" data-autoplay="4500">
+        <div class="car-track">
+          <div class="car-slide"><img src="../assets/bag-navy-spread.webp" alt="Large navy welcome bag with Texas coffee, popcorn, jam, mug and koozies" /></div>
+          <div class="car-slide"><img src="../assets/bags-lineup.webp" alt="Small, medium and large welcome bags side by side" /></div>
+          <div class="car-slide"><img src="../assets/bag-lifestyle.webp" alt="White welcome bag beside Texas coffee, popcorn, crackers, taffy and koozies" /></div>
+          <div class="car-slide"><img src="../assets/tote-navy.webp" alt="Navy striped canvas beach tote" /></div>
+        </div>
+      </div>
+      <div class="hero-thumbs" id="heroThumbs"></div>
     </div>
   </div>
 </section>
@@ -448,78 +617,25 @@
   </div>
 </section>
 
-<!-- ===== The Welcome Bags (three sizes) ===== -->
-<section class="band sand" id="inside">
+<!-- ===== Shop ===== -->
+<section class="band sand" id="shop">
   <div class="wrap">
     <div class="center reveal">
-      <h2>Our curated welcome bags</h2>
-      <p>Pre-made and stocked with Texas finds, our welcome bags come in three sizes — each finished with a customized card and your logo on the front for effortless property-manager branding.</p>
+      <p class="eyebrow">Shop</p>
+      <h2>Welcome bags &amp; closing baskets</h2>
+      <p>Swipe through each basket to see it from every angle, then the full list of what's inside.</p>
     </div>
-    <figure class="lineup reveal">
-      <img src="../assets/bags-lineup.webp" alt="Small, medium and large Gulf Coast Greetings welcome bags side by side" loading="lazy" />
-      <figcaption>Three sizes — Small, Medium &amp; Large</figcaption>
-    </figure>
-    <div class="bags3">
-      <div class="bagcard reveal">
-        <div class="bag-figure">
-          <img src="../assets/bag-small.webp" alt="Small white Kraft welcome bag with navy tissue and striped ribbon" loading="lazy" />
-        </div>
-        <h3>Small</h3>
-        <div class="size">8 × 4.75 × 10 · White Kraft</div>
-        <ul class="bag-contents">
-          <li><b>Coffee</b><span>1.75 oz</span></li>
-          <li><b>Popcorn</b><span>1.5 oz</span></li>
-          <li><b>Taffy</b><span>3 oz</span></li>
-          <li><b>Crackers</b><span>3 oz</span></li>
-          <li><b>Water</b><span>2 × 8 oz</span></li>
-          <li><b>Customized koozies</b><span>2</span></li>
-          <li><b>Customized card</b><span>✓</span></li>
-        </ul>
-        <div class="price"><small>Starting at</small>$30</div>
-      </div>
-      <div class="bagcard reveal">
-        <div class="bag-figure">
-          <img src="../assets/bag-medium.webp" alt="Medium white Kraft welcome bag styled with navy tissue and striped ribbon" loading="lazy" />
-        </div>
-        <h3>Medium</h3>
-        <div class="size">10 × 5 × 13 · White Kraft</div>
-        <ul class="bag-contents">
-          <li><b>Coffee</b><span>3.5 oz</span></li>
-          <li><b>Popcorn</b><span>3 oz</span></li>
-          <li><b>Taffy</b><span>6 oz</span></li>
-          <li><b>Crackers</b><span>6 oz</span></li>
-          <li><b>Water</b><span>2 × 16 oz</span></li>
-          <li><b>Customized koozies</b><span>4</span></li>
-          <li><b>Customized card</b><span>✓</span></li>
-        </ul>
-        <div class="price"><small>Starting at</small>$50</div>
-      </div>
-      <div class="bagcard reveal">
-        <div class="bag-figure">
-          <img src="../assets/bag-large.webp" alt="Large navy laminate welcome bag with white tissue and starfish ribbon" loading="lazy" />
-        </div>
-        <h3>Large</h3>
-        <div class="size">16 × 6 × 12 · Navy &amp; White Laminate</div>
-        <ul class="bag-contents">
-          <li><b>Coffee</b><span>5.25 oz</span></li>
-          <li><b>Popcorn</b><span>5.5 oz</span></li>
-          <li><b>Taffy</b><span>6 oz</span></li>
-          <li><b>Crackers</b><span>6 oz</span></li>
-          <li><b>Water</b><span>2 × 16 oz</span></li>
-          <li><b>Customized koozies</b><span>3</span></li>
-          <li><b>Local jam</b><span>1</span></li>
-          <li><b>Coffee mug</b><span>1</span></li>
-          <li><b>Customized card</b><span>✓</span></li>
-        </ul>
-        <div class="price"><small>Starting at</small>$75</div>
-      </div>
+    <div class="perks reveal">
+      <span>&#10022; Thank-you card included with every basket</span>
+      <span>&#10022; ACH bank transfer: no fee</span>
+      <span>&#10022; Card payments online: 3% fee</span>
     </div>
-    <div class="bag-note reveal">
-      <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.1 6.5L12 17.9 6.2 21l1.1-6.5L2.5 9.4l6.6-.9z"/></svg> Vacation rental bags are filled with Texas products</span>
-      <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Realtor luxury totes and coastal baskets feature local finds</span>
-      <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.3 7l8.7 5 8.7-5M12 22V12"/></svg> Minimum order of 10 bags</span>
+    <div class="tabs" role="tablist" id="shopTabs"></div>
+    <p class="tab-blurb" id="tabBlurb"></p>
+    <div class="products" id="products"></div>
+    <div class="notice reveal" style="margin-top:36px">
+      <b>Please Note:</b> Due to high order volume and customized orders, processing and delivery times may occasionally be delayed. We appreciate your patience and understanding, and apologize for any inconvenience.
     </div>
-    <p class="reveal" style="text-align:center;color:var(--muted);margin-top:18px;font-size:.9rem">Contents may vary by season and availability — every bag is curated with Texas finds.</p>
   </div>
 </section>
 
@@ -527,15 +643,10 @@
 <section class="band cream" id="gallery">
   <div class="wrap">
     <div class="center reveal">
-      <p class="eyebrow">Our Bags</p>
+      <p class="eyebrow">Gallery</p>
       <h2>Signature style, coast to closing</h2>
     </div>
-    <div class="gallery">
-      <figure class="reveal photo"><img src="../assets/bag-lifestyle.webp" alt="White welcome bag with navy tissue beside Texas coffee, popcorn, crackers, taffy and koozies" loading="lazy" /><figcaption>Small<span>Pre-made &amp; stocked with Texas goodies</span></figcaption></figure>
-      <figure class="reveal photo"><img src="../assets/bag-spread.webp" alt="Full spread of Gulf Coast Greetings welcome-bag contents — coffee, popcorn, taffy, water and koozies" loading="lazy" /><figcaption>Medium<span>Coffee, popcorn, taffy, koozies &amp; more</span></figcaption></figure>
-      <figure class="reveal photo"><img src="../assets/bag-navy-spread.webp" alt="Navy laminate welcome bag with a full spread of Texas coffee, popcorn, jam, mug and koozies" loading="lazy" /><figcaption>Our Large Navy Bag<span>Loaded with Texas coffee, popcorn, jam &amp; more</span></figcaption></figure>
-      <figure class="reveal"><img src="../assets/tote-navy.webp" alt="Navy striped canvas beach tote with Gulf Coast Greetings badge" /><figcaption>The Realtor Collection<span>Totes &amp; coastal baskets filled with local finds</span></figcaption></figure>
-    </div>
+    <div class="gal" id="gal"></div>
   </div>
 </section>
 
@@ -560,6 +671,40 @@
   <div class="wrap quote reveal">
     <p>“The little welcome bag was the first thing our guests noticed — and the last thing they forgot. It set the tone for the whole stay.”</p>
     <div class="who">— A warm welcome, thoughtfully curated</div>
+  </div>
+</section>
+
+<!-- ===== Reviews ===== -->
+<section class="band sand" id="reviews">
+  <div class="wrap reviews-grid">
+    <div class="reveal">
+      <p class="eyebrow">Reviews</p>
+      <h2>What our clients say</h2>
+      <div class="review-list" id="reviewList" style="margin-top:24px">
+        <p class="empty" style="text-align:left;padding:10px 0">No reviews yet. Be the first to share your experience!</p>
+      </div>
+    </div>
+    <form class="card-form reveal" id="reviewForm" novalidate>
+      <h3 style="font-size:1.3rem;margin-bottom:14px">Leave a review</h3>
+      <div class="field">
+        <label>Your rating <span class="req">*</span></label>
+        <div class="star-input">
+          <input type="radio" name="rating" id="r5" value="5"><label for="r5">&#9733;</label>
+          <input type="radio" name="rating" id="r4" value="4"><label for="r4">&#9733;</label>
+          <input type="radio" name="rating" id="r3" value="3"><label for="r3">&#9733;</label>
+          <input type="radio" name="rating" id="r2" value="2"><label for="r2">&#9733;</label>
+          <input type="radio" name="rating" id="r1" value="1"><label for="r1">&#9733;</label>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="field"><label for="rv-name">Name <span class="req">*</span></label><input id="rv-name" name="name" required placeholder="First name &amp; last initial" /></div>
+        <div class="field"><label for="rv-org">Company / Property</label><input id="rv-org" name="org" placeholder="Optional" /></div>
+      </div>
+      <div class="field"><label for="rv-text">Your review <span class="req">*</span></label><textarea id="rv-text" name="text" required placeholder="How did your guests or clients like their gift?"></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Submit Review</button>
+      <p class="form-note">Reviews are posted after a quick check by our team.</p>
+      <div class="form-msg" id="reviewMsg" role="status"></div>
+    </form>
   </div>
 </section>
 
@@ -645,10 +790,10 @@
       <div>
         <h5>Explore</h5>
         <ul>
-          <li><a href="#services">What We Offer</a></li>
-          <li><a href="#how">How It Works</a></li>
-          <li><a href="#inside">What's Inside</a></li>
-          <li><a href="#gallery">Our Bags</a></li>
+          <li><a href="#shop" data-cat="vacation">Vacation Rental Bags</a></li>
+          <li><a href="#shop" data-cat="realtor">Realtor Closing Baskets</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Request a Consultation</a></li>
         </ul>
       </div>
@@ -668,6 +813,38 @@
   </div>
 </footer>
 
+
+<!-- ===== Cart drawer ===== -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart" aria-hidden="true">
+  <div class="drawer-head"><h3>Your Cart</h3><button class="x" id="cartClose" aria-label="Close cart">&times;</button></div>
+  <div class="drawer-body" id="cartLines"></div>
+  <div class="drawer-foot" id="cartFoot">
+    <div class="pay" id="payOpts">
+      <label><span><input type="radio" name="pay" value="ach" checked>Bank transfer (ACH)</span><span class="fee">No fee</span></label>
+      <label><span><input type="radio" name="pay" value="card">Credit / debit card</span><span class="fee">+3%</span></label>
+    </div>
+    <div class="totals">
+      <div><span>Subtotal</span><span id="tSub">$0.00</span></div>
+      <div id="tFeeRow"><span>Card processing fee (3%)</span><span id="tFee">$0.00</span></div>
+      <div class="grand"><span>Total</span><span id="tTotal">$0.00</span></div>
+    </div>
+    <button class="btn btn-primary" id="checkoutBtn" style="width:100%;justify-content:center">Checkout →</button>
+    <div class="form-msg" id="checkoutMsg" role="status"></div>
+    <p class="fine">A thank-you card is included with every basket. Please Note: Due to high order volume and customized orders, processing and delivery times may occasionally be delayed.</p>
+  </div>
+</aside>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbClose" aria-label="Close">&times;</button>
+  <button class="car-arrow prev" id="lbPrev" aria-label="Previous photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <img id="lbImg" alt="" />
+  <button class="car-arrow next" id="lbNext" aria-label="Next photo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="catalog.js"></script>
 <!-- ===== Supabase ===== -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -692,6 +869,183 @@
   const links = document.getElementById('navLinks');
   ham.addEventListener('click', ()=>links.classList.toggle('open'));
   links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  /* =================== v2: shop =================== */
+  const CAT = window.GCG_CATALOG;
+  const money = n => '$' + n.toFixed(2);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ARROW = d => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
+
+  /* Carousel: native swipe (scroll-snap) + arrows + dots */
+  function makeCarousel(root, onChange){
+    const track = root.querySelector('.car-track');
+    const slides = [...track.children];
+    if(slides.length < 2) return { go(){} };
+    const prev = document.createElement('button'); prev.className = 'car-arrow prev'; prev.setAttribute('aria-label','Previous'); prev.innerHTML = ARROW('M15 18l-6-6 6-6');
+    const next = document.createElement('button'); next.className = 'car-arrow next'; next.setAttribute('aria-label','Next'); next.innerHTML = ARROW('M9 18l6-6-6-6');
+    const dots = document.createElement('div'); dots.className = 'car-dots';
+    slides.forEach((_, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Go to slide ' + (i+1)); b.onclick = () => go(i); dots.appendChild(b); });
+    root.append(prev, next, dots);
+    const idx = () => Math.round(track.scrollLeft / track.clientWidth);
+    const go = i => track.scrollTo({ left: Math.max(0, Math.min(slides.length-1, i)) * track.clientWidth });
+    const sync = () => {
+      const i = idx();
+      prev.disabled = i === 0; next.disabled = i === slides.length - 1;
+      [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
+      onChange && onChange(i);
+    };
+    prev.onclick = () => go(idx() - 1); next.onclick = () => go(idx() + 1);
+    track.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    sync();
+    return { go, idx, count: slides.length, track };
+  }
+
+  /* Hero slideshow with thumbnails + autoplay (pauses on interaction) */
+  (function(){
+    const root = document.getElementById('heroShow');
+    const thumbs = document.getElementById('heroThumbs');
+    const imgs = [...root.querySelectorAll('img')];
+    imgs.forEach((im, i) => { const b = document.createElement('button'); b.setAttribute('aria-label','Show photo ' + (i+1)); b.innerHTML = `<img src="${im.src}" alt="">`; b.onclick = () => { stop(); car.go(i); }; thumbs.appendChild(b); });
+    const car = makeCarousel(root, i => [...thumbs.children].forEach((t, j) => t.classList.toggle('on', j === i)));
+    let timer = setInterval(() => car.go((car.idx() + 1) % car.count), +root.dataset.autoplay || 4500);
+    const stop = () => clearInterval(timer);
+    root.addEventListener('pointerdown', stop); root.querySelectorAll('.car-arrow').forEach(a => a.addEventListener('click', stop));
+  })();
+
+  /* Product cards */
+  const tabsEl = document.getElementById('shopTabs'), prodEl = document.getElementById('products'), blurbEl = document.getElementById('tabBlurb');
+  function renderShop(catId){
+    const cat = CAT.categories.find(c => c.id === catId) || CAT.categories[0];
+    [...tabsEl.children].forEach(t => { const on = t.dataset.cat === cat.id; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
+    blurbEl.textContent = cat.blurb;
+    const list = CAT.products.filter(p => p.category === cat.id).sort((a, b) => a.price - b.price);
+    prodEl.innerHTML = list.map(p => {
+      const slides = p.photos.map(ph => `<div class="car-slide"><img src="${ph.src}" alt="${esc(ph.alt)}" class="${ph.fit === 'contain' ? 'contain' : ''}" loading="lazy"></div>`).join('')
+        + `<div class="car-slide contents-slide"><h4>What's inside</h4><ul class="bag-contents">${p.items.map(([n, q]) => `<li><b>${esc(n)}</b><span>${esc(q)}</span></li>`).join('')}</ul></div>`;
+      const wrapOk = p.wrap !== false;
+      return `<article class="product reveal in" data-id="${p.id}">
+        <div class="carousel">${p.placeholder ? '<span class="ph-flag">Sample</span>' : ''}<div class="car-track">${slides}</div></div>
+        <div class="p-body">
+          ${p.num ? `<div class="p-num">Basket #${p.num}</div>` : ''}
+          <div class="p-head"><h3>${esc(p.name)}</h3><span class="p-price">${money(p.price)}</span></div>
+          ${p.size ? `<div class="p-size">${esc(p.size)}</div>` : ''}
+          <button type="button" class="p-link" data-contents>See what's inside →</button>
+          ${p.champagne ? `<div class="champ"><b>CHAMPAGNE NOT INCLUDED</b>Feel free to drop your champagne off before pickup, or place the bottle inside the basket after pickup.</div>` : ''}
+          ${wrapOk ? `<div class="addon">
+            <label class="chk"><input type="checkbox" data-wrap> ${esc(CAT.wrapAddon.label)} (+${money(CAT.wrapAddon.price).replace('.00','')})</label>
+            <div class="ribbons">${CAT.wrapAddon.ribbons.map((r, i) => `<label><input type="radio" name="rb-${p.id}" value="${r}" ${i ? '' : 'checked'}> ${r}</label>`).join('')}</div>
+          </div>` : ''}
+          <div class="buy">
+            <div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">−</button><input type="text" inputmode="numeric" value="1" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div>
+            <button type="button" class="btn btn-teal" data-add>Add to Cart</button>
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+    prodEl.querySelectorAll('.product').forEach(card => {
+      const car = makeCarousel(card.querySelector('.carousel'));
+      card.querySelector('[data-contents]').onclick = () => car.go ? car.go(99) : null;
+      const wrap = card.querySelector('[data-wrap]');
+      if(wrap) wrap.onchange = () => card.querySelector('.ribbons').classList.toggle('show', wrap.checked);
+      const q = card.querySelector('.qty input');
+      card.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { q.value = Math.max(1, (parseInt(q.value) || 1) + +b.dataset.q); });
+      card.querySelector('[data-add]').onclick = () => {
+        const p = CAT.products.find(x => x.id === card.dataset.id);
+        const ribbon = wrap && wrap.checked ? card.querySelector('.ribbons input:checked').value : null;
+        addToCart(p.id, Math.max(1, parseInt(q.value) || 1), ribbon);
+      };
+    });
+  }
+  CAT.categories.forEach(c => { const b = document.createElement('button'); b.className = 'tab'; b.type = 'button'; b.setAttribute('role','tab'); b.dataset.cat = c.id; b.textContent = c.label; b.onclick = () => renderShop(c.id); tabsEl.appendChild(b); });
+  document.querySelectorAll('a[data-cat]').forEach(a => a.addEventListener('click', () => renderShop(a.dataset.cat)));
+  renderShop(location.hash === '#realtor' ? 'realtor' : 'vacation');
+
+  /* Cart (kept in this browser only) */
+  const CART_KEY = 'gcg-cart-v2';
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { cart = []; }
+  const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e) {} };
+  const product = id => CAT.products.find(p => p.id === id);
+  const unitPrice = l => product(l.id).price + (l.ribbon ? CAT.wrapAddon.price : 0);
+  function addToCart(id, qty, ribbon){
+    const hit = cart.find(l => l.id === id && l.ribbon === ribbon);
+    hit ? hit.qty += qty : cart.push({ id, qty, ribbon });
+    save(); renderCart(); toast(`Added ${qty} × ${product(id).name}`);
+  }
+  const drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
+  const openCart = () => { drawer.classList.add('open'); scrim.classList.add('open'); drawer.setAttribute('aria-hidden','false'); };
+  const closeCart = () => { drawer.classList.remove('open'); scrim.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); };
+  document.getElementById('cartBtn').onclick = openCart;
+  document.getElementById('cartClose').onclick = closeCart; scrim.onclick = closeCart;
+  document.querySelectorAll('input[name="pay"]').forEach(r => r.onchange = renderCart);
+  function renderCart(){
+    cart = cart.filter(l => product(l.id));
+    document.getElementById('cartCount').textContent = cart.reduce((n, l) => n + l.qty, 0);
+    const linesEl = document.getElementById('cartLines'), foot = document.getElementById('cartFoot');
+    if(!cart.length){ linesEl.innerHTML = '<p class="empty">Your cart is empty.</p>'; foot.style.display = 'none'; return; }
+    foot.style.display = '';
+    linesEl.innerHTML = cart.map((l, i) => { const p = product(l.id); return `<div class="line">
+      <img src="${p.photos[0].src}" alt="">
+      <div><b>${esc(p.name)}</b><small>${money(p.price)} each${l.ribbon ? ` · Cellophane wrap, ${esc(l.ribbon)} (+${money(CAT.wrapAddon.price)})` : ''}</small>
+        <div class="qty" style="margin-top:6px;transform:scale(.85);transform-origin:left"><button data-li="${i}" data-d="-1" aria-label="Decrease">−</button><input value="${l.qty}" readonly aria-label="Quantity"><button data-li="${i}" data-d="1" aria-label="Increase">+</button></div>
+        <button class="rm" data-rm="${i}">Remove</button></div>
+      <span class="amt">${money(unitPrice(l) * l.qty)}</span></div>`; }).join('');
+    linesEl.querySelectorAll('[data-d]').forEach(b => b.onclick = () => { const l = cart[b.dataset.li]; l.qty = Math.max(1, l.qty + +b.dataset.d); save(); renderCart(); });
+    linesEl.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { cart.splice(+b.dataset.rm, 1); save(); renderCart(); });
+    const sub = cart.reduce((s, l) => s + unitPrice(l) * l.qty, 0);
+    const card = document.querySelector('input[name="pay"]:checked').value === 'card';
+    const fee = card ? Math.round(sub * CAT.cardFeePct) / 100 : 0;
+    document.getElementById('tSub').textContent = money(sub);
+    document.getElementById('tFeeRow').style.display = card ? '' : 'none';
+    document.getElementById('tFee').textContent = money(fee);
+    document.getElementById('tTotal').textContent = money(sub + fee);
+  }
+  renderCart();
+  document.getElementById('checkoutBtn').onclick = () => {
+    const m = document.getElementById('checkoutMsg');
+    m.className = 'form-msg err';
+    m.textContent = 'Online checkout is coming soon (Square payments are being set up). To order now, call or text ' + PHONE_FMT + '.';
+  };
+
+  let toastT;
+  function toast(t){ const el = document.getElementById('toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 2200); }
+
+  /* Gallery + lightbox: every product photo, then extra shots */
+  (function(){
+    const seen = new Set(), pics = [];
+    const add = ph => { if(!seen.has(ph.src)){ seen.add(ph.src); pics.push(ph); } };
+    CAT.products.filter(p => !p.placeholder).forEach(p => p.photos.forEach(add));
+    [{ src: '../assets/bags-lineup.webp', alt: 'Small, medium and large welcome bags side by side' },
+     { src: '../assets/bag-white.webp', alt: 'White welcome bag' },
+     { src: '../assets/tote-navy.webp', alt: 'Navy striped canvas beach tote' }].forEach(add);
+    const gal = document.getElementById('gal');
+    gal.innerHTML = pics.map((ph, i) => `<button type="button" data-i="${i}" aria-label="Enlarge: ${esc(ph.alt)}"><img src="${ph.src}" alt="${esc(ph.alt)}" loading="lazy"></button>`).join('');
+    const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg');
+    let cur = 0;
+    const show = i => { cur = (i + pics.length) % pics.length; lbImg.src = pics[cur].src; lbImg.alt = pics[cur].alt; };
+    gal.querySelectorAll('button').forEach(b => b.onclick = () => { show(+b.dataset.i); lb.classList.add('open'); });
+    document.getElementById('lbPrev').onclick = () => show(cur - 1);
+    document.getElementById('lbNext').onclick = () => show(cur + 1);
+    const close = () => lb.classList.remove('open');
+    document.getElementById('lbClose').onclick = close;
+    lb.onclick = e => { if(e.target === lb) close(); };
+    let x0 = null;
+    lb.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
+    lb.addEventListener('touchend', e => { if(x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if(Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1)); x0 = null; });
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape'){ close(); closeCart(); }
+      if(lb.classList.contains('open') && e.key === 'ArrowLeft') show(cur - 1);
+      if(lb.classList.contains('open') && e.key === 'ArrowRight') show(cur + 1);
+    });
+  })();
+
+  /* Reviews (not connected yet) */
+  document.getElementById('reviewForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const m = document.getElementById('reviewMsg');
+    m.className = 'form-msg ok';
+    m.textContent = 'Thanks! (Preview: reviews will be saved once this form is connected.)';
+  });
 
   /* ---- Reveal on scroll ---- */
   const io = new IntersectionObserver((entries)=>{
