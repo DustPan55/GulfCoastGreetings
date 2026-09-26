@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact | Gulf Coast Greetings</title>
+<meta name="description" content="Gulf Coast Greetings creates curated, locally-inspired welcome bags for vacation rentals and realtor closing baskets in Rockport, Texas." />
+<meta name="theme-color" content="#16324f" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Great+Vibes&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+</head>
+<body data-page="contact">
+<header id="siteHead"></header>
+
+<main>
+<section class="page-head"><span class="script">Gulf Coast Greetings</span><h1>Contact Us</h1><p>Questions, custom orders, or bulk pricing for your properties: we&rsquo;re happy to help.</p></section>
+<section class="band cream" id="contact" style="padding-top:44px">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <p class="eyebrow">Let's Talk</p>
+      <h2>Request a consultation</h2>
+      <p class="lead">Tell us about your properties or business and we'll put together a welcome-bag plan that fits. No pressure, no obligation.</p>
+      <div class="ci-item">
+        <span class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012 4.2 2 2 0 014 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8 9.6a16 16 0 006 6l1.2-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg></span>
+        <div><b data-cc="p">&nbsp;</b><span>Call or text</span></div>
+      </div>
+      <div class="ci-item">
+        <span class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></span>
+        <div><b data-cc="e">&nbsp;</b><span>We reply within one business day</span></div>
+      </div>
+      <div class="ci-item">
+        <span class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <div><b>Rockport, Texas</b><span>Serving the Coastal Bend</span></div>
+      </div>
+    </div>
+
+    <form class="card-form reveal" id="inquiryForm" novalidate>
+      <div class="frow">
+        <div class="field">
+          <label for="f-name">Name <span class="req">*</span></label>
+          <input id="f-name" name="name" type="text" required placeholder="Your name" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="f-company">Company / Property</label>
+          <input id="f-company" name="company" type="text" placeholder="e.g. Bayside Rentals" autocomplete="organization" />
+        </div>
+      </div>
+      <div class="frow">
+        <div class="field">
+          <label for="f-email">Email <span class="req">*</span></label>
+          <input id="f-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="f-phone">Phone</label>
+          <input id="f-phone" name="phone" type="tel" placeholder="(361) 555-0123" autocomplete="tel" />
+        </div>
+      </div>
+      <div class="frow">
+        <div class="field">
+          <label for="f-type">I'm interested in <span class="req">*</span></label>
+          <select id="f-type" name="inquiry_type" required>
+            <option value="" disabled selected>Select an option…</option>
+            <option value="vacation_rental">Vacation rental welcome gifts</option>
+            <option value="realtor">Realtor closing gifts</option>
+            <option value="new_tenant">New tenant gift bags</option>
+            <option value="general">Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-units"># of properties / gifts</label>
+          <input id="f-units" name="units" type="text" placeholder="e.g. 12 units, or 20 gifts/mo" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-message">Tell us a little more</label>
+        <textarea id="f-message" name="message" placeholder="What are you looking for? Any timing, budget, or ideas in mind?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%;justify-content:center">Send My Request →</button>
+      <p class="form-note">By submitting, you agree to be contacted about your request. We never share your info.</p>
+      <div class="form-msg" id="formMsg" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer id="siteFoot"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="catalog.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

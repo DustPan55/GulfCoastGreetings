@@ -17,6 +17,14 @@ window.GCG_CATALOG = {
 
   cardFeePct: 3,
 
+  /* Extra photos for the Gallery page (product photos are added automatically). */
+  gallery: [
+    { src: '../assets/bags-lineup.webp', alt: 'Small, medium and large welcome bags side by side' },
+    { src: '../assets/bag-navy-spread.webp', alt: 'Large navy welcome bag with Texas coffee, popcorn, jam, mug and koozies' },
+    { src: '../assets/bag-white.webp', alt: 'White welcome bag' },
+    { src: '../assets/tote-navy.webp', alt: 'Navy striped canvas beach tote' }
+  ],
+
   products: [
     {
       id: 'vr-small', category: 'vacation', name: 'Small Welcome Bag', price: 30,

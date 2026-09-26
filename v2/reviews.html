@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reviews | Gulf Coast Greetings</title>
+<meta name="description" content="Gulf Coast Greetings creates curated, locally-inspired welcome bags for vacation rentals and realtor closing baskets in Rockport, Texas." />
+<meta name="theme-color" content="#16324f" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Great+Vibes&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css" />
+</head>
+<body data-page="reviews">
+<header id="siteHead"></header>
+
+<main>
+<section class="page-head"><span class="script">Gulf Coast Greetings</span><h1>Reviews</h1><p>We&rsquo;d love to hear how your guests and clients liked their gifts.</p></section>
+<section class="band cream" id="reviews" style="padding-top:44px">
+  <div class="wrap reviews-grid">
+    <div class="reveal">
+            <div class="review-list" id="reviewList" style="margin-top:24px">
+        <p class="empty" style="text-align:left;padding:10px 0">No reviews yet. Be the first to share your experience!</p>
+      </div>
+    </div>
+    <form class="card-form reveal" id="reviewForm" novalidate>
+      <h3 style="font-size:1.3rem;margin-bottom:14px">Leave a review</h3>
+      <div class="field">
+        <label>Your rating <span class="req">*</span></label>
+        <div class="star-input">
+          <input type="radio" name="rating" id="r5" value="5"><label for="r5">&#9733;</label>
+          <input type="radio" name="rating" id="r4" value="4"><label for="r4">&#9733;</label>
+          <input type="radio" name="rating" id="r3" value="3"><label for="r3">&#9733;</label>
+          <input type="radio" name="rating" id="r2" value="2"><label for="r2">&#9733;</label>
+          <input type="radio" name="rating" id="r1" value="1"><label for="r1">&#9733;</label>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="field"><label for="rv-name">Name <span class="req">*</span></label><input id="rv-name" name="name" required placeholder="First name &amp; last initial" /></div>
+        <div class="field"><label for="rv-org">Company / Property</label><input id="rv-org" name="org" placeholder="Optional" /></div>
+      </div>
+      <div class="field"><label for="rv-text">Your review <span class="req">*</span></label><textarea id="rv-text" name="text" required placeholder="How did your guests or clients like their gift?"></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Submit Review</button>
+      <p class="form-note">Reviews are posted after a quick check by our team.</p>
+      <div class="form-msg" id="reviewMsg" role="status"></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer id="siteFoot"></footer>
+<script src="catalog.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
