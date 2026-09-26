@@ -291,15 +291,16 @@ footer ul a:hover{opacity:1;color:var(--sand)}
 .site-head{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
   border-bottom:1px solid rgba(22,50,79,.1)}
 .head-inner{display:flex;align-items:center;justify-content:space-between;height:78px;gap:20px}
-.brand{display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:12px;flex:0 0 auto;white-space:nowrap}
 .brand .mark{width:50px;height:50px;object-fit:contain}
 .brand .txt{line-height:1}
 .brand .txt .a{font-family:'Playfair Display',serif;font-weight:600;color:var(--navy);font-size:1.02rem;letter-spacing:.16em;display:block}
 .brand .txt .b{font-family:'Great Vibes',cursive;color:var(--teal);font-size:1.2rem;display:block;margin-top:-1px}
 .main-nav{display:flex;align-items:center;gap:28px}
-.main-nav a{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--navy);padding:6px 0;border-bottom:2px solid transparent}
+.main-nav a{text-align:center;line-height:1.45;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--navy);padding:6px 0;border-bottom:2px solid transparent}
 .main-nav a:hover{color:var(--teal-dk)}
 .main-nav a.on{border-bottom-color:var(--teal)}
+.main-nav a span{display:block;white-space:nowrap}
 .head-right{display:flex;align-items:center;gap:6px}
 .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px}
 .hamburger span{display:block;width:24px;height:2px;background:var(--navy);margin:5px 0;border-radius:2px}
@@ -348,13 +349,16 @@ footer ul a:hover{opacity:1;color:var(--sand)}
   .main-nav{gap:18px}
   .main-nav a{letter-spacing:.1em;font-size:.72rem}
 }
-@media(max-width:800px){
+@media(max-width:1060px){
   .hamburger{display:block}
   .main-nav{position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;background:#fff;
     padding:6px 16px 14px;box-shadow:var(--shadow-sm);display:none}
   .main-nav.open{display:flex}
-  .main-nav a{padding:13px 0;border-bottom:1px solid rgba(22,50,79,.08);font-size:.8rem}
+  .main-nav a{padding:13px 0;border-bottom:1px solid rgba(22,50,79,.08);font-size:.8rem;text-align:left}
+  .main-nav a span{display:inline}
   .main-nav a.on{border-bottom-color:rgba(22,50,79,.08);color:var(--teal-dk)}
+}
+@media(max-width:800px){
   .cat-cards,.steps3{grid-template-columns:1fr}
   .strip .car-slide{flex-basis:72%}
   .brand .txt .a{font-size:.9rem}

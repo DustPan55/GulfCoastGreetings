@@ -9,8 +9,8 @@
   const ARROW = d => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="${d}"/></svg>`;
   const PAGES = [
     ['index.html', 'home', 'Home'],
-    ['vacation-rental.html', 'vacation', 'Vacation Rental'],
-    ['realtor-closing.html', 'realtor', 'Realtor Closing'],
+    ['vacation-rental.html', 'vacation', 'Vacation Rental|Welcome Bags'],
+    ['realtor-closing.html', 'realtor', 'Realtor|Closing Gifts'],
     ['gallery.html', 'gallery', 'Gallery'],
     ['reviews.html', 'reviews', 'Reviews'],
     ['contact.html', 'contact', 'Contact']
@@ -24,7 +24,7 @@
         <img class="mark" src="../assets/logo-mark.webp" alt="Gulf Coast Greetings logo" width="50" height="50" />
         <span class="txt"><span class="a">GULF COAST</span><span class="b">Greetings</span></span>
       </a>
-      <nav class="main-nav" id="navLinks">${PAGES.map(([href, id, label]) => `<a href="${href}" class="${id === PAGE ? 'on' : ''}">${label}</a>`).join('')}</nav>
+      <nav class="main-nav" id="navLinks">${PAGES.map(([href, id, label]) => `<a href="${href}" class="${id === PAGE ? 'on' : ''}">${label.split('|').map(t => `<span>${t}</span>`).join(' ')}</a>`).join('')}</nav>
       <div class="head-right">
         <button class="cart-btn" id="cartBtn" aria-label="Open cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 016 0"/></svg>
@@ -43,7 +43,7 @@
             <span class="txt"><span class="a" style="color:var(--cream)">GULF COAST</span><span class="b">Greetings</span></span></div>
           <p>Curated, locally-inspired welcome gifts for vacation rentals, realtors, and new residents across the Texas Coastal Bend.</p>
         </div>
-        <div><h5>Explore</h5><ul>${PAGES.map(([href, , label]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul></div>
+        <div><h5>Explore</h5><ul>${PAGES.map(([href, , label]) => `<li><a href="${href}">${label.replace('|', ' ')}</a></li>`).join('')}</ul></div>
         <div><h5>Get in Touch</h5><ul><li><span data-cc="p">&nbsp;</span></li><li><span data-cc="e">&nbsp;</span></li><li>Rockport, Texas</li></ul></div>
       </div>
       <div class="foot-bottom"><span>© ${new Date().getFullYear()} Gulf Coast Greetings, LLC · Rockport, TX</span><span>Warm Welcomes. Lasting Memories.</span></div>

@@ -9,7 +9,7 @@ window.GCG_CATALOG = {
   categories: [
     { id: 'vacation', label: 'Vacation Rental Welcome Bags',
       blurb: 'Pre-made welcome bags stocked with Texas finds, finished with a customized card and your logo on the front.' },
-    { id: 'realtor', label: 'Realtor Closing Baskets',
+    { id: 'realtor', label: 'Realtor Closing Gifts',
       blurb: 'Reusable coastal baskets packed with premium local and Texas items: a closing gift that keeps your name top of mind.' }
   ],
 
@@ -58,7 +58,7 @@ window.GCG_CATALOG = {
               ['Thank-you card', '✓']]
     },
 
-    /* ---- Realtor Closing Baskets #1-#20 ----
+    /* ---- Realtor Closing Gifts #1-#20 ----
        Contents drafted from the item photos in each basket's Drive folder; confirm with the owner.
        price: null shows 'Price coming soon' and disables Add to Cart. */
     {"id": "rc-01", "category": "realtor", "num": 1, "name": "Realtor Basket #1", "price": null, "photos": [{"src": "../assets/baskets/basket-01-1.webp", "alt": "Realtor Basket #1"}, {"src": "../assets/baskets/basket-01-2.webp", "alt": "Realtor Basket #1, another view"}], "items": [["Blue & teal cotton basket", "Basket"], ["Coral sea turtle coffee mug", ""], ["Cutting board", ""], ["Potter Country Store pecans (white)", ""], ["Colonial Candle, Ambrosia Tea", ""], ["Champagne glasses (pair)", ""], ["Deanan Gourmet popcorn, Kettle", ""], ["Deanan Gourmet popcorn, Vanilla", ""], ["Rockport Coffee (Taste of Rockport)", ""], ["Stevie Lew's cherry preserves", ""], ["Thank-you card", "✓"]], "champagne": true},
