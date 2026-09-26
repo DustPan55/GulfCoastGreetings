@@ -918,16 +918,17 @@
     const cat = CAT.categories.find(c => c.id === catId) || CAT.categories[0];
     [...tabsEl.children].forEach(t => { const on = t.dataset.cat === cat.id; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
     blurbEl.textContent = cat.blurb;
-    const list = CAT.products.filter(p => p.category === cat.id).sort((a, b) => a.price - b.price);
+    const list = CAT.products.filter(p => p.category === cat.id)
+      .sort((a, b) => (a.price == null) - (b.price == null) || (a.price - b.price) || ((a.num || 0) - (b.num || 0)));
     prodEl.innerHTML = list.map(p => {
-      const slides = p.photos.map(ph => `<div class="car-slide"><img src="${ph.src}" alt="${esc(ph.alt)}" class="${ph.fit === 'contain' ? 'contain' : ''}" loading="lazy"></div>`).join('')
+      const slides = p.photos.map(ph => `<div class="car-slide"><img src="${ph.src}" alt="${esc(ph.alt)}" class="${ph.fit === 'contain' ? 'contain' : ''}" loading="lazy" onerror="this.onerror=null;this.src='../assets/logo.webp';this.className='contain'"></div>`).join('')
         + `<div class="car-slide contents-slide"><h4>What's inside</h4><ul class="bag-contents">${p.items.map(([n, q]) => `<li><b>${esc(n)}</b><span>${esc(q)}</span></li>`).join('')}</ul></div>`;
       const wrapOk = p.wrap !== false;
       return `<article class="product reveal in" data-id="${p.id}">
         <div class="carousel">${p.placeholder ? '<span class="ph-flag">Sample</span>' : ''}<div class="car-track">${slides}</div></div>
         <div class="p-body">
           ${p.num ? `<div class="p-num">Basket #${p.num}</div>` : ''}
-          <div class="p-head"><h3>${esc(p.name)}</h3><span class="p-price">${money(p.price)}</span></div>
+          <div class="p-head"><h3>${esc(p.name)}</h3><span class="p-price">${p.price == null ? '<small style="font:700 .8rem Mulish,sans-serif;color:var(--muted)">Price coming soon</small>' : money(p.price)}</span></div>
           ${p.size ? `<div class="p-size">${esc(p.size)}</div>` : ''}
           <button type="button" class="p-link" data-contents>See what's inside →</button>
           ${p.champagne ? `<div class="champ"><b>CHAMPAGNE NOT INCLUDED</b>Feel free to drop your champagne off before pickup, or place the bottle inside the basket after pickup.</div>` : ''}
@@ -937,7 +938,7 @@
           </div>` : ''}
           <div class="buy">
             <div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">−</button><input type="text" inputmode="numeric" value="1" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div>
-            <button type="button" class="btn btn-teal" data-add>Add to Cart</button>
+            <button type="button" class="btn btn-teal" data-add ${p.price == null ? 'disabled' : ''}>Add to Cart</button>
           </div>
         </div>
       </article>`;
@@ -979,7 +980,7 @@
   document.getElementById('cartClose').onclick = closeCart; scrim.onclick = closeCart;
   document.querySelectorAll('input[name="pay"]').forEach(r => r.onchange = renderCart);
   function renderCart(){
-    cart = cart.filter(l => product(l.id));
+    cart = cart.filter(l => product(l.id) && product(l.id).price != null);
     document.getElementById('cartCount').textContent = cart.reduce((n, l) => n + l.qty, 0);
     const linesEl = document.getElementById('cartLines'), foot = document.getElementById('cartFoot');
     if(!cart.length){ linesEl.innerHTML = '<p class="empty">Your cart is empty.</p>'; foot.style.display = 'none'; return; }
