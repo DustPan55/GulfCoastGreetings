@@ -28,3 +28,10 @@ or via SQL. Consider adding an email/Slack notification via a Supabase Edge Func
 
 ## Contact
 979-743-5350 · Welcome@gulfcoastgreetingstx.com · GulfCoastGreetingsTX.com
+
+## v2 (redesign, multi-page) at `/v2/`
+- Pages share `v2/site.css`, `v2/site.js` and `v2/catalog.js` (products, prices, contents).
+- GitHub Pages caches files for 10 minutes. When publishing a change, bump the `?v=` stamp on those
+  links in every `v2/*.html` so browsers fetch the new copies:
+  `V=$(date +%Y%m%d%H%M); sed -i -E "s#(site\.css|catalog\.js|site\.js)\?v=[0-9]+#\1?v=$V#g" v2/*.html`
+- The original single-page site stays at the root; it is also tagged `v1-original`.
