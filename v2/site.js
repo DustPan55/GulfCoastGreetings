@@ -198,6 +198,7 @@
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { cart = []; }
   const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e) {} };
+  if(PAGE === 'thanks'){ cart = []; save(); }
   const product = id => CAT.products.find(p => p.id === id);
   const unitPrice = l => product(l.id).price + (l.ribbon ? CAT.wrapAddon.price : 0);
   function addToCart(id, qty, ribbon){
@@ -238,10 +239,24 @@
     document.getElementById('tTotal').textContent = money(sub + tax);
   }
   renderCart();
-  document.getElementById('checkoutBtn').onclick = () => {
+  /* Checkout: a Supabase function prices the cart from the catalog and returns a Square checkout link. */
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  checkoutBtn.onclick = async () => {
     const m = document.getElementById('checkoutMsg');
-    m.className = 'form-msg err';
-    m.textContent = 'Online checkout is coming soon (Square payments are being set up). To order now, call or text ' + PHONE_FMT + '.';
+    m.className = 'form-msg'; checkoutBtn.disabled = true; checkoutBtn.textContent = 'Starting secure checkout…';
+    try {
+      const r = await fetch(GCG_URL + '/functions/v1/square-checkout', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', apikey: GCG_KEY },
+        body: JSON.stringify({ cart: cart.map(l => ({ id: l.id, qty: l.qty, wrap: !!l.ribbon })), returnUrl: new URL('thank-you.html', location.href).href })
+      });
+      const d = await r.json().catch(() => ({}));
+      if(r.ok && d.url){ location.href = d.url; return; }
+      throw Object.assign(new Error(d.error || ''), { fromServer: true });
+    } catch(e) {
+      m.className = 'form-msg err';
+      m.textContent = (e.fromServer && e.message ? e.message + ' ' : 'Online checkout isn\'t available right now. ') + 'To order, call or text ' + PHONE_FMT + '.';
+    }
+    checkoutBtn.disabled = false; checkoutBtn.textContent = 'Checkout →';
   };
 
   let toastT;

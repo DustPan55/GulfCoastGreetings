@@ -37,3 +37,21 @@ or via SQL. Consider adding an email/Slack notification via a Supabase Edge Func
   links in every `v2/*.html` so browsers fetch the new copies:
   `V=$(date +%Y%m%d%H%M); sed -i -E "s#(site\.css|catalog\.js|site\.js)\?v=[0-9]+#\1?v=$V#g" v2/*.html`
 - The original single-page site stays at the root; it is also tagged `v1-original`.
+
+## Square checkout (v2)
+The cart's Checkout button calls the Supabase Edge Function `square-checkout`
+(`supabase/functions/square-checkout/`). It re-prices the cart from the live `v2/catalog.js`
+(the browser only sends product ids, quantities and wrap yes/no), enforces the welcome-bag minimum,
+adds the catalog's `salesTaxPct`, and returns a Square hosted-checkout link. Square redirects back
+to `v2/thank-you.html`, which clears the cart. If the function is unreachable the button says to call or text.
+
+Setup (on the Gulf Coast Greetings Supabase project, `ubdnxnpptqvyijswjyju`):
+```
+supabase link --project-ref ubdnxnpptqvyijswjyju
+supabase secrets set SQUARE_ENV=sandbox SQUARE_ACCESS_TOKEN=... SQUARE_LOCATION_ID=... \
+  CATALOG_URL=https://dustpan55.github.io/GulfCoastGreetings/v2/catalog.js \
+  ALLOWED_ORIGINS=https://dustpan55.github.io
+supabase functions deploy square-checkout --no-verify-jwt
+```
+Going live: set `SQUARE_ENV=production` with the production token and location id.
+When the site moves to its own domain, add that origin to `ALLOWED_ORIGINS` and update `CATALOG_URL`.
