@@ -60,13 +60,9 @@
       <div class="drawer-head"><h3>Your Cart</h3><button class="x" id="cartClose" aria-label="Close cart">&times;</button></div>
       <div class="drawer-body" id="cartLines"></div>
       <div class="drawer-foot" id="cartFoot">
-        <div class="pay">
-          <label><span><input type="radio" name="pay" value="ach" checked>Bank transfer (ACH)</span><span class="fee">No fee</span></label>
-          <label><span><input type="radio" name="pay" value="card">Credit / debit card</span><span class="fee">+${CAT.cardFeePct}%</span></label>
-        </div>
         <div class="totals">
           <div><span>Subtotal</span><span id="tSub">$0.00</span></div>
-          <div id="tFeeRow"><span>Card processing fee (${CAT.cardFeePct}%)</span><span id="tFee">$0.00</span></div>
+          <div><span>Sales tax (${CAT.salesTaxPct}%)</span><span id="tTax">$0.00</span></div>
           <div class="grand"><span>Total</span><span id="tTotal">$0.00</span></div>
         </div>
         <div class="form-msg" id="minMsg" role="status" style="margin:0 0 12px"></div>
@@ -211,7 +207,6 @@
   const closeCart = () => { drawer.classList.remove('open'); scrim.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); };
   document.getElementById('cartBtn').onclick = openCart;
   document.getElementById('cartClose').onclick = closeCart; scrim.onclick = closeCart;
-  document.querySelectorAll('input[name="pay"]').forEach(r => r.onchange = renderCart);
   function renderCart(){
     cart = cart.filter(l => product(l.id) && product(l.id).price != null);
     document.getElementById('cartCount').textContent = cart.reduce((n, l) => n + l.qty, 0);
@@ -234,12 +229,10 @@
     minEl.textContent = short.join(' '); minEl.className = short.length ? 'form-msg err' : 'form-msg';
     document.getElementById('checkoutBtn').disabled = short.length > 0;
     const sub = cart.reduce((s, l) => s + unitPrice(l) * l.qty, 0);
-    const card = document.querySelector('input[name="pay"]:checked').value === 'card';
-    const fee = card ? Math.round(sub * CAT.cardFeePct) / 100 : 0;
+    const tax = Math.round(sub * CAT.salesTaxPct) / 100;
     document.getElementById('tSub').textContent = money(sub);
-    document.getElementById('tFeeRow').style.display = card ? '' : 'none';
-    document.getElementById('tFee').textContent = money(fee);
-    document.getElementById('tTotal').textContent = money(sub + fee);
+    document.getElementById('tTax').textContent = money(tax);
+    document.getElementById('tTotal').textContent = money(sub + tax);
   }
   renderCart();
   document.getElementById('checkoutBtn').onclick = () => {

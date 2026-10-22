@@ -18,7 +18,7 @@ window.GCG_CATALOG = {
 
   wrapAddon: { label: 'Cellophane wrap with Tulle and raffia', price: 10 },
 
-  cardFeePct: 3,
+  salesTaxPct: 8.25,
 
   /* Extra photos for the Gallery page (product photos are added automatically). */
   gallery: [

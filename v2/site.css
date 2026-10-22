@@ -235,12 +235,7 @@ footer ul a:hover{opacity:1;color:var(--sand)}
 .line .rm{background:none;border:0;color:#a8402f;font:600 .78rem 'Mulish',sans-serif;cursor:pointer;padding:0;margin-top:4px}
 .line .amt{font-weight:800;color:var(--navy)}
 .empty{color:var(--muted);text-align:center;padding:40px 0}
-.pay{display:grid;gap:8px;margin:4px 0 14px}
-.pay label{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0;background:var(--cream);
   border:1.5px solid rgba(22,50,79,.14);border-radius:11px;padding:11px 13px;cursor:pointer;font-size:.9rem}
-.pay label:has(input:checked){border-color:var(--teal);background:#eef6f3}
-.pay input{width:auto;accent-color:var(--teal);margin-right:8px}
-.pay span.fee{color:var(--muted);font-weight:700;font-size:.8rem}
 .totals{display:grid;gap:4px;font-size:.92rem;margin-bottom:14px}
 .totals div{display:flex;justify-content:space-between}
 .totals .grand{font-size:1.15rem;font-weight:800;color:var(--navy);border-top:1px solid rgba(22,50,79,.12);padding-top:8px;margin-top:4px}
