@@ -184,7 +184,7 @@ footer ul a:hover{opacity:1;color:var(--sand)}
   padding:11px 22px;font:700 .95rem 'Mulish',sans-serif;cursor:pointer;transition:.18s}
 .tab.on{background:var(--navy);color:var(--cream)}
 .tab-blurb{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 34px}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:stretch}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;align-items:stretch;max-width:980px;margin:0 auto}
 .product{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06);
   overflow:hidden;display:flex;flex-direction:column}
 .product .carousel{background:linear-gradient(180deg,#fff,#f6f1e6)}
