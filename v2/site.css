@@ -184,7 +184,7 @@ footer ul a:hover{opacity:1;color:var(--sand)}
   padding:11px 22px;font:700 .95rem 'Mulish',sans-serif;cursor:pointer;transition:.18s}
 .tab.on{background:var(--navy);color:var(--cream)}
 .tab-blurb{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 34px}
-.products{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:start}
+.products{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;align-items:stretch}
 .product{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06);
   overflow:hidden;display:flex;flex-direction:column}
 .product .carousel{background:linear-gradient(180deg,#fff,#f6f1e6)}
@@ -193,8 +193,8 @@ footer ul a:hover{opacity:1;color:var(--sand)}
 .product .car-slide img.contain{object-fit:contain;padding:16px}
 .contents-slide{padding:26px 26px 36px;display:flex;flex-direction:column;background:var(--cream)}
 .contents-slide h4{font-size:1.1rem;margin-bottom:10px}
-.contents-slide .bag-contents{margin-top:0;overflow:auto}
-.p-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px}
+.contents-slide .bag-contents{margin-top:0;overflow:auto;min-height:0;flex:0 1 auto}
+.p-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
 .p-num{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dk);font-weight:800}
 .p-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .p-head h3{font-size:1.22rem}
@@ -202,8 +202,10 @@ footer ul a:hover{opacity:1;color:var(--sand)}
 .p-size{font-size:.84rem;color:var(--muted);font-weight:600}
 .p-link{background:none;border:0;padding:0;color:var(--teal-dk);font:700 .88rem 'Mulish',sans-serif;cursor:pointer;
   text-align:left;text-decoration:underline;text-underline-offset:3px}
-.champ{background:#fff7e8;border:1px solid rgba(230,169,75,.45);border-radius:11px;padding:10px 13px;font-size:.84rem;color:#6b4a12}
-.champ b{display:block;letter-spacing:.06em;color:#8a5a0c}
+.champ-flag{position:absolute;top:12px;left:12px;z-index:3;background:rgba(255,247,232,.95);color:#8a5a0c;border:1px solid rgba(230,169,75,.6);
+  font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;box-shadow:var(--shadow-sm);pointer-events:none}
+.champ-note{margin-top:12px;background:#fff7e8;border:1px solid rgba(230,169,75,.45);border-radius:11px;padding:10px 13px;font-size:.82rem;color:#6b4a12}
+.champ-note b{color:#8a5a0c}
 .addon{display:flex;flex-direction:column;gap:8px;border-top:1px solid rgba(22,50,79,.1);padding-top:12px}
 .addon label.chk{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.9rem;color:var(--navy);margin:0;cursor:pointer}
 .addon label.chk input{width:18px;height:18px;accent-color:var(--teal)}
@@ -211,7 +213,7 @@ footer ul a:hover{opacity:1;color:var(--sand)}
 .ribbons.show{display:flex}
 .ribbons label{margin:0;display:flex;align-items:center;gap:6px;font-weight:600;font-size:.86rem;color:var(--ink);cursor:pointer}
 .ribbons input{width:auto;accent-color:var(--teal)}
-.buy{display:flex;gap:10px;align-items:center;margin-top:4px}
+.buy{display:flex;gap:10px;align-items:center;margin-top:auto;padding-top:4px}
 .qty{display:flex;align-items:center;border:1.5px solid rgba(22,50,79,.18);border-radius:999px;overflow:hidden;flex:0 0 auto}
 .qty button{width:36px;height:42px;border:0;background:transparent;font-size:1.1rem;color:var(--navy);cursor:pointer}
 .qty input{width:38px;border:0;background:transparent;text-align:center;padding:0;font-weight:700}

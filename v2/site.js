@@ -162,8 +162,8 @@
   }
 
   function productCard(p){
-    const slides = p.photos.map(ph => `<div class="car-slide"><img src="${ph.src}" alt="${esc(ph.alt)}" class="${ph.fit === 'contain' ? 'contain' : ''}" loading="lazy" onerror="${FALLBACK}"></div>`).join('')
-      + `<div class="car-slide contents-slide"><h4>What's inside</h4><ul class="bag-contents">${p.items.map(([n, q]) => `<li><b>${esc(n)}</b><span>${esc(q)}</span></li>`).join('')}</ul></div>`;
+    const slides = p.photos.map((ph, i) => `<div class="car-slide">${p.champagne && !i ? '<span class="champ-flag">Champagne not included</span>' : ''}<img src="${ph.src}" alt="${esc(ph.alt)}" class="${ph.fit === 'contain' ? 'contain' : ''}" loading="lazy" onerror="${FALLBACK}"></div>`).join('')
+      + `<div class="car-slide contents-slide"><h4>What's inside</h4><ul class="bag-contents">${p.items.map(([n, q]) => `<li><b>${esc(n)}</b><span>${esc(q)}</span></li>`).join('')}</ul>${p.champagne ? `<p class="champ-note"><b>Champagne not included:</b> drop yours off before pickup, or add it after.</p>` : ''}</div>`;
     const wrapOk = p.wrap !== false;
     return `<article class="product" id="${p.id}" data-id="${p.id}">
       <div class="carousel">${p.placeholder ? '<span class="ph-flag">Sample</span>' : ''}<div class="car-track">${slides}</div></div>
@@ -172,7 +172,6 @@
         <div class="p-head"><h3>${esc(p.name)}</h3><span class="p-price">${p.price == null ? '<small style="font:700 .8rem Mulish,sans-serif;color:var(--muted)">Price coming soon</small>' : money(p.price)}</span></div>
         ${p.size ? `<div class="p-size">${esc(p.size)}</div>` : ''}
         <button type="button" class="p-link" data-contents>See what's inside →</button>
-        ${p.champagne ? `<div class="champ"><b>CHAMPAGNE NOT INCLUDED</b>Feel free to drop your champagne off before pickup, or place the bottle inside the basket after pickup.</div>` : ''}
         ${wrapOk ? `<div class="addon">
           <label class="chk"><input type="checkbox" data-wrap> ${esc(CAT.wrapAddon.label)} (+$${CAT.wrapAddon.price})</label>
           <div class="ribbons">${CAT.wrapAddon.ribbons.map((r, i) => `<label><input type="radio" name="rb-${p.id}" value="${r}" ${i ? '' : 'checked'}> ${r}</label>`).join('')}</div>
