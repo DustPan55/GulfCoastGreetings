@@ -174,7 +174,6 @@
         <button type="button" class="p-link" data-contents>See what's inside →</button>
         ${wrapOk ? `<div class="addon">
           <label class="chk"><input type="checkbox" data-wrap> ${esc(CAT.wrapAddon.label)} (+$${CAT.wrapAddon.price})</label>
-          <div class="ribbons">${CAT.wrapAddon.ribbons.map((r, i) => `<label><input type="radio" name="rb-${p.id}" value="${r}" ${i ? '' : 'checked'}> ${r}</label>`).join('')}</div>
         </div>` : ''}
         <div class="buy">
           <div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">−</button><input type="text" inputmode="numeric" value="1" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div>
@@ -187,11 +186,10 @@
     const car = makeCarousel(card.querySelector('.carousel'));
     card.querySelector('[data-contents]').onclick = () => car.go(99);
     const wrap = card.querySelector('[data-wrap]');
-    if(wrap) wrap.onchange = () => card.querySelector('.ribbons').classList.toggle('show', wrap.checked);
     const q = card.querySelector('.qty input');
     card.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { q.value = Math.max(1, (parseInt(q.value) || 1) + +b.dataset.q); });
     card.querySelector('[data-add]').onclick = () => {
-      const ribbon = wrap && wrap.checked ? card.querySelector('.ribbons input:checked').value : null;
+      const ribbon = wrap && wrap.checked ? 'Tulle and raffia' : null;
       addToCart(card.dataset.id, Math.max(1, parseInt(q.value) || 1), ribbon);
     };
   }
@@ -222,7 +220,7 @@
     foot.style.display = '';
     linesEl.innerHTML = cart.map((l, i) => { const p = product(l.id); return `<div class="line">
       <img src="${p.photos[0].src}" alt="" onerror="${FALLBACK}">
-      <div><b>${esc(p.name)}</b><small>${money(p.price)} each${l.ribbon ? ` · Cellophane wrap, ${esc(l.ribbon)} (+${money(CAT.wrapAddon.price)})` : ''}</small>
+      <div><b>${esc(p.name)}</b><small>${money(p.price)} each${l.ribbon ? ` · ${esc(CAT.wrapAddon.label)} (+${money(CAT.wrapAddon.price)})` : ''}</small>
         <div class="qty" style="margin-top:6px;transform:scale(.85);transform-origin:left"><button data-li="${i}" data-d="-1" aria-label="Decrease">−</button><input value="${l.qty}" readonly aria-label="Quantity"><button data-li="${i}" data-d="1" aria-label="Increase">+</button></div>
         <button class="rm" data-rm="${i}">Remove</button></div>
       <span class="amt">${money(unitPrice(l) * l.qty)}</span></div>`; }).join('');

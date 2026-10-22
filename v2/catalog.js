@@ -16,7 +16,7 @@ window.GCG_CATALOG = {
       blurb: 'Reusable coastal baskets packed with premium local and Texas items: a closing gift that keeps your name top of mind.' }
   ],
 
-  wrapAddon: { label: 'Cellophane wrap with tulle or raffia', price: 10, ribbons: ['Tulle', 'Raffia'] },
+  wrapAddon: { label: 'Cellophane wrap with Tulle and raffia', price: 10 },
 
   cardFeePct: 3,
 
