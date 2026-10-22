@@ -402,3 +402,35 @@ footer ul a:hover{opacity:1;color:var(--sand)}
   .script,.center .script,.page-head .script{font-size:1.2rem !important}
   .cat-card .go{display:none}
 }
+
+/* ---------- Home: offerings, why us (carried over from the original site) ---------- */
+.intro-sub{max-width:640px;margin:-34px auto 44px;text-align:center;color:var(--muted);font-size:1rem}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{background:#fff;border-radius:var(--radius);padding:34px 28px;box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06);
+  transition:transform .2s ease, box-shadow .2s ease;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .tag{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--teal),var(--sand))}
+.card .ic{width:58px;height:58px;border-radius:14px;background:var(--cream-2);display:grid;place-items:center;margin-bottom:18px;color:var(--navy)}
+.card h3{font-size:1.32rem;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.98rem}
+.card ul{list-style:none;margin-top:16px;display:grid;gap:8px}
+.card ul li{font-size:.9rem;color:var(--ink);display:flex;gap:9px;align-items:flex-start;font-weight:600}
+.card ul li::before{content:"✦";color:var(--teal);font-size:.9rem;line-height:1.5}
+.why-split{display:grid;grid-template-columns:.82fr 1.18fr;gap:54px;align-items:start}
+.why-split h2{font-size:clamp(2rem,3.4vw,2.8rem)}
+.why-intro{color:var(--muted);margin-top:18px;font-size:1.06rem}
+.why-list{display:grid;gap:24px}
+.wl{border-bottom:1px solid rgba(22,50,79,.14);padding-bottom:22px}
+.wl:last-child{border-bottom:0;padding-bottom:0}
+.wl h4{font-size:1.28rem;margin-bottom:6px}
+.wl p{color:var(--muted);font-size:1rem}
+@media(max-width:920px){
+  .cards3{grid-template-columns:1fr}
+  .why-split{grid-template-columns:1fr;gap:32px}
+  .steps{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .steps{grid-template-columns:1fr}
+  .intro-sub{margin-top:-30px}
+  .why-split h2{font-size:1.6rem}
+}
