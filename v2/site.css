@@ -188,12 +188,12 @@ footer ul a:hover{opacity:1;color:var(--sand)}
 .product{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06);
   overflow:hidden;display:flex;flex-direction:column}
 .product .carousel{background:linear-gradient(180deg,#fff,#f6f1e6)}
-.product .car-slide{aspect-ratio:1;overflow:hidden;min-height:0}
-.product .car-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.product .car-slide{aspect-ratio:4/3;overflow:hidden;min-height:0}
+.product .car-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
 .product .car-slide img.contain{object-fit:contain;padding:16px}
-.contents-slide{padding:26px 26px 36px;display:flex;flex-direction:column;background:var(--cream)}
-.contents-slide h4{font-size:1.1rem;margin-bottom:10px}
-.contents-slide .bag-contents{margin-top:0;overflow:auto;min-height:0;flex:0 1 auto}
+.inside{background:var(--cream);border-radius:12px;padding:4px 14px 12px}
+.inside .bag-contents{margin:0;border-top:0;padding-top:8px}
+.inside .champ-note{margin-top:10px}
 .p-body{padding:20px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
 .p-num{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dk);font-weight:800}
 .p-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}

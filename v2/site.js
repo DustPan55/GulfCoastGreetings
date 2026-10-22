@@ -159,7 +159,8 @@
 
   function productCard(p){
     const slides = p.photos.map((ph, i) => `<div class="car-slide">${p.champagne && !i ? '<span class="champ-flag">Champagne not included</span>' : ''}<img src="${ph.src}" alt="${esc(ph.alt)}" class="${ph.fit === 'contain' ? 'contain' : ''}" loading="lazy" onerror="${FALLBACK}"></div>`).join('')
-      + `<div class="car-slide contents-slide"><h4>What's inside</h4><ul class="bag-contents">${p.items.map(([n, q]) => `<li><b>${esc(n)}</b><span>${esc(q)}</span></li>`).join('')}</ul>${p.champagne ? `<p class="champ-note"><b>Champagne not included:</b> drop yours off before pickup, or add it after.</p>` : ''}</div>`;
+;
+    const inside = `<div class="inside" hidden><ul class="bag-contents">${p.items.map(([n, q]) => `<li><b>${esc(n)}</b><span>${esc(q)}</span></li>`).join('')}</ul>${p.champagne ? `<p class="champ-note"><b>Champagne not included:</b> drop yours off before pickup, or add it after.</p>` : ''}</div>`;
     const wrapOk = p.wrap !== false;
     return `<article class="product" id="${p.id}" data-id="${p.id}">
       <div class="carousel">${p.placeholder ? '<span class="ph-flag">Sample</span>' : ''}<div class="car-track">${slides}</div></div>
@@ -167,7 +168,8 @@
         ${p.num ? `<div class="p-num">Basket #${p.num}</div>` : ''}
         <div class="p-head"><h3>${esc(p.name)}</h3><span class="p-price">${p.price == null ? '<small style="font:700 .8rem Mulish,sans-serif;color:var(--muted)">Price coming soon</small>' : money(p.price)}</span></div>
         ${p.size ? `<div class="p-size">${esc(p.size)}</div>` : ''}
-        <button type="button" class="p-link" data-contents>See what's inside →</button>
+        <button type="button" class="p-link" data-contents aria-expanded="false">See what's inside →</button>
+        ${inside}
         ${wrapOk ? `<div class="addon">
           <label class="chk"><input type="checkbox" data-wrap> ${esc(CAT.wrapAddon.label)} (+$${CAT.wrapAddon.price})</label>
         </div>` : ''}
@@ -179,8 +181,9 @@
     </article>`;
   }
   function wireCard(card){
-    const car = makeCarousel(card.querySelector('.carousel'));
-    card.querySelector('[data-contents]').onclick = () => car.go(99);
+    makeCarousel(card.querySelector(".carousel"));
+    const btn = card.querySelector('[data-contents]'), inside = card.querySelector('.inside');
+    btn.onclick = () => { inside.hidden = !inside.hidden; btn.setAttribute('aria-expanded', !inside.hidden); btn.textContent = inside.hidden ? "See what's inside →" : 'Hide contents ↑'; };
     const wrap = card.querySelector('[data-wrap]');
     const q = card.querySelector('.qty input');
     card.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { q.value = Math.max(1, (parseInt(q.value) || 1) + +b.dataset.q); });
