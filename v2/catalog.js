@@ -30,34 +30,48 @@ window.GCG_CATALOG = {
 
   products: [
     {
-      id: 'vr-small', category: 'vacation', name: 'Small Welcome Bag', price: 30,
+      id: 'vr-small', category: 'vacation', wrap: false, name: 'Small Welcome Bag', price: 30,
       size: '8 × 4.75 × 10 · White Kraft',
       photos: [
-        { src: '../assets/bag-small.webp', alt: 'Small white Kraft welcome bag with navy tissue and striped ribbon', fit: 'contain' },
-        { src: '../assets/bag-lifestyle.webp', alt: 'Small welcome bag beside Texas coffee, popcorn, crackers, taffy and koozies' }
+        { src: '../assets/welcome-bags/small-1.webp', alt: 'Small welcome bag with your logo and everything that comes inside' },
+        { src: '../assets/welcome-bags/small-2.webp', alt: 'Savory crackers', gallery: false },
+        { src: '../assets/welcome-bags/small-3.webp', alt: 'Peppermint', gallery: false },
+        { src: '../assets/welcome-bags/small-4.webp', alt: 'Coffee', gallery: false },
+        { src: '../assets/welcome-bags/small-5.webp', alt: 'Deanan Gourmet popcorn', gallery: false },
+        { src: '../assets/welcome-bags/small-6.webp', alt: 'Two 8 oz waters', gallery: false },
+        { src: '../assets/welcome-bags/small-7.webp', alt: 'Two neoprene koozies with your logo', gallery: false }
       ],
       items: [['Savory crackers', '3 oz'], ['Peppermint', '3 oz'], ['Coffee', '1.75 oz'], ['Popcorn', '1.4 oz'], ['Water', '2 × 8 oz'], ['Neoprene koozies with your custom logo', '2'], ['Card with your business info', '✓']]
     },
     {
-      id: 'vr-medium', category: 'vacation', name: 'Medium Welcome Bag', price: 45,
+      id: 'vr-medium', category: 'vacation', wrap: false, name: 'Medium Welcome Bag', price: 45,
       size: '10 × 5 × 13 · White Kraft',
       photos: [
-        { src: '../assets/bag-medium.webp', alt: 'Medium white Kraft welcome bag with navy tissue and striped ribbon', fit: 'contain' },
-        { src: '../assets/bag-spread.webp', alt: 'Medium welcome bag contents: coffee, popcorn, taffy, water and koozies' }
+        { src: '../assets/welcome-bags/medium-1.webp', alt: 'Medium welcome bag with your logo and everything that comes inside' },
+        { src: '../assets/welcome-bags/medium-2.webp', alt: 'Savory crackers', gallery: false },
+        { src: '../assets/welcome-bags/medium-3.webp', alt: 'Peppermint', gallery: false },
+        { src: '../assets/welcome-bags/medium-4.webp', alt: 'Coffee', gallery: false },
+        { src: '../assets/welcome-bags/medium-5.webp', alt: 'Deanan Gourmet popcorn', gallery: false },
+        { src: '../assets/welcome-bags/medium-6.webp', alt: 'Two 16 oz waters', gallery: false },
+        { src: '../assets/welcome-bags/medium-7.webp', alt: 'Four neoprene koozies with your logo', gallery: false }
       ],
       items: [['Savory crackers', '6 oz'], ['Peppermint', '6 oz'], ['Coffee', '3.5 oz'], ['Popcorn', '2.6 oz'], ['Water', '2 × 16 oz'], ['Neoprene koozies with your custom logo', '4'], ['Card with your business info', '✓']]
     },
     {
-      id: 'vr-large', category: 'vacation', name: 'Large Welcome Bag', price: 65,
+      id: 'vr-large', category: 'vacation', wrap: false, name: 'Large Welcome Bag', price: 65,
       size: '16 × 6 × 12 · Navy & White Laminate',
       photos: [
-        { src: '../assets/bag-large.webp', alt: 'Large navy laminate welcome bag with white tissue and starfish ribbon', fit: 'contain' },
-        { src: '../assets/bag-navy-spread.webp', alt: 'Large navy bag with Texas coffee, popcorn, jam, mug and koozies' }
+        { src: '../assets/welcome-bags/large-1.webp', alt: 'Large welcome bag with your logo and everything that comes inside' },
+        { src: '../assets/welcome-bags/large-2.webp', alt: 'Savory crackers', gallery: false },
+        { src: '../assets/welcome-bags/large-3.webp', alt: 'Peppermint', gallery: false },
+        { src: '../assets/welcome-bags/large-4.webp', alt: 'Coffee', gallery: false },
+        { src: '../assets/welcome-bags/large-5.webp', alt: 'Deanan Gourmet popcorn', gallery: false },
+        { src: '../assets/welcome-bags/large-6.webp', alt: 'Three 16 oz waters', gallery: false },
+        { src: '../assets/welcome-bags/large-7.webp', alt: 'Six neoprene koozies with your logo', gallery: false }
       ],
       items: [['Savory crackers', '9 oz'], ['Peppermint', '9 oz'], ['Coffee', '5.25 oz'], ['Popcorn', '4.1 oz'], ['Water', '3 × 16 oz'], ['Neoprene koozies with your custom logo', '6'], ['Card with your business info', '✓']]
     },
-
-    {"id": "vr-sampler", "category": "vacation", "name": "Gulf Coast Sampler", "price": 85, "photos": [{"src": "../assets/samplers/sampler-1.webp", "alt": "Gulf Coast Sampler welcome bag with its contents"}, {"src": "../assets/samplers/sampler-2.webp", "alt": "Savory crackers", "gallery": false}, {"src": "../assets/samplers/sampler-3.webp", "alt": "Peppermint", "gallery": false}, {"src": "../assets/samplers/sampler-4.webp", "alt": "Peppermint in a jar", "gallery": false}, {"src": "../assets/samplers/sampler-5.webp", "alt": "Stevie Lew's blueberry preserves", "gallery": false}, {"src": "../assets/samplers/sampler-6.webp", "alt": "Neoprene koozies with your logo", "gallery": false}, {"src": "../assets/samplers/sampler-7.webp", "alt": "Cinnamon pecans", "gallery": false}, {"src": "../assets/samplers/sampler-8.webp", "alt": "Rockport Coffee", "gallery": false}, {"src": "../assets/samplers/sampler-9.webp", "alt": "Water", "gallery": false}, {"src": "../assets/samplers/sampler-10.webp", "alt": "Deanan Gourmet popcorn", "gallery": false}], "items": [["Savory crackers", "6 oz"], ["Peppermint", "6 oz"], ["Blueberry preserves", "16 oz"], ["Neoprene koozies with your company logo", "4"], ["Cinnamon pecans", "6 oz"], ["Coffee", "8 oz"], ["Water", "2 × 16 oz"], ["Popcorn", "2.6 oz"], ["Card with your business info", "✓"]]},
+    {"id": "vr-sampler", "category": "vacation", "name": "Gulf Coast Sampler", "price": 85, "photos": [{"src": "../assets/samplers/sampler-1.webp", "alt": "Gulf Coast Sampler welcome bag with its contents"}, {"src": "../assets/samplers/sampler-2.webp", "alt": "Savory crackers", "gallery": false}, {"src": "../assets/samplers/sampler-3.webp", "alt": "Peppermint", "gallery": false}, {"src": "../assets/samplers/sampler-4.webp", "alt": "Peppermint in a jar", "gallery": false}, {"src": "../assets/samplers/sampler-5.webp", "alt": "Stevie Lew's blueberry preserves", "gallery": false}, {"src": "../assets/samplers/sampler-6.webp", "alt": "Neoprene koozies with your logo", "gallery": false}, {"src": "../assets/samplers/sampler-7.webp", "alt": "Cinnamon pecans", "gallery": false}, {"src": "../assets/samplers/sampler-8.webp", "alt": "Rockport Coffee", "gallery": false}, {"src": "../assets/samplers/sampler-9.webp", "alt": "Water", "gallery": false}, {"src": "../assets/samplers/sampler-10.webp", "alt": "Deanan Gourmet popcorn", "gallery": false}], "items": [["Savory crackers", "6 oz"], ["Peppermint", "6 oz"], ["Blueberry preserves", "16 oz"], ["Neoprene koozies with your company logo", "4"], ["Cinnamon pecans", "6 oz"], ["Coffee", "8 oz"], ["Water", "2 × 16 oz"], ["Popcorn", "2.6 oz"], ["Card with your business info", "✓"]], "wrap": false},
 
     /* ---- Realtor Closing Gifts #1-#20 ----
        Contents drafted from the item photos in each basket's Drive folder; confirm with the owner.
