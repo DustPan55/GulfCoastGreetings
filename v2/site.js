@@ -143,10 +143,11 @@
   if(prodEl){
     const catId = prodEl.dataset.cat;
     const seg = document.getElementById('seg');
-    let champOnly = location.hash === '#champagne';
+    const filters = seg ? [...seg.children].map(b => b.dataset.f) : [];
+    let f = filters.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'all';
     const render = () => {
-      if(seg) [...seg.children].forEach(b => b.classList.toggle('on', (b.dataset.f === 'champagne') === champOnly));
-      const list = CAT.products.filter(p => p.category === catId && (!champOnly || p.champagne))
+      if(seg) [...seg.children].forEach(b => b.classList.toggle('on', b.dataset.f === f));
+      const list = CAT.products.filter(p => p.category === catId && (f === 'all' || p.material === f))
         .sort((a, b) => (a.price == null) - (b.price == null) || (a.price - b.price) || ((a.num || 0) - (b.num || 0)));
       prodEl.innerHTML = list.map(productCard).join('');
       const cat = CAT.categories.find(c => c.id === catId);
@@ -154,7 +155,7 @@
       if(cat && cat.minNote && perks && !perks.querySelector('.min')) perks.insertAdjacentHTML('afterbegin', `<span class="min">&#10022; ${esc(cat.minNote)}</span>`);
       prodEl.querySelectorAll('.product').forEach(wireCard);
     };
-    if(seg) seg.querySelectorAll('button').forEach(b => b.onclick = () => { champOnly = b.dataset.f === 'champagne'; render(); });
+    if(seg) seg.querySelectorAll('button').forEach(b => b.onclick = () => { f = b.dataset.f; render(); });
     render();
     const target = location.hash && document.getElementById(location.hash.slice(1));
     if(target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 150);
@@ -275,7 +276,7 @@
     const seen = new Set();
     const add = ph => { if(!seen.has(ph.src)){ seen.add(ph.src); pics.push(ph); } };
     (CAT.gallery || []).forEach(add);
-    CAT.products.filter(p => !p.placeholder).forEach(p => p.photos.forEach(add));
+    CAT.products.filter(p => !p.placeholder).forEach(p => p.photos.filter(ph => ph.gallery !== false).forEach(add));
     gal.innerHTML = pics.map((ph, i) => `<button type="button" data-i="${i}" aria-label="Enlarge: ${esc(ph.alt)}"><img src="${ph.src}" alt="${esc(ph.alt)}" loading="lazy" onerror="this.closest('button').remove()"></button>`).join('');
     gal.querySelectorAll('button').forEach(b => b.onclick = () => { show(+b.dataset.i); lb.classList.add('open'); });
   }
