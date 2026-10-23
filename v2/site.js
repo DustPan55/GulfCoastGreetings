@@ -182,6 +182,8 @@
   }
   function wireCard(card){
     makeCarousel(card.querySelector(".carousel"));
+    const p = CAT.products.find(x => x.id === card.dataset.id);
+    card.querySelectorAll('.car-slide img').forEach((img, i) => img.onclick = () => openLightbox(p.photos, i));
     const btn = card.querySelector('[data-contents]'), inside = card.querySelector('.inside');
     btn.onclick = () => { inside.hidden = !inside.hidden; btn.setAttribute('aria-expanded', !inside.hidden); btn.textContent = inside.hidden ? "See what's inside →" : 'Hide contents ↑'; };
     const wrap = card.querySelector('[data-wrap]');
@@ -267,6 +269,7 @@
   let pics = [], cur = 0;
   const show = i => { cur = (i + pics.length) % pics.length; lbImg.src = pics[cur].src; lbImg.alt = pics[cur].alt; };
   const closeLb = () => lb.classList.remove('open');
+  function openLightbox(list, i){ pics = list; show(i); lb.classList.add('open'); }
   document.getElementById('lbPrev').onclick = () => show(cur - 1);
   document.getElementById('lbNext').onclick = () => show(cur + 1);
   document.getElementById('lbClose').onclick = closeLb;
@@ -286,7 +289,8 @@
     (CAT.gallery || []).forEach(add);
     CAT.products.filter(p => !p.placeholder).forEach(p => p.photos.filter(ph => ph.gallery !== false).forEach(add));
     gal.innerHTML = pics.map((ph, i) => `<button type="button" data-i="${i}" aria-label="Enlarge: ${esc(ph.alt)}"><img src="${ph.src}" alt="${esc(ph.alt)}" loading="lazy" onerror="this.closest('button').remove()"></button>`).join('');
-    gal.querySelectorAll('button').forEach(b => b.onclick = () => { show(+b.dataset.i); lb.classList.add('open'); });
+    const galPics = pics;
+    gal.querySelectorAll('button').forEach(b => b.onclick = () => openLightbox(galPics, +b.dataset.i));
   }
 
   /* ---------- Reviews: show approved ones, submit new ones for approval ---------- */
