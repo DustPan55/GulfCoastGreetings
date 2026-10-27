@@ -49,7 +49,7 @@
           <p>Curated, locally-inspired welcome gifts for vacation rentals, realtors, and new residents across the Texas Coastal Bend.</p>
         </div>
         <div><h5>Explore</h5><ul>${PAGES.map(([href, , label]) => `<li><a href="${href}">${label.replace('|', ' ')}</a></li>`).join('')}</ul></div>
-        <div><h5>Get in Touch</h5><ul><li><span data-cc="p">&nbsp;</span></li><li><span data-cc="e">&nbsp;</span></li><li>Rockport, Texas</li></ul></div>
+        <div><h5>Get in Touch</h5><ul><li><span data-cc="e">&nbsp;</span></li><li>Rockport, Texas</li></ul></div>
       </div>
       <div class="foot-bottom"><span>© ${new Date().getFullYear()} Gulf Coast Greetings, LLC · Rockport, TX</span><span>Warm Welcomes. Lasting Memories.</span></div>
     </div>`;
@@ -82,9 +82,6 @@
   /* ---------- Contact details (assembled at runtime so bots can't scrape plain text) ---------- */
   const _dec = a => a.map(c => String.fromCharCode(c)).join('');
   const EMAIL = _dec([87,101,108,99,111,109,101,64,103,117,108,102,99,111,97,115,116,103,114,101,101,116,105,110,103,115,116,120,46,99,111,109]);
-  const PHONE_DIGITS = _dec([57,55,57,55,52,51,53,51,53,48]);
-  const PHONE_FMT = PHONE_DIGITS.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
-  document.querySelectorAll('[data-cc="p"]').forEach(el => { el.innerHTML = `<a href="tel:${PHONE_DIGITS}" rel="nofollow">${PHONE_FMT}</a>`; });
   document.querySelectorAll('[data-cc="e"]').forEach(el => { el.innerHTML = `<a href="mailto:${EMAIL}" rel="nofollow">${EMAIL}</a>`; });
 
   /* ---------- Mobile nav ---------- */
@@ -256,7 +253,7 @@
       throw Object.assign(new Error(d.error || ''), { fromServer: true });
     } catch(e) {
       m.className = 'form-msg err';
-      m.textContent = (e.fromServer && e.message ? e.message + ' ' : 'Online checkout isn\'t available right now. ') + 'To order, call or text ' + PHONE_FMT + '.';
+      m.textContent = (e.fromServer && e.message ? e.message + ' ' : 'Online checkout isn\'t available right now. ') + 'To order, email us at ' + EMAIL + '.';
     }
     checkoutBtn.disabled = false; checkoutBtn.textContent = 'Checkout →';
   };
@@ -317,7 +314,7 @@
         if(error) throw error;
         rf.reset(); m.className = 'form-msg ok'; m.textContent = "Thank you! Your review has been sent and will appear once it's approved.";
       }catch(err){
-        console.error(err); m.className = 'form-msg err'; m.textContent = 'Sorry, something went wrong. Please try again, or call or text us at ' + PHONE_FMT + '.';
+        console.error(err); m.className = 'form-msg err'; m.textContent = 'Sorry, something went wrong. Please try again, or email us at ' + EMAIL + '.';
       }finally{ btn.disabled = false; }
     });
   }
@@ -351,7 +348,7 @@
         showMsg('ok', "Thank you! Your request is in. We'll be in touch within one business day.");
       }catch(err){
         console.error(err);
-        showMsg('err', 'Sorry, something went wrong. Please call or text us at ' + PHONE_FMT + " and we'll take care of you.");
+        showMsg('err', 'Sorry, something went wrong. Please email us at ' + EMAIL + " and we'll take care of you.");
       }finally{ btn.disabled = false; btn.textContent = orig; }
     });
   }

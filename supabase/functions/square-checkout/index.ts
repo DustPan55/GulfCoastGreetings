@@ -69,7 +69,7 @@ Deno.serve(async req => {
   const data = await res.json().catch(() => ({}));
   if (!res.ok || !data.payment_link?.url) {
     console.error('Square error', res.status, JSON.stringify(data.errors ?? data));
-    return reply(502, { error: 'Checkout is unavailable right now. Please call or text to order.' });
+    return reply(502, { error: 'Checkout is unavailable right now. Please email us to order.' });
   }
   return reply(200, { url: data.payment_link.url });
 });
