@@ -41,11 +41,11 @@ window.GCG_CATALOG = {
         { src: 'assets/welcome-bags/small-2.webp', alt: 'Savory crackers', gallery: false },
         { src: 'assets/welcome-bags/small-3.webp', alt: 'Peppermint taffy', gallery: false },
         { src: 'assets/welcome-bags/small-4.webp', alt: 'Coffee', gallery: false },
-        { src: 'assets/welcome-bags/small-5.webp', alt: 'Deanan Gourmet popcorn', gallery: false },
+        { src: 'assets/welcome-bags/small-5-caramel.webp', alt: 'Deanan Gourmet caramel popcorn', gallery: false },
         { src: 'assets/welcome-bags/small-6.webp', alt: 'Two 8 oz waters', gallery: false },
         { src: 'assets/welcome-bags/small-7.webp', alt: 'Two neoprene koozies with your logo', gallery: false }
       ],
-      items: [['Savory crackers', '3 oz'], ['Peppermint', '2 oz'], ['Coffee', '1.75 oz'], ['Popcorn', '1.4 oz'], ['Water', '2 × 8 oz'], ['Neoprene koozies with your custom logo', '2'], ['Card with your business info', '✓']]
+      items: [['Savory crackers', '3 oz'], ['Peppermint', '2 oz'], ['Coffee', '1.75 oz'], ['Caramel popcorn', '1.5 oz'], ['Water', '2 × 8 oz'], ['Neoprene koozies with your custom logo', '2'], ['Card with your business info', '✓']]
     },
     {
       id: 'vr-medium', category: 'vacation', wrap: false, name: 'Medium Welcome Bag', price: 45,
