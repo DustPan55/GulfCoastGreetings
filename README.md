@@ -35,6 +35,7 @@ See the Contact page on https://gulfcoastgreetingstx.com
 - GitHub Pages caches files for 10 minutes. When publishing a change, bump the `?v=` stamp on those
   links in every page so browsers fetch the new copies:
   `V=$(date +%Y%m%d%H%M); sed -i -E "s#(site\.css|catalog\.js|site\.js)\?v=[0-9]+#\1?v=$V#g" *.html`
+- Short print addresses: `/realtor/` and `/rentals/` forward to the realtor and vacation-rental pages (used on brochures).
 - The shop used to live under `/v2/`; the pages in `v2/` now only redirect to the root.
   The original single-page site is tagged `v1-original`.
 
