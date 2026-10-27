@@ -3,7 +3,7 @@
 //   SQUARE_ACCESS_TOKEN  Square access token (sandbox or production)
 //   SQUARE_LOCATION_ID   Square location the sale belongs to
 //   SQUARE_ENV           "sandbox" or "production"
-//   CATALOG_URL          the live v2/catalog.js, the single source of prices
+//   CATALOG_URL          the live catalog.js, the single source of prices
 //   ALLOWED_ORIGINS      comma-separated site origins allowed to start a checkout,
 //                        e.g. "https://dustpan55.github.io,https://gulfcoastgreetingstx.com"
 import { buildOrder, parseCatalog } from './order.js';

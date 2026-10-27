@@ -26,7 +26,7 @@
   document.getElementById('siteHead').innerHTML = `
     <div class="wrap head-inner">
       <a class="brand" href="index.html" aria-label="Gulf Coast Greetings home">
-        <img class="mark" src="../assets/logo-mark.webp" alt="Gulf Coast Greetings logo" width="50" height="50" />
+        <img class="mark" src="assets/logo-mark.webp" alt="Gulf Coast Greetings logo" width="50" height="50" />
         <span class="txt"><span class="a">GULF COAST</span><span class="b">Greetings</span></span>
       </a>
       <nav class="main-nav" id="navLinks">${PAGES.map(([href, id, label]) => `<a href="${href}" class="${id === PAGE ? 'on' : ''}">${label.split('|').map(t => `<span>${t}</span>`).join(' ')}</a>`).join('')}</nav>
@@ -44,7 +44,7 @@
     <div class="wrap">
       <div class="foot-grid">
         <div>
-          <div class="brand"><img class="mark" src="../assets/logo-mark.webp" alt="Gulf Coast Greetings logo" style="width:44px;height:44px" />
+          <div class="brand"><img class="mark" src="assets/logo-mark.webp" alt="Gulf Coast Greetings logo" style="width:44px;height:44px" />
             <span class="txt"><span class="a" style="color:var(--cream)">GULF COAST</span><span class="b">Greetings</span></span></div>
           <p>Curated, locally-inspired welcome gifts for vacation rentals, realtors, and new residents across the Texas Coastal Bend.</p>
         </div>
@@ -115,7 +115,7 @@
     sync();
     return { go };
   }
-  const FALLBACK = `this.onerror=null;this.src='../assets/logo.webp';this.classList.add('contain')`;
+  const FALLBACK = `this.onerror=null;this.src='assets/logo.webp';this.classList.add('contain')`;
 
   /* ---------- Home: banner crossfade + swipe strip of every basket ---------- */
   const bs = [...document.querySelectorAll('#bannerSlides .bs')];
