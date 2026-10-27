@@ -12,6 +12,7 @@ window.GCG_CATALOG = {
   categories: [
     { id: 'vacation', label: 'Vacation Rental Welcome Bags', minQty: 10, minNote: 'Minimum order of 10 welcome bags (sizes can be mixed)',
       blurb: 'Pre-made welcome bags stocked with Texas finds, finished with a customized card and your logo on the front.' },
+    { id: 'test', label: 'Test Order' },   /* only on test-order.html (not linked); remove after the live checkout test */
     { id: 'realtor', label: 'Realtor Closing Gifts',
       blurb: 'Reusable coastal baskets filled with thoughtfully selected local and Texas-inspired items: a memorable closing gift to celebrate their new home.' }
   ],
@@ -29,6 +30,9 @@ window.GCG_CATALOG = {
   ],
 
   products: [
+    { id: 'test-1', category: 'test', wrap: false, name: 'Checkout Test Item', price: 1,
+      photos: [{ src: '../assets/logo.webp', alt: 'Gulf Coast Greetings logo', fit: 'contain', gallery: false }],
+      items: [['Live checkout test (refund afterwards)', '✓']] },
     {
       id: 'vr-small', category: 'vacation', wrap: false, name: 'Small Welcome Bag', price: 30,
       size: '8 × 4.75 × 10 · White Kraft',
