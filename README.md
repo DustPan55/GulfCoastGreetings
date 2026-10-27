@@ -28,7 +28,7 @@ Leads are private by RLS. View them in the Supabase dashboard (Table editor → 
 or via SQL. Consider adding an email/Slack notification via a Supabase Edge Function or Database Webhook.
 
 ## Contact
-979-743-5350 · Welcome@gulfcoastgreetingstx.com · GulfCoastGreetingsTX.com
+See the Contact page on https://gulfcoastgreetingstx.com
 
 ## Site files
 - Pages share `site.css`, `site.js` and `catalog.js` (products, prices, contents).
