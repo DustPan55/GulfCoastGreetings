@@ -444,3 +444,11 @@ html.home{font-size:112.5%}
 .logo-step h2{font-size:clamp(1.5rem,3vw,2rem);margin:4px 0 10px}
 .logo-step p{color:var(--muted);margin-bottom:18px}
 .logo-step small{display:block;margin-top:12px;color:var(--muted)}
+
+/* ---------- Social links (footer + contact page) ---------- */
+.socials{display:flex;flex-wrap:wrap;gap:14px}
+a.social{display:inline-flex;align-items:center;gap:7px;font-weight:600}
+a.social svg{flex:none}
+.ci-item .socials-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:2px}
+.ci-item .socials-row a.social{color:var(--navy)}
+.ci-item .socials-row a.social:hover{color:var(--teal-dk)}

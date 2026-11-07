@@ -40,6 +40,12 @@
     </div>`;
   document.getElementById('siteHead').classList.add('site-head');
 
+  /* Social accounts shown in the footer and on the Contact page ([label, url, icon path]). */
+  const SOCIAL = [
+    ['Instagram', 'https://www.instagram.com/gulfcoastgreetingstx/', '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>'],
+  ];
+  const socialLinks = SOCIAL.map(([label, url, icon]) => `<a class="social" href="${url}" target="_blank" rel="noopener" aria-label="Gulf Coast Greetings on ${label}">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icon}</svg>${label}</a>`).join('');
   document.getElementById('siteFoot').innerHTML = `
     <div class="wrap">
       <div class="foot-grid">
@@ -49,7 +55,7 @@
           <p>Curated, locally-inspired welcome gifts for vacation rentals, realtors, and new residents across the Texas Coastal Bend.</p>
         </div>
         <div><h5>Explore</h5><ul>${PAGES.map(([href, , label]) => `<li><a href="${href}">${label.replace('|', ' ')}</a></li>`).join('')}</ul></div>
-        <div><h5>Get in Touch</h5><ul><li><span data-cc="e">&nbsp;</span></li><li>Rockport, Texas</li></ul></div>
+        <div><h5>Get in Touch</h5><ul><li><span data-cc="e">&nbsp;</span></li><li>Rockport, Texas</li>${SOCIAL.length ? `<li class="socials">${socialLinks}</li>` : ''}</ul></div>
       </div>
       <div class="foot-bottom"><span>© ${new Date().getFullYear()} Gulf Coast Greetings, LLC · Rockport, TX</span><span>Warm Welcomes. Lasting Memories.</span></div>
     </div>`;
@@ -82,6 +88,7 @@
   /* ---------- Contact details (assembled at runtime so bots can't scrape plain text) ---------- */
   const _dec = a => a.map(c => String.fromCharCode(c)).join('');
   const EMAIL = _dec([87,101,108,99,111,109,101,64,103,117,108,102,99,111,97,115,116,103,114,101,101,116,105,110,103,115,116,120,46,99,111,109]);
+  document.querySelectorAll('[data-social]').forEach(el => { el.innerHTML = socialLinks; });
   document.querySelectorAll('[data-cc="e"]').forEach(el => { el.innerHTML = `<a href="mailto:${EMAIL}" rel="nofollow">${EMAIL}</a>`; });
 
   /* ---------- Mobile nav ---------- */
