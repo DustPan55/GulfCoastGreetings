@@ -3,13 +3,18 @@
 
 const cents = dollars => Math.round(dollars * 100);
 
+export const REF_RE = /^GCG-[A-Z0-9]{6}$/;
+
 // Returns { order, hasBags }: the Square order, and whether it includes welcome bags (they need the buyer's branding).
-export function buildOrder(catalog, cart, { locationId, salesTaxPct }) {
+// ref (optional) is the branding reference saved in the cart; it goes on the order and the first welcome-bag line.
+export function buildOrder(catalog, cart, { locationId, salesTaxPct, ref = null }) {
+  if (ref != null && !REF_RE.test(ref)) throw new Error('Bad branding reference.');
   if (!Array.isArray(cart) || !cart.length) throw new Error('Your cart is empty.');
   if (cart.length > 50) throw new Error('Too many lines in the cart.');
 
   const lineItems = [];
   const perCategory = {};
+  let noted = false;
   for (const line of cart) {
     const p = catalog.products.find(x => x.id === line?.id);
     const qty = Number.parseInt(line?.qty, 10);
@@ -19,11 +24,13 @@ export function buildOrder(catalog, cart, { locationId, salesTaxPct }) {
     const capri = Boolean(line.capri) && p.capri === true && Boolean(catalog.capriAddon);
     perCategory[p.category] = (perCategory[p.category] || 0) + qty;
 
-    lineItems.push({
+    const item = {
       name: p.name,
       quantity: String(qty),
       base_price_money: { amount: cents(p.price), currency: 'USD' },
-    });
+    };
+    if (ref && p.category === 'vacation' && !noted) { item.note = 'Branding ' + ref; noted = true; }
+    lineItems.push(item);
     if (wrap) {
       lineItems.push({
         name: `${catalog.wrapAddon.label} (${p.name})`,
@@ -49,6 +56,7 @@ export function buildOrder(catalog, cart, { locationId, salesTaxPct }) {
     hasBags: Boolean(perCategory.vacation),
     order: {
       location_id: locationId,
+      ...(ref ? { reference_id: ref } : {}),
       line_items: lineItems,
       taxes: [{ uid: 'sales-tax', name: 'Sales tax', percentage: String(salesTaxPct), scope: 'ORDER' }],
     },

@@ -452,3 +452,14 @@ a.social svg{flex:none}
 .ci-item .socials-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:2px}
 .ci-item .socials-row a.social{color:var(--navy)}
 .ci-item .socials-row a.social:hover{color:var(--teal-dk)}
+
+/* ---------- Cart: branding for welcome-bag orders ---------- */
+.cart-brand[hidden]{display:none}
+.cart-brand{margin-top:18px;padding:16px;background:#fff;border:1px solid rgba(22,50,79,.1);border-radius:14px}
+.cart-brand h4{font-family:'Playfair Display',serif;color:var(--navy);font-size:1.12rem;margin-bottom:4px}
+.cart-brand label{margin-top:12px}
+.cart-brand textarea{min-height:72px}
+.cart-brand input[type=file]{padding:9px;font-size:.85rem;background:var(--cream)}
+.brand-hint{display:block;color:var(--muted);font-size:.76rem;margin-top:4px}
+.cart-brand label.chk{display:flex;align-items:center;gap:9px;font-weight:700;font-size:.88rem;margin-top:12px;cursor:pointer}
+.cart-brand label.chk input{width:18px;height:18px;accent-color:var(--teal)}

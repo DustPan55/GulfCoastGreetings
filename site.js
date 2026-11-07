@@ -65,7 +65,21 @@
     <div class="scrim" id="scrim"></div>
     <aside class="drawer" id="drawer" aria-label="Shopping cart" aria-hidden="true">
       <div class="drawer-head"><h3>Your Cart</h3><button class="x" id="cartClose" aria-label="Close cart">&times;</button></div>
-      <div class="drawer-body" id="cartLines"></div>
+      <div class="drawer-body">
+        <div id="cartLines"></div>
+        <section class="cart-brand" id="branding" hidden aria-labelledby="brandHead">
+          <h4 id="brandHead">Your branding</h4>
+          <p class="fine" style="margin:0 0 12px">Welcome bags carry your logo on the bag and koozies, plus a card with your business info.</p>
+          <label for="bName">Business name <span class="req">*</span></label>
+          <input id="bName" maxlength="200" autocomplete="organization">
+          <label for="bCard">Details for the card</label>
+          <textarea id="bCard" maxlength="1000" placeholder="Phone, website, or a short welcome message"></textarea>
+          <label for="bLogo">Logo <span class="req" id="bLogoReq">*</span></label>
+          <input id="bLogo" type="file" accept="image/png,image/jpeg,image/webp,image/gif,application/pdf,.png,.jpg,.jpeg,.webp,.gif,.pdf">
+          <small class="brand-hint">PNG, JPG, WebP, GIF or PDF, up to 10 MB.</small>
+          <label class="chk"><input type="checkbox" id="bLater"> I'll email my logo later</label>
+        </section>
+      </div>
       <div class="drawer-foot" id="cartFoot">
         <div class="totals">
           <div><span>Subtotal</span><span id="tSub">$0.00</span></div>
@@ -205,21 +219,28 @@
   }
 
   /* ---------- Cart (kept in this browser, shared across pages) ---------- */
-  const CART_KEY = 'gcg-cart-v2';
+  const CART_KEY = 'gcg-cart-v2', BRAND_KEY = 'gcg-branding-v1', SENT_KEY = 'gcg-branding-sent';
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { cart = []; }
   const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e) {} };
   if(PAGE === 'thanks'){
     // Welcome-bag orders need the customer's logo and business info: show that step before the cart is cleared.
     const bags = cart.some(l => { const p = CAT.products.find(x => x.id === l.id); return p && p.category === 'vacation'; });
-    const step = document.getElementById('logoStep');
-    if(step && bags){
-      step.hidden = false;
-      const note = document.getElementById('logoNote'); if(note) note.hidden = true;
-      document.getElementById('logoMail').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Logo & business info for my welcome bag order')
+    let sent = {};
+    try { sent = JSON.parse(sessionStorage.getItem(SENT_KEY)) || {}; } catch(e) {}
+    const step = document.getElementById('logoStep'), got = document.getElementById('logoGot');
+    const note = document.getElementById('logoNote');
+    if(bags && sent.logo && got){
+      got.hidden = false; if(note) note.hidden = true;
+      document.getElementById('gotRef').textContent = sent.ref;
+    } else if(step && bags){
+      step.hidden = false; if(note) note.hidden = true;
+      const subject = 'Logo & business info for my welcome bag order' + (sent.ref ? ' (' + sent.ref + ')' : '');
+      document.getElementById('logoMail').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject)
         + '&body=' + encodeURIComponent('Name on the order:\nBusiness name:\nDetails for the card (phone, website, etc.):\n\nLogo file attached.');
     }
     cart = []; save();
+    try { sessionStorage.removeItem(SENT_KEY); localStorage.removeItem(BRAND_KEY); } catch(e) {}
   }
   const product = id => CAT.products.find(p => p.id === id);
   const unitPrice = l => product(l.id).price + (l.ribbon ? CAT.wrapAddon.price : 0) + (l.capri ? CAT.capriAddon.price : 0);
@@ -254,11 +275,57 @@
     const minEl = document.getElementById('minMsg');
     minEl.textContent = short.join(' '); minEl.className = short.length ? 'form-msg err' : 'form-msg';
     document.getElementById('checkoutBtn').disabled = short.length > 0;
+    document.getElementById('branding').hidden = !hasBags();
     const sub = cart.reduce((s, l) => s + unitPrice(l) * l.qty, 0);
     const tax = Math.round(sub * CAT.salesTaxPct) / 100;
     document.getElementById('tSub').textContent = money(sub);
     document.getElementById('tTax').textContent = money(tax);
     document.getElementById('tTotal').textContent = money(sub + tax);
+  }
+  /* Branding for welcome bags: business name, card details and logo, collected before checkout.
+     Text is kept with the cart in this browser; the logo goes to a private Supabase bucket only at checkout. */
+  function hasBags(){ return cart.some(l => product(l.id).category === 'vacation'); }
+  const bName = document.getElementById('bName'), bCard = document.getElementById('bCard');
+  const bLogo = document.getElementById('bLogo'), bLater = document.getElementById('bLater');
+  const LOGO_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'application/pdf'], LOGO_MAX = 10 * 1024 * 1024;
+  try { const b = JSON.parse(localStorage.getItem(BRAND_KEY)) || {}; bName.value = b.name || ''; bCard.value = b.card || ''; bLater.checked = !!b.later; } catch(e) {}
+  const saveBrand = () => { try { localStorage.setItem(BRAND_KEY, JSON.stringify({ name: bName.value, card: bCard.value, later: bLater.checked })); } catch(e) {} };
+  const logoReq = () => { document.getElementById('bLogoReq').hidden = bLater.checked; };
+  [bName, bCard].forEach(el => el.addEventListener('input', saveBrand));
+  bLater.addEventListener('change', () => { saveBrand(); logoReq(); });
+  logoReq();
+  const logoProblem = f => !f ? null
+    : !LOGO_TYPES.includes(f.type) ? 'Your logo needs to be a PNG, JPG, WebP, GIF or PDF file.'
+    : f.size > LOGO_MAX ? 'Your logo file is over 10 MB. Please choose a smaller file.' : null;
+  bLogo.addEventListener('change', () => {
+    const problem = logoProblem(bLogo.files[0]), m = document.getElementById('checkoutMsg');
+    m.className = problem ? 'form-msg err' : 'form-msg'; m.textContent = problem || '';
+  });
+  const newRef = () => { const A = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', b = crypto.getRandomValues(new Uint8Array(6)); return 'GCG-' + [...b].map(n => A[n % 36]).join(''); };
+  const sbHeaders = { apikey: GCG_KEY, Authorization: 'Bearer ' + GCG_KEY };
+  // Saves the branding and returns its reference, or throws a message for the shopper.
+  async function sendBranding(){
+    const name = bName.value.trim(), file = bLogo.files[0];
+    if(!name) throw new Error('Please enter your business name under "Your branding".');
+    if(!file && !bLater.checked) throw new Error('Please upload your logo, or tick "I\'ll email my logo later".');
+    const problem = logoProblem(file); if(problem) throw new Error(problem);
+    const ref = newRef();
+    let logo_path = null;
+    if(file){
+      const clean = file.name.replace(/[^A-Za-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(-80) || 'logo';
+      logo_path = ref + '/' + clean;
+      const up = await fetch(`${GCG_URL}/storage/v1/object/logos/${logo_path}`, {
+        method: 'POST', headers: { ...sbHeaders, 'Content-Type': file.type, 'x-upsert': 'false' }, body: file
+      }).catch(() => null);
+      if(!up || !up.ok) throw new Error('We couldn\'t upload your logo. Please try again, or tick "I\'ll email my logo later" to continue.');
+    }
+    const row = await fetch(`${GCG_URL}/rest/v1/gcg_branding`, {
+      method: 'POST', headers: { ...sbHeaders, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({ ref, business_name: name, card_info: bCard.value.trim() || null, logo_path, email_later: !file })
+    }).catch(() => null);
+    // If the details can't be saved, checkout still goes ahead: Square's page asks for them instead.
+    if(!row || !row.ok) return { ref: null, logo: false };
+    return { ref, logo: !!file };
   }
   renderCart();
   /* Checkout: a Supabase function prices the cart from the catalog and returns a Square checkout link. */
@@ -266,10 +333,20 @@
   checkoutBtn.onclick = async () => {
     const m = document.getElementById('checkoutMsg');
     m.className = 'form-msg'; checkoutBtn.disabled = true; checkoutBtn.textContent = 'Starting secure checkout…';
+    let brand = { ref: null, logo: false };
+    if(hasBags()){
+      try { brand = await sendBranding(); }
+      catch(e) {
+        m.className = 'form-msg err'; m.textContent = e.message;
+        document.getElementById('branding').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        checkoutBtn.disabled = false; checkoutBtn.textContent = 'Checkout →'; return;
+      }
+      try { sessionStorage.setItem(SENT_KEY, JSON.stringify(brand)); } catch(e) {}
+    }
     try {
       const r = await fetch(GCG_URL + '/functions/v1/square-checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json', apikey: GCG_KEY },
-        body: JSON.stringify({ cart: cart.map(l => ({ id: l.id, qty: l.qty, wrap: !!l.ribbon, capri: !!l.capri })), returnUrl: new URL('thank-you.html', location.href).href })
+        body: JSON.stringify({ cart: cart.map(l => ({ id: l.id, qty: l.qty, wrap: !!l.ribbon, capri: !!l.capri })), returnUrl: new URL('thank-you.html', location.href).href, ref: brand.ref })
       });
       const d = await r.json().catch(() => ({}));
       if(r.ok && d.url){ location.href = d.url; return; }

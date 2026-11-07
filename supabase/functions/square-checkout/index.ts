@@ -6,7 +6,7 @@
 //   CATALOG_URL          the live catalog.js, the single source of prices
 //   ALLOWED_ORIGINS      comma-separated site origins allowed to start a checkout,
 //                        e.g. "https://dustpan55.github.io,https://gulfcoastgreetingstx.com"
-import { buildOrder, parseCatalog } from './order.js';
+import { buildOrder, parseCatalog, REF_RE } from './order.js';
 
 const env = (k: string) => Deno.env.get(k) ?? '';
 const SQUARE_HOST = env('SQUARE_ENV') === 'production' ? 'https://connect.squareup.com' : 'https://connect.squareupsandbox.com';
@@ -45,10 +45,14 @@ Deno.serve(async req => {
   try { returnUrl = new URL(body.returnUrl); } catch { return reply(400, { error: 'Bad return address.' }); }
   if (!allowed.includes(returnUrl.origin)) return reply(400, { error: 'Bad return address.' });
 
+  // Branding reference from the cart (logo + business info saved before checkout). Optional.
+  const ref = body.ref == null || body.ref === '' ? null : String(body.ref);
+  if (ref && !REF_RE.test(ref)) return reply(400, { error: 'Bad branding reference.' });
+
   let built;
   try {
     const cat = await catalog();
-    built = buildOrder(cat, body.cart, { locationId: env('SQUARE_LOCATION_ID'), salesTaxPct: cat.salesTaxPct });
+    built = buildOrder(cat, body.cart, { locationId: env('SQUARE_LOCATION_ID'), salesTaxPct: cat.salesTaxPct, ref });
   } catch (e) {
     return reply(400, { error: (e as Error).message });
   }
@@ -66,8 +70,9 @@ Deno.serve(async req => {
       checkout_options: {
         redirect_url: returnUrl.href,
         allow_tipping: false,
-        // Welcome bags carry the customer's branding, so ask for it on Square's payment page.
-        ...(built.hasBags ? { custom_fields: [{ title: 'Business name & info for your bag cards' }] } : {}),
+        // Welcome bags carry the customer's branding. It's normally collected in the cart (ref); without it,
+        // ask for it on Square's payment page instead.
+        ...(built.hasBags && !ref ? { custom_fields: [{ title: 'Business name & info for your bag cards' }] } : {}),
       },
     }),
   });
