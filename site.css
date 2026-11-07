@@ -437,3 +437,10 @@ html.home{font-size:112.5%}
 @media (max-width:560px){ .cat-card .cat-points{padding:0 16px 16px} .cat-card .cat-points li{font-size:.88rem} }
 .page-head .local-note{max-width:680px;margin-top:18px;padding-top:16px;border-top:1px solid rgba(22,50,79,.14);font-style:italic;font-size:.98rem}
 .product .car-slide img{cursor:zoom-in}
+
+/* ---------- Thank-you: logo step for welcome-bag orders ---------- */
+.logo-step{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.08);border-top:5px solid var(--teal);
+  padding:30px 32px;max-width:640px;margin:0 auto 28px;text-align:center}
+.logo-step h2{font-size:clamp(1.5rem,3vw,2rem);margin:4px 0 10px}
+.logo-step p{color:var(--muted);margin-bottom:18px}
+.logo-step small{display:block;margin-top:12px;color:var(--muted)}

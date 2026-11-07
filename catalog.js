@@ -6,6 +6,7 @@
    - material: 'hyacinth' or 'cotton' puts a realtor basket under that tab (no material = All baskets only).
    - champagne: true shows the "champagne not included" note.
    - wrap: false hides the cellophane wrap add-on for that basket.
+   - capri: true offers the Capri Sun add-on (one per bag) on that product.
    - minQty on a category: the cart won't check out until that many items from the category are in it.
    - placeholder: true marks a stand-in entry until the real basket details arrive. */
 window.GCG_CATALOG = {
@@ -18,6 +19,7 @@ window.GCG_CATALOG = {
   ],
 
   wrapAddon: { label: 'Cellophane wrap with Tulle and raffia', price: 10 },
+  capriAddon: { label: 'Capri Sun', price: 0.75 },
 
   salesTaxPct: 8.25,
 
@@ -34,7 +36,7 @@ window.GCG_CATALOG = {
       photos: [{ src: 'assets/logo.webp', alt: 'Gulf Coast Greetings logo', fit: 'contain', gallery: false }],
       items: [['Live checkout test (refund afterwards)', '✓']] },
     {
-      id: 'vr-small', category: 'vacation', wrap: false, name: 'Small Welcome Bag', price: 30,
+      id: 'vr-small', category: 'vacation', wrap: false, capri: true, name: 'Small Welcome Bag', price: 30,
       size: '8 × 4.75 × 10 · White Kraft',
       photos: [
         { src: 'assets/welcome-bags/small-1.webp', alt: 'Small welcome bag with your logo and everything that comes inside' },
@@ -48,7 +50,7 @@ window.GCG_CATALOG = {
       items: [['Savory crackers', '3 oz'], ['Peppermint', '2 oz'], ['Coffee', '1.75 oz'], ['Caramel popcorn', '1.5 oz'], ['Water', '2 × 8 oz'], ['Neoprene koozies with your custom logo', '2'], ['Card with your business info', '✓']]
     },
     {
-      id: 'vr-medium', category: 'vacation', wrap: false, name: 'Medium Welcome Bag', price: 45,
+      id: 'vr-medium', category: 'vacation', wrap: false, capri: true, name: 'Medium Welcome Bag', price: 45,
       size: '10 × 5 × 13 · White Kraft',
       photos: [
         { src: 'assets/welcome-bags/medium-1.webp', alt: 'Medium welcome bag with your logo and everything that comes inside' },
@@ -62,7 +64,7 @@ window.GCG_CATALOG = {
       items: [['Savory crackers', '6 oz'], ['Peppermint', '4 oz'], ['Coffee', '3.5 oz'], ['Popcorn', '2.6 oz'], ['Water', '2 × 16 oz'], ['Neoprene koozies with your custom logo', '4'], ['Card with your business info', '✓']]
     },
     {
-      id: 'vr-large', category: 'vacation', wrap: false, name: 'Large Welcome Bag', price: 65,
+      id: 'vr-large', category: 'vacation', wrap: false, capri: true, name: 'Large Welcome Bag', price: 65,
       size: '16 × 6 × 12 · Navy & White Laminate',
       photos: [
         { src: 'assets/welcome-bags/large-1.webp', alt: 'Large welcome bag with your logo and everything that comes inside' },
@@ -75,7 +77,7 @@ window.GCG_CATALOG = {
       ],
       items: [['Savory crackers', '9 oz'], ['Peppermint', '6 oz'], ['Coffee', '5.25 oz'], ['Popcorn', '4.1 oz'], ['Water', '3 × 16 oz'], ['Neoprene koozies with your custom logo', '6'], ['Card with your business info', '✓']]
     },
-    {"id": "vr-sampler", "category": "vacation", "name": "Gulf Coast Sampler", "price": 85, "size": "16 × 6 × 12 · Navy & White Laminate", "photos": [{"src": "assets/samplers/sampler-1.webp", "alt": "Gulf Coast Sampler welcome bag with its contents"}, {"src": "assets/samplers/sampler-2.webp", "alt": "Savory crackers", "gallery": false}, {"src": "assets/samplers/sampler-4.webp", "alt": "Peppermint taffy in a jar", "gallery": false}, {"src": "assets/samplers/sampler-5.webp", "alt": "Stevie Lew's blueberry preserves", "gallery": false}, {"src": "assets/samplers/sampler-6.webp", "alt": "Neoprene koozies with your logo", "gallery": false}, {"src": "assets/samplers/sampler-7.webp", "alt": "Cinnamon pecans", "gallery": false}, {"src": "assets/samplers/sampler-8.webp", "alt": "Rockport Coffee", "gallery": false}, {"src": "assets/samplers/sampler-9.webp", "alt": "Water", "gallery": false}, {"src": "assets/samplers/sampler-10.webp", "alt": "Deanan Gourmet popcorn", "gallery": false}], "items": [["Savory crackers", "6 oz"], ["Peppermint", "4 oz"], ["Blueberry preserves", "16 oz"], ["Neoprene koozies with your company logo", "4"], ["Cinnamon pecans", "6 oz"], ["Coffee", "8 oz"], ["Water", "2 × 16 oz"], ["Popcorn", "2.6 oz"], ["Card with your business info", "✓"]], "wrap": false},
+    {"id": "vr-sampler", "category": "vacation", "capri": true, "name": "Gulf Coast Sampler", "price": 85, "size": "16 × 6 × 12 · Navy & White Laminate", "photos": [{"src": "assets/samplers/sampler-1.webp", "alt": "Gulf Coast Sampler welcome bag with its contents"}, {"src": "assets/samplers/sampler-2.webp", "alt": "Savory crackers", "gallery": false}, {"src": "assets/samplers/sampler-4.webp", "alt": "Peppermint taffy in a jar", "gallery": false}, {"src": "assets/samplers/sampler-5.webp", "alt": "Stevie Lew's blueberry preserves", "gallery": false}, {"src": "assets/samplers/sampler-6.webp", "alt": "Neoprene koozies with your logo", "gallery": false}, {"src": "assets/samplers/sampler-7.webp", "alt": "Cinnamon pecans", "gallery": false}, {"src": "assets/samplers/sampler-8.webp", "alt": "Rockport Coffee", "gallery": false}, {"src": "assets/samplers/sampler-9.webp", "alt": "Water", "gallery": false}, {"src": "assets/samplers/sampler-10.webp", "alt": "Deanan Gourmet popcorn", "gallery": false}], "items": [["Savory crackers", "6 oz"], ["Peppermint", "4 oz"], ["Blueberry preserves", "16 oz"], ["Neoprene koozies with your company logo", "4"], ["Cinnamon pecans", "6 oz"], ["Coffee", "8 oz"], ["Water", "2 × 16 oz"], ["Popcorn", "2.6 oz"], ["Card with your business info", "✓"]], "wrap": false},
 
     /* ---- Realtor Closing Gifts #1-#20 ----
        Contents drafted from the item photos in each basket's Drive folder; confirm with the owner.

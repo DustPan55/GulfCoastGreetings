@@ -45,10 +45,10 @@ Deno.serve(async req => {
   try { returnUrl = new URL(body.returnUrl); } catch { return reply(400, { error: 'Bad return address.' }); }
   if (!allowed.includes(returnUrl.origin)) return reply(400, { error: 'Bad return address.' });
 
-  let order;
+  let built;
   try {
     const cat = await catalog();
-    order = buildOrder(cat, body.cart, { locationId: env('SQUARE_LOCATION_ID'), salesTaxPct: cat.salesTaxPct });
+    built = buildOrder(cat, body.cart, { locationId: env('SQUARE_LOCATION_ID'), salesTaxPct: cat.salesTaxPct });
   } catch (e) {
     return reply(400, { error: (e as Error).message });
   }
@@ -62,8 +62,13 @@ Deno.serve(async req => {
     },
     body: JSON.stringify({
       idempotency_key: crypto.randomUUID(),
-      order,
-      checkout_options: { redirect_url: returnUrl.href, allow_tipping: false },
+      order: built.order,
+      checkout_options: {
+        redirect_url: returnUrl.href,
+        allow_tipping: false,
+        // Welcome bags carry the customer's branding, so ask for it on Square's payment page.
+        ...(built.hasBags ? { custom_fields: [{ title: 'Business name & info for your bag cards' }] } : {}),
+      },
     }),
   });
   const data = await res.json().catch(() => ({}));

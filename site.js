@@ -170,6 +170,9 @@
         ${wrapOk ? `<div class="addon">
           <label class="chk"><input type="checkbox" data-wrap> ${esc(CAT.wrapAddon.label)} (+$${CAT.wrapAddon.price})</label>
         </div>` : ''}
+        ${p.capri && CAT.capriAddon ? `<div class="addon">
+          <label class="chk"><input type="checkbox" data-capri> Add a ${esc(CAT.capriAddon.label)} (+${money(CAT.capriAddon.price)} each)</label>
+        </div>` : ''}
         <div class="buy">
           <div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">−</button><input type="text" inputmode="numeric" value="1" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div>
           <button type="button" class="btn btn-teal" data-add ${p.price == null ? 'disabled' : ''}>Add to Cart</button>
@@ -188,7 +191,8 @@
     card.querySelectorAll('[data-q]').forEach(b => b.onclick = () => { q.value = Math.max(1, (parseInt(q.value) || 1) + +b.dataset.q); });
     card.querySelector('[data-add]').onclick = () => {
       const ribbon = wrap && wrap.checked ? 'Tulle and raffia' : null;
-      addToCart(card.dataset.id, Math.max(1, parseInt(q.value) || 1), ribbon);
+      const capri = card.querySelector('[data-capri]');
+      addToCart(card.dataset.id, Math.max(1, parseInt(q.value) || 1), ribbon, !!(capri && capri.checked));
     };
   }
 
@@ -197,12 +201,23 @@
   let cart = [];
   try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) { cart = []; }
   const save = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e) {} };
-  if(PAGE === 'thanks'){ cart = []; save(); }
+  if(PAGE === 'thanks'){
+    // Welcome-bag orders need the customer's logo and business info: show that step before the cart is cleared.
+    const bags = cart.some(l => { const p = CAT.products.find(x => x.id === l.id); return p && p.category === 'vacation'; });
+    const step = document.getElementById('logoStep');
+    if(step && bags){
+      step.hidden = false;
+      const note = document.getElementById('logoNote'); if(note) note.hidden = true;
+      document.getElementById('logoMail').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Logo & business info for my welcome bag order')
+        + '&body=' + encodeURIComponent('Name on the order:\nBusiness name:\nDetails for the card (phone, website, etc.):\n\nLogo file attached.');
+    }
+    cart = []; save();
+  }
   const product = id => CAT.products.find(p => p.id === id);
-  const unitPrice = l => product(l.id).price + (l.ribbon ? CAT.wrapAddon.price : 0);
-  function addToCart(id, qty, ribbon){
-    const hit = cart.find(l => l.id === id && l.ribbon === ribbon);
-    hit ? hit.qty += qty : cart.push({ id, qty, ribbon });
+  const unitPrice = l => product(l.id).price + (l.ribbon ? CAT.wrapAddon.price : 0) + (l.capri ? CAT.capriAddon.price : 0);
+  function addToCart(id, qty, ribbon, capri = false){
+    const hit = cart.find(l => l.id === id && l.ribbon === ribbon && !!l.capri === capri);
+    hit ? hit.qty += qty : cart.push({ id, qty, ribbon, capri });
     save(); renderCart(); toast(`Added ${qty} × ${product(id).name}`);
   }
   const drawer = document.getElementById('drawer'), scrim = document.getElementById('scrim');
@@ -218,7 +233,7 @@
     foot.style.display = '';
     linesEl.innerHTML = cart.map((l, i) => { const p = product(l.id); return `<div class="line">
       <img src="${p.photos[0].src}" alt="" onerror="${FALLBACK}">
-      <div><b>${esc(p.name)}</b><small>${money(p.price)} each${l.ribbon ? ` · ${esc(CAT.wrapAddon.label)} (+${money(CAT.wrapAddon.price)})` : ''}</small>
+      <div><b>${esc(p.name)}</b><small>${money(p.price)} each${l.ribbon ? ` · ${esc(CAT.wrapAddon.label)} (+${money(CAT.wrapAddon.price)})` : ''}${l.capri ? ` · ${esc(CAT.capriAddon.label)} (+${money(CAT.capriAddon.price)})` : ''}</small>
         <div class="qty" style="margin-top:6px;transform:scale(.85);transform-origin:left"><button data-li="${i}" data-d="-1" aria-label="Decrease">−</button><input value="${l.qty}" readonly aria-label="Quantity"><button data-li="${i}" data-d="1" aria-label="Increase">+</button></div>
         <button class="rm" data-rm="${i}">Remove</button></div>
       <span class="amt">${money(unitPrice(l) * l.qty)}</span></div>`; }).join('');
@@ -246,7 +261,7 @@
     try {
       const r = await fetch(GCG_URL + '/functions/v1/square-checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json', apikey: GCG_KEY },
-        body: JSON.stringify({ cart: cart.map(l => ({ id: l.id, qty: l.qty, wrap: !!l.ribbon })), returnUrl: new URL('thank-you.html', location.href).href })
+        body: JSON.stringify({ cart: cart.map(l => ({ id: l.id, qty: l.qty, wrap: !!l.ribbon, capri: !!l.capri })), returnUrl: new URL('thank-you.html', location.href).href })
       });
       const d = await r.json().catch(() => ({}));
       if(r.ok && d.url){ location.href = d.url; return; }

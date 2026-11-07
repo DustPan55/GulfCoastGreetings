@@ -42,9 +42,10 @@ See the Contact page on https://gulfcoastgreetingstx.com
 ## Square checkout
 The cart's Checkout button calls the Supabase Edge Function `square-checkout`
 (`supabase/functions/square-checkout/`). It re-prices the cart from the live `catalog.js`
-(the browser only sends product ids, quantities and wrap yes/no), enforces the welcome-bag minimum,
+(the browser only sends product ids, quantities and add-ons: wrap, Capri Sun), enforces the welcome-bag minimum,
 adds the catalog's `salesTaxPct`, and returns a Square hosted-checkout link. Square redirects back
-to `thank-you.html`, which clears the cart. If the function is unreachable the button says to email instead.
+to `thank-you.html`, which clears the cart and, for welcome-bag orders, asks for the logo and business info
+(Square's payment page also asks for business info on those orders). If the function is unreachable the button says to email instead.
 
 Setup (on the Gulf Coast Greetings Supabase project, `ubdnxnpptqvyijswjyju`):
 ```

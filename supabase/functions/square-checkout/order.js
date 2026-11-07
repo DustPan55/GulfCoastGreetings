@@ -1,8 +1,9 @@
 // Builds the Square order for a cart. Prices come from the site's catalog (never from the browser),
-// so the only things the shopper controls are which products, how many, and whether to add the wrap.
+// so the only things the shopper controls are which products, how many, and which add-ons (wrap, Capri Sun).
 
 const cents = dollars => Math.round(dollars * 100);
 
+// Returns { order, hasBags }: the Square order, and whether it includes welcome bags (they need the buyer's branding).
 export function buildOrder(catalog, cart, { locationId, salesTaxPct }) {
   if (!Array.isArray(cart) || !cart.length) throw new Error('Your cart is empty.');
   if (cart.length > 50) throw new Error('Too many lines in the cart.');
@@ -15,6 +16,7 @@ export function buildOrder(catalog, cart, { locationId, salesTaxPct }) {
     if (!p || p.price == null || p.placeholder) throw new Error('One of the items in your cart is no longer available.');
     if (!Number.isInteger(qty) || qty < 1 || qty > 500) throw new Error(`Please check the quantity for ${p.name}.`);
     const wrap = Boolean(line.wrap) && p.wrap !== false;
+    const capri = Boolean(line.capri) && p.capri === true && Boolean(catalog.capriAddon);
     perCategory[p.category] = (perCategory[p.category] || 0) + qty;
 
     lineItems.push({
@@ -29,6 +31,13 @@ export function buildOrder(catalog, cart, { locationId, salesTaxPct }) {
         base_price_money: { amount: cents(catalog.wrapAddon.price), currency: 'USD' },
       });
     }
+    if (capri) {
+      lineItems.push({
+        name: `${catalog.capriAddon.label} (${p.name})`,
+        quantity: String(qty),
+        base_price_money: { amount: cents(catalog.capriAddon.price), currency: 'USD' },
+      });
+    }
   }
 
   for (const c of catalog.categories) {
@@ -37,9 +46,12 @@ export function buildOrder(catalog, cart, { locationId, salesTaxPct }) {
   }
 
   return {
-    location_id: locationId,
-    line_items: lineItems,
-    taxes: [{ uid: 'sales-tax', name: 'Sales tax', percentage: String(salesTaxPct), scope: 'ORDER' }],
+    hasBags: Boolean(perCategory.vacation),
+    order: {
+      location_id: locationId,
+      line_items: lineItems,
+      taxes: [{ uid: 'sales-tax', name: 'Sales tax', percentage: String(salesTaxPct), scope: 'ORDER' }],
+    },
   };
 }
 
