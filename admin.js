@@ -108,7 +108,7 @@
       : `<button class="btn btn-ghost" data-set="pending" data-id="${o.id}">Move back to pending</button>`;
     return `<article class="ord">
       <div class="ord-top"><h3>${esc(name)}</h3><span class="when">${when(o.created_at)}${o.fulfilled_at ? ' · fulfilled ' + when(o.fulfilled_at) : ''}</span></div>
-      <div><h4>Items</h4><ul>${items}</ul><p class="total">Total ${money(o.total_cents)}</p>${o.ref ? `<p>Ref <span class="ref">${esc(o.ref)}</span></p>` : ''}</div>
+      <div><h4>Items</h4><ul>${items}</ul><p class="total">Total (incl. tax) ${money(o.total_cents)}</p>${o.ref ? `<p>Ref <span class="ref">${esc(o.ref)}</span></p>` : ''}</div>
       <div><h4>Customer</h4><p>${contact}</p><h4 style="margin-top:12px">Branding</h4>${branding}</div>
       <div class="ord-actions">${action}</div>
     </article>`;

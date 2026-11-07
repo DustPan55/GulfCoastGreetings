@@ -66,7 +66,7 @@ async function sendEmail(row: Record<string, any>, branding: Record<string, any>
 
   const html = `
     <h2 style="font-family:Georgia,serif;color:#16324f">New paid order: ${esc(who)}</h2>
-    <p><b>Total:</b> ${money(row.total_cents ?? 0)}${row.ref ? ` &nbsp;·&nbsp; <b>Branding ref:</b> ${esc(row.ref)}` : ''}</p>
+    <p><b>Total (incl. tax):</b> ${money(row.total_cents ?? 0)}${row.ref ? ` &nbsp;·&nbsp; <b>Branding ref:</b> ${esc(row.ref)}` : ''}</p>
     <h3>Items</h3><ul>${items}</ul>
     ${branding ? `<h3>Branding</h3><p><b>Business name:</b> ${esc(branding.business_name)}</p>
       ${branding.card_info ? `<p><b>Card details:</b><br>${esc(branding.card_info).replace(/\n/g, '<br>')}</p>` : ''}` : ''}
@@ -116,7 +116,7 @@ Deno.serve(async req => {
       customer_name: [customer?.given_name, customer?.family_name].filter(Boolean).join(' ') || null,
       customer_email: customer?.email_address || payment.buyer_email_address || null,
       customer_phone: customer?.phone_number || null,
-      items: (order.line_items ?? []).map((l: any) => ({ name: l.name, quantity: Number(l.quantity), total_cents: l.total_money?.amount ?? 0 })),
+      items: (order.line_items ?? []).map((l: any) => ({ name: l.name, quantity: Number(l.quantity), total_cents: l.gross_sales_money?.amount ?? l.total_money?.amount ?? 0 })),
       total_cents: order.total_money?.amount ?? payment.total_money?.amount ?? 0,
     };
 
