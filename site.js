@@ -42,6 +42,7 @@
 
   /* Social accounts shown in the footer and on the Contact page ([label, url, icon path]). */
   const SOCIAL = [
+    ['Facebook', 'https://www.facebook.com/profile.php?id=61591935668599', '<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>'],
     ['Instagram', 'https://www.instagram.com/gulfcoastgreetingstx/', '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>'],
   ];
   const socialLinks = SOCIAL.map(([label, url, icon]) => `<a class="social" href="${url}" target="_blank" rel="noopener" aria-label="Gulf Coast Greetings on ${label}">
