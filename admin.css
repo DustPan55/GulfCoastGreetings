@@ -1,0 +1,54 @@
+/* Owner admin panel (admin.html). Builds on site.css for fonts, colors, buttons and form fields. */
+body{background:var(--cream)}
+.adm-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 22px;background:#fff;border-bottom:1px solid rgba(22,50,79,.1)}
+.adm-brand{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:600;color:var(--navy);font-size:1.05rem}
+.adm-brand img{width:38px;height:38px}
+.adm-brand small{font-family:'Mulish',sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-dk);margin-left:6px}
+.adm-user{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:.86rem;color:var(--muted)}
+.adm-link{background:none;border:0;color:var(--teal-dk);font:700 .86rem 'Mulish',sans-serif;cursor:pointer;padding:0}
+.adm-main{max-width:980px;margin:0 auto;padding:26px 16px 60px}
+.adm-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid rgba(22,50,79,.06);padding:26px}
+.adm-login{max-width:420px;margin:40px auto}
+.adm-login h1{font-size:1.7rem;margin-bottom:14px}
+.adm-login label{margin-top:12px}
+.adm-login .btn{margin-top:18px;margin-right:8px}
+
+.adm-tabs{display:flex;gap:6px;border-bottom:1px solid rgba(22,50,79,.14);margin-bottom:16px;overflow-x:auto}
+.adm-tabs button,.adm-sub button[data-status]{background:none;border:0;border-bottom:3px solid transparent;padding:10px 14px;
+  font:700 .92rem 'Mulish',sans-serif;color:var(--muted);cursor:pointer;white-space:nowrap}
+.adm-tabs button.on{color:var(--navy);border-bottom-color:var(--teal)}
+.adm-tabs span{display:inline-block;min-width:20px;padding:1px 7px;border-radius:99px;background:var(--teal);color:#fff;font-size:.74rem;margin-left:4px}
+.adm-tabs span:empty{display:none}
+.adm-sub{display:flex;align-items:center;gap:6px;margin-bottom:14px}
+.adm-sub button[data-status]{border:1.5px solid rgba(22,50,79,.16);border-radius:99px;padding:6px 14px}
+.adm-sub button[data-status].on{background:var(--navy);border-color:var(--navy);color:#fff}
+.adm-sub .adm-link{margin-left:auto}
+
+.adm-list{display:grid;gap:14px}
+.adm-empty{color:var(--muted);text-align:center;padding:40px 0}
+.ord{background:#fff;border-radius:14px;border:1px solid rgba(22,50,79,.08);box-shadow:var(--shadow-sm);padding:18px 20px;display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.ord-top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.ord-top h3{font-size:1.2rem}
+.ord-top .when{color:var(--muted);font-size:.84rem}
+.ord h4{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-dk);margin-bottom:6px;font-family:'Mulish',sans-serif;font-weight:800}
+.ord p,.ord li{font-size:.9rem;line-height:1.5}
+.ord ul{list-style:none;display:grid;gap:3px}
+.ord .total{font-weight:800;color:var(--navy);margin-top:6px}
+.ord .ref{font-family:ui-monospace,Menlo,monospace;font-size:.84rem;background:var(--cream);border-radius:6px;padding:1px 6px}
+.ord .card-info{white-space:pre-wrap;color:var(--ink)}
+.ord .logo{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.ord .logo img{width:120px;height:120px;object-fit:contain;background:var(--cream);border-radius:10px;border:1px solid rgba(22,50,79,.08)}
+.ord .warn{color:#a8402f;font-weight:600}
+.ord-actions{grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid rgba(22,50,79,.08);padding-top:12px}
+.ord-actions .btn{padding:10px 18px;font-size:.88rem}
+.msg-item{background:#fff;border-radius:14px;border:1px solid rgba(22,50,79,.08);padding:16px 18px}
+.msg-item .meta{color:var(--muted);font-size:.82rem;margin-bottom:6px}
+.msg-item p{font-size:.9rem;white-space:pre-wrap}
+.msg-item .stars{color:var(--sun);letter-spacing:2px}
+.chip{display:inline-block;font-size:.72rem;font-weight:800;padding:2px 9px;border-radius:99px;background:var(--seafoam);color:var(--teal-dk)}
+.chip.wait{background:#fff3df;color:#8a5a12}
+@media (max-width:640px){
+  .ord{grid-template-columns:1fr}
+  .ord-actions{justify-content:stretch}
+  .ord-actions .btn{flex:1;justify-content:center}
+}

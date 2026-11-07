@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin | Gulf Coast Greetings</title>
+<meta name="theme-color" content="#16324f" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Great+Vibes&family=Mulish:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site.css?v=202611070954" />
+<link rel="stylesheet" href="admin.css?v=202611070818" />
+</head>
+<body data-page="admin">
+<header class="adm-head">
+  <div class="adm-brand"><img src="assets/logo-mark.webp" alt="" /><span>Gulf Coast Greetings <small>Admin</small></span></div>
+  <div class="adm-user" id="userBar" hidden>
+    <span id="userEmail"></span>
+    <button type="button" class="adm-link" id="pwBtn">Change password</button>
+    <button type="button" class="adm-link" id="signOut">Sign out</button>
+  </div>
+</header>
+
+<main class="adm-main">
+  <!-- Sign in -->
+  <section class="adm-card adm-login" id="loginView" hidden>
+    <h1>Sign in</h1>
+    <form id="loginForm">
+      <label for="lEmail">Email</label>
+      <input id="lEmail" type="email" autocomplete="username" required />
+      <label for="lPass">Password</label>
+      <input id="lPass" type="password" autocomplete="current-password" required />
+      <button class="btn btn-primary" type="submit" id="loginBtn">Sign in</button>
+      <div class="form-msg" id="loginMsg" role="status"></div>
+    </form>
+  </section>
+
+  <!-- Change password -->
+  <section class="adm-card adm-login" id="pwView" hidden>
+    <h1>Change password</h1>
+    <form id="pwForm">
+      <label for="pNew">New password (at least 10 characters)</label>
+      <input id="pNew" type="password" autocomplete="new-password" minlength="10" required />
+      <label for="pNew2">Repeat new password</label>
+      <input id="pNew2" type="password" autocomplete="new-password" minlength="10" required />
+      <button class="btn btn-primary" type="submit">Save password</button>
+      <button class="btn btn-ghost" type="button" id="pwCancel">Cancel</button>
+      <div class="form-msg" id="pwMsg" role="status"></div>
+    </form>
+  </section>
+
+  <!-- Not an admin -->
+  <section class="adm-card adm-login" id="denyView" hidden>
+    <h1>No access</h1>
+    <p>This account doesn't have access.</p>
+  </section>
+
+  <!-- Dashboard -->
+  <section id="appView" hidden>
+    <nav class="adm-tabs" role="tablist">
+      <button type="button" class="on" data-tab="orders">Orders <span id="cOrders"></span></button>
+      <button type="button" data-tab="messages">Messages</button>
+      <button type="button" data-tab="reviews">Reviews <span id="cReviews"></span></button>
+    </nav>
+
+    <div data-panel="orders">
+      <div class="adm-sub">
+        <button type="button" class="on" data-status="pending">Pending</button>
+        <button type="button" data-status="fulfilled">Fulfilled</button>
+        <button type="button" class="adm-link" id="refresh">Refresh</button>
+      </div>
+      <div id="orders" class="adm-list"></div>
+    </div>
+    <div data-panel="messages" hidden><div id="messages" class="adm-list"></div></div>
+    <div data-panel="reviews" hidden><div id="reviews" class="adm-list"></div></div>
+    <div class="form-msg" id="appMsg" role="status"></div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+<script src="admin.js?v=202611070818"></script>
+</body>
+</html>
