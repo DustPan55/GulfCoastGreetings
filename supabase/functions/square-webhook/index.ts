@@ -26,6 +26,8 @@ const money = (c: number) => '$' + (c / 100).toFixed(2);
 
 // Square signs NOTIFICATION_URL + raw body with HMAC-SHA256 and sends it base64-encoded.
 async function validSignature(body: string, signature: string) {
+  // Refuse everything until the secrets are set; an empty key would make signatures forgeable.
+  if (!env('SQUARE_WEBHOOK_SIGNATURE_KEY') || !env('NOTIFICATION_URL') || !signature) return false;
   const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(env('SQUARE_WEBHOOK_SIGNATURE_KEY')),
     { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
   const mac = new Uint8Array(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(env('NOTIFICATION_URL') + body)));
